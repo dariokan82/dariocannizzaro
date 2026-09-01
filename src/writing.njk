@@ -14,7 +14,7 @@ description: Essays, stories and fragments by Dario Cannizzaro.
   <ul class="index">
     {%- for post in collections.writing %}
     <li class="entry">
-      <h2 class="entry-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+      <h2 class="entry-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
       <p class="entry-meta"><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></p>
       {% if post.data.standfirst %}<p class="entry-standfirst">{{ post.data.standfirst }}</p>{% endif %}
     </li>

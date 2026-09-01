@@ -69,13 +69,17 @@ without touching the live domain. When you are happy with it:
 
 1. Create `src/CNAME` containing one line: `dariocannizzaro.com`
 2. Uncomment the `addPassthroughCopy("src/CNAME")` line in `eleventy.config.js`.
-3. In **Settings → Pages**, set the custom domain to `dariocannizzaro.com` and tick
+3. Delete the `env:` block (and its `PATH_PREFIX` line) under the build step in
+   `.github/workflows/deploy.yml`. On a project URL the site lives at
+   `/dariocannizzaro/`; on the apex domain it lives at `/`, and that env var is the
+   only thing that knows the difference.
+4. In **Settings → Pages**, set the custom domain to `dariocannizzaro.com` and tick
    *Enforce HTTPS*.
-4. At the registrar, point the apex `A` records at GitHub's four IPs
+5. At the registrar, point the apex `A` records at GitHub's four IPs
    (`185.199.108.153`, `.109.153`, `.110.153`, `.111.153`) and `www` at a `CNAME` to
    `dariokan82.github.io`.
 
-Until step 4 the old site keeps serving. Nothing breaks while you decide.
+Until step 5 the old site keeps serving. Nothing breaks while you decide.
 
 ---
 

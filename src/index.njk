@@ -15,8 +15,8 @@ eleventyExcludeFromCollections: true
   </p>
 
   <p class="doors">
-    <a class="door" href="/writing/">Read something</a>
-    <a class="door door-quiet" href="/contact/">Request a script</a>
+    <a class="door" href="{{ "/writing/" | url }}">Read something</a>
+    <a class="door door-quiet" href="{{ "/contact/" | url }}">Request a script</a>
   </p>
 </section>
 
@@ -27,5 +27,5 @@ eleventyExcludeFromCollections: true
     <li><span class="strip-name">{{ w.title }}</span> <span class="strip-meta">{{ w.genre or w.format }}</span></li>
     {%- endif %}{% endfor %}
   </ul>
-  <p class="strip-more"><a href="/work/">The full slate →</a></p>
+  <p class="strip-more"><a href="{{ "/work/" | url }}">The full slate →</a></p>
 </section>

@@ -25,6 +25,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("isoDate", (d) => d.toISOString().slice(0, 10));
 
   return {
+    pathPrefix: process.env.PATH_PREFIX || "/",
     dir: {
       input: "src",
       output: "_site",
