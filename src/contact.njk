@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+permalink: /contact/
+title: Contact
+description: Contact Dario Cannizzaro to request a script, or about representation and development.
+---
+<article class="sheet prose">
+  <header class="sheet-head">
+    <h1>Contact</h1>
+    <p class="standfirst">To request a script, talk about a project, or just to chat.</p>
+  </header>
+
+  <p class="bigmail"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+  <p class="item-note">Based in {{ site.location }}. Comfortable working across European and US hours.</p>
+
+  {% if site.formspreeId %}
+  <form class="form" action="https://formspree.io/f/{{ site.formspreeId }}" method="POST">
+    <label>Name <input type="text" name="name" required></label>
+    <label>Email <input type="email" name="email" required></label>
+    <label>Message <textarea name="message" rows="6" required></textarea></label>
+    <button type="submit">Send</button>
+  </form>
+  {% endif %}
+</article>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if title %}{{ title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.role }}{% endif %}</title>
+<meta name="description" content="{{ description or site.metaDescription }}">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:title" content="{% if title %}{{ title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.role }}{% endif %}">
+<meta property="og:description" content="{{ description or site.metaDescription }}">
+<meta property="og:type" content="{% if layout == 'layouts/essay.njk' %}article{% else %}website{% endif %}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:image" content="{{ site.url }}/assets/img/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <a class="wordmark" href="/">Dario&nbsp;Cannizzaro</a>
+  <nav aria-label="Primary">
+    <a href="/work/"{% if page.url == '/work/' %} aria-current="page"{% endif %}>Work</a>
+    <a href="/writing/"{% if '/writing/' in page.url %} aria-current="page"{% endif %}>Writing</a>
+    <a href="/about/"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
+    <a href="/contact/"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+{{ content | safe }}
+</main>
+
+<footer class="colophon">
+  <ul class="social">
+    {%- for s in site.social %}
+    <li><a href="{{ s.url }}" rel="me noopener">{{ s.name }}</a></li>
+    {%- endfor %}
+  </ul>
+  <p class="fine">{{ site.location }} · <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+  <p class="fine">© {{ site.title }}. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

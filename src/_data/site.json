@@ -1,0 +1,25 @@
+{
+  "title": "Dario Cannizzaro",
+  "role": "Writer · Screenwriter · Director",
+  "url": "https://dariocannizzaro.com",
+
+  "_comment_promise": "THE PROMISE LINE. This is the one thing the whole site hangs on. Swap `promise` and `promiseSupport` here and every page updates.",
+  "promise": "Wonder, badly maintained.",
+  "promiseSupport": "Stories about the numinous arriving through the neglected — the mouldy fairy door still standing open onto Tír na nÓg, the spaceship that runs on spirit instead of fuel, the crack in the pavement where something older is growing back. Often funny. Always watched.",
+
+  "metaDescription": "Dario Cannizzaro is an Italian-Irish writer, screenwriter and director. Head of Story at True Story Studios. Author of the novel Dead Men Naked.",
+
+  "email": "TODO@dariocannizzaro.com",
+  "formspreeId": "",
+
+  "location": "Cork, Ireland",
+
+  "social": [
+    { "name": "IMDb", "url": "https://www.imdb.com/name/nm10525131/" },
+    { "name": "Instagram", "url": "https://instagram.com/dariowrites" },
+    { "name": "Threads", "url": "https://threads.net/@dariowrites" },
+    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/dariocan/" },
+    { "name": "Amazon", "url": "https://www.amazon.com/stores/Dario-Cannizzaro/author/B01LZZW9YP" },
+    { "name": "Facebook", "url": "https://facebook.com/dariowrites" }
+  ]
+}

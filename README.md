@@ -1,0 +1,85 @@
+# dariocannizzaro.com
+
+The personal site of Dario Cannizzaro — writer, screenwriter, director.
+
+Static site, built with [Eleventy](https://www.11ty.dev/), published by GitHub Pages
+from a GitHub Action on every push to `main`.
+
+---
+
+## Running it locally
+
+```bash
+npm install     # once
+npm start       # http://localhost:8080, live-reloads as you save
+npm run build   # one-off build into _site/
+```
+
+Node 20 or newer.
+
+---
+
+## Adding a piece of writing
+
+1. Copy `WRITING-TEMPLATE.md` into `src/writing/`.
+2. Rename it. **The filename becomes the URL** — `the-door-in-the-tree.md` publishes to
+   `/writing/the-door-in-the-tree/`.
+3. Fill in `title`, `date`, `description`, write the piece in Markdown, delete `draft: true`.
+4. Commit and push. The Action builds and deploys; it takes about a minute.
+
+The index at `/writing/` builds itself from whatever is in that folder, newest first.
+There is nothing else to update.
+
+## Changing the work slate
+
+`src/_data/work.json`. Two shelves: `available` (what a producer is here for — it renders
+first) and `produced` (the proof). Add or reorder entries; the Work page and the homepage
+strip both follow.
+
+## Changing the promise line
+
+`src/_data/site.json`, the `promise` and `promiseSupport` fields. They render on the
+homepage and nowhere else, so you can rewrite them a hundred times without touching markup.
+
+---
+
+## Before this goes live — the outstanding list
+
+- [ ] **`site.json` → `email`** is still `TODO@dariocannizzaro.com`. Put the real address in.
+- [ ] **Loglines.** Every entry in `work.json → available` has an empty `logline`. One line
+      each. Claire deliberately did not invent them.
+- [ ] **Images.** `src/assets/img/` is empty. It needs `share.jpg` (the social-preview card,
+      1200×630) and `favicon.png`. A portrait for the About page would earn its place too.
+- [ ] **David's credits.** `about.njk` has a TODO where his two best-known titles should go.
+- [ ] **Confirm two links.** The IMDb title links in `work.json` were carried over from the old
+      site and mapped by position: check that Strati is `tt38907629` and Trigger Warning is
+      `tt11953332`.
+- [ ] **True Story titles.** Six Dimes, Darkness is my Candle and Running the Amazon are not
+      listed. Check with David whether they belong on a personal site before adding them.
+- [ ] **Contact form (optional).** Set `formspreeId` in `site.json` to a
+      [Formspree](https://formspree.io) form ID and the form appears. Leave it empty and the
+      page shows the email address alone, which is the better default.
+
+---
+
+## Going live on the real domain
+
+The site publishes to `dariokan82.github.io/dariocannizzaro/` first, so you can look at it
+without touching the live domain. When you are happy with it:
+
+1. Create `src/CNAME` containing one line: `dariocannizzaro.com`
+2. Uncomment the `addPassthroughCopy("src/CNAME")` line in `eleventy.config.js`.
+3. In **Settings → Pages**, set the custom domain to `dariocannizzaro.com` and tick
+   *Enforce HTTPS*.
+4. At the registrar, point the apex `A` records at GitHub's four IPs
+   (`185.199.108.153`, `.109.153`, `.110.153`, `.111.153`) and `www` at a `CNAME` to
+   `dariokan82.github.io`.
+
+Until step 4 the old site keeps serving. Nothing breaks while you decide.
+
+---
+
+## Repo settings that need doing once
+
+**Settings → Pages → Source: GitHub Actions.** Not "Deploy from a branch" — this repo
+builds, so it needs the Actions source or nothing will publish.

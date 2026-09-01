@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+permalink: /writing/
+title: Writing
+description: Essays, stories and fragments by Dario Cannizzaro.
+---
+<article class="sheet">
+  <header class="sheet-head">
+    <h1>Writing</h1>
+    <p class="standfirst">Essays, fragments, and the odd piece of fiction.</p>
+  </header>
+
+  {% if collections.writing | length %}
+  <ul class="index">
+    {%- for post in collections.writing %}
+    <li class="entry">
+      <h2 class="entry-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+      <p class="entry-meta"><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></p>
+      {% if post.data.standfirst %}<p class="entry-standfirst">{{ post.data.standfirst }}</p>{% endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+  {% else %}
+  <p class="item-note">Nothing published here yet.</p>
+  {% endif %}
+</article>

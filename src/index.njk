@@ -1,0 +1,31 @@
+---
+layout: layouts/base.njk
+permalink: /
+eleventyExcludeFromCollections: true
+---
+<section class="hero">
+  <p class="eyebrow">{{ site.role }}</p>
+  <h1 class="promise">{{ site.promise }}</h1>
+  <p class="promise-support">{{ site.promiseSupport }}</p>
+
+  <p class="standing">
+    Head of Story at <strong>True Story Studios</strong>, alongside screenwriter
+    <strong>David Aaron Cohen</strong>. Author of the novel <em>Dead Men Naked</em>.
+    Austin Film Festival Semifinalist.
+  </p>
+
+  <p class="doors">
+    <a class="door" href="/writing/">Read something</a>
+    <a class="door door-quiet" href="/contact/">Request a script</a>
+  </p>
+</section>
+
+<section class="strip">
+  <h2 class="strip-title">Available now</h2>
+  <ul class="strip-list">
+    {%- for w in work.available %}{% if loop.index0 < 3 %}
+    <li><span class="strip-name">{{ w.title }}</span> <span class="strip-meta">{{ w.genre or w.format }}</span></li>
+    {%- endif %}{% endfor %}
+  </ul>
+  <p class="strip-more"><a href="/work/">The full slate →</a></p>
+</section>

@@ -1,0 +1,37 @@
+---
+layout: layouts/base.njk
+permalink: /work/
+title: Work
+description: Available scripts and produced work by Dario Cannizzaro — features, TV, audio drama, fiction.
+---
+<article class="sheet">
+  <header class="sheet-head">
+    <h1>Work</h1>
+    <p class="standfirst">Scripts available to read on request. Everything below the line is finished and out in the world.</p>
+  </header>
+
+  <h2 class="shelf-title">Available</h2>
+  <ul class="shelf">
+    {%- for w in work.available %}
+    <li class="item">
+      <h3 class="item-title">{{ w.title }}</h3>
+      <p class="item-meta">{{ w.format }}{% if w.genre %} · {{ w.genre }}{% endif %}</p>
+      {% if w.logline %}<p class="item-logline">{{ w.logline }}</p>{% endif %}
+      {% if w.note %}<p class="item-note">{{ w.note }}</p>{% endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+  <p class="shelf-cta"><a href="/contact/">Ask me for any of these →</a></p>
+
+  <h2 class="shelf-title">Produced &amp; published</h2>
+  <ul class="shelf">
+    {%- for w in work.produced %}
+    <li class="item">
+      <h3 class="item-title">{% if w.link %}<a href="{{ w.link }}" rel="noopener">{{ w.title }}</a>{% else %}{{ w.title }}{% endif %}</h3>
+      <p class="item-meta">{{ w.format }}{% if w.genre %} · {{ w.genre }}{% endif %} · {{ w.year }}</p>
+      <p class="item-credit">{{ w.credit }}</p>
+      {% if w.note %}<p class="item-note">{{ w.note }}</p>{% endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+</article>

@@ -1,0 +1,128 @@
+{
+  "_comment": "TWO SHELVES. `available` is what a producer is here for and it goes FIRST. `produced` is the proof. Loglines are deliberately left empty — Claire will not invent them; one line each, from Dario.",
+  "available": [
+    {
+      "title": "The Last Supper",
+      "format": "Feature",
+      "genre": "Period comedy",
+      "logline": "",
+      "note": "Lead package"
+    },
+    {
+      "title": "Near Dark",
+      "format": "TV series",
+      "genre": "",
+      "logline": "",
+      "note": "With Tomasz Perczynski · lead package"
+    },
+    {
+      "title": "The Quiet Mile",
+      "format": "Feature",
+      "genre": "UAP",
+      "logline": "",
+      "note": ""
+    },
+    {
+      "title": "Saint Johnny",
+      "format": "Feature",
+      "genre": "Horror comedy",
+      "logline": "",
+      "note": "Austin Film Festival Semifinalist"
+    },
+    {
+      "title": "Wait for Me",
+      "format": "Feature",
+      "genre": "Crime comedy",
+      "logline": "",
+      "note": "Austin Film Festival Quarter-Finalist"
+    },
+    {
+      "title": "Maddalena",
+      "format": "Feature",
+      "genre": "",
+      "logline": "",
+      "note": "Adapted from the book by Salvatore Colletta Drago"
+    },
+    {
+      "title": "Wild Fires",
+      "format": "Feature",
+      "genre": "",
+      "logline": "",
+      "note": "In development"
+    },
+    {
+      "title": "Karma Police",
+      "format": "Novel / series",
+      "genre": "Noir sci-fi",
+      "logline": "",
+      "note": ""
+    }
+  ],
+  "_comment_truestory": "HOLD. Six Dimes / Darkness is my Candle / Running the Amazon are True Story Studios projects. Check with David Aaron Cohen before listing them on a personal site, then move them into `available` or drop this block.",
+  "produced": [
+    {
+      "title": "Strati",
+      "format": "Audio drama",
+      "genre": "Crime",
+      "credit": "Writer & Director",
+      "year": "2025",
+      "note": "Commissioned by the Italian Cultural Authority. Produced by Machineria.",
+      "link": "https://www.imdb.com/title/tt38907629/"
+    },
+    {
+      "title": "The Venetian",
+      "format": "Cinematic audio series",
+      "genre": "",
+      "credit": "Writer",
+      "year": "2025",
+      "note": "Completed.",
+      "link": ""
+    },
+    {
+      "title": "Party's Over",
+      "format": "Pilot",
+      "genre": "Comedy",
+      "credit": "Director & Co-Writer",
+      "year": "2024",
+      "note": "",
+      "link": ""
+    },
+    {
+      "title": "The Secret Seas of Puglia",
+      "format": "Audio drama",
+      "genre": "Adventure",
+      "credit": "Writer & Director",
+      "year": "2023",
+      "note": "Commissioned by the Puglia Region and the EU CoHeN Programme. Produced by Machineria.",
+      "link": "https://pod.link/1718771067"
+    },
+    {
+      "title": "Trigger Warning",
+      "format": "Short film",
+      "genre": "",
+      "credit": "Writer & Director",
+      "year": "2019",
+      "note": "Award-winning. Screened internationally, including Rio de Janeiro and Tokyo.",
+      "link": "https://www.imdb.com/title/tt11953332/"
+    },
+    {
+      "title": "Dead Men Naked",
+      "format": "Novel",
+      "genre": "Literary urban fantasy",
+      "credit": "Author",
+      "year": "2017",
+      "note": "Indie bestseller.",
+      "link": "https://www.amazon.com/Dead-Men-Naked-Dario-Cannizzaro-ebook/dp/B071DP6G9T"
+    },
+    {
+      "title": "Of Life, Death, Aliens and Zombies",
+      "format": "Short story collection",
+      "genre": "",
+      "credit": "Author",
+      "year": "2016",
+      "note": "Individual stories published in The Galway Review, San Francisco Review of Books, and elsewhere.",
+      "link": "https://www.amazon.com/Life-Death-Aliens-Zombies-ebook/dp/B0791F3VBR"
+    }
+  ],
+  "_comment_links": "Outbound links were lifted verbatim from the old site. The two IMDb title links and the pod.link were mapped BY POSITION in the old markup — Dario, confirm Strati=tt38907629 and Trigger Warning=tt11953332 before launch."
+}
