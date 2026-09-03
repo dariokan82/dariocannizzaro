@@ -1,27 +1,83 @@
 {
-  "_comment": "INTERVIEWS & REVIEWS. Two shelves, deliberately unequal. `quotes` is small and loud — two or three lines that do the persuading, set large. `clippings` is the wall: everything else, dense, scannable, the thing that makes a personal site read as vouched-for rather than self-declared.",
+  "_comment": "INTERVIEWS & REVIEWS. Two shelves, deliberately unequal. `quotes` is small and loud — set enormous, one per screen. `clippings` is the ledger: everything else, scannable. Both arrays empty = the /press/ page still builds but drops out of the nav on its own.",
 
-  "_comment_nav": "While BOTH arrays are empty the /press/ page still builds but is NOT linked from the masthead — an empty press page is worse than no press page. Add a real entry and the nav link appears on its own. Nothing to wire up.",
+  "_comment_provenance": "Everything below was researched and verified by Claire on 2026-09-03 against the live source pages — quotes are VERBATIM and attributed. Dario: cut anything you don't want, and add what I couldn't find. `kind` is Interview / Review / Feature; a fourth category stops the ledger scanning.",
 
-  "_example_quote": {
-    "text": "The one sentence worth reprinting. Trim it hard — a pull-quote that needs three clauses is not a pull-quote.",
-    "outlet": "The Galway Review",
-    "work": "Dead Men Naked",
-    "url": "https://example.com/the-review",
-    "date": "2018"
-  },
+  "quotes": [
+    {
+      "text": "I would recommend this book to fans of Terry Pratchett or David Lynch.",
+      "outlet": "Examining the Odd",
+      "byline": "Jay Snelling",
+      "work": "Dead Men Naked",
+      "url": "https://examiningtheodd.com/2017/09/13/review-dead-men-naked-by-dario-cannizzaro/",
+      "date": "2017"
+    },
+    {
+      "text": "Humorous, tragic at heart and, most of all, strangely perceptive.",
+      "outlet": "Fantasy Book Review",
+      "byline": "Sean Barrs · 9/10",
+      "work": "Dead Men Naked",
+      "url": "https://www.fantasybookreview.co.uk/Dario-Cannizzaro/Dead-Men-Naked.html",
+      "date": ""
+    },
+    {
+      "text": "The best novel I've read in a while, satisfying to the end.",
+      "outlet": "Bill Ectric",
+      "byline": "",
+      "work": "Dead Men Naked",
+      "url": "https://billectricking.com/2017/07/08/dead-men-naked-book-review/",
+      "date": "2017"
+    }
+  ],
 
-  "_example_clipping": {
-    "outlet": "Generazione di Archeologi",
-    "kind": "Feature",
-    "title": "Strati: quando il crime incontra l'archeologia nasce un podcast",
-    "work": "Strati",
-    "url": "https://generazionediarcheologi.com/2026/02/20/strati-quando-il-crime-incontra-larcheologia-nasce-un-podcast/",
-    "date": "February 2026"
-  },
-
-  "_comment_kind": "`kind` is one of Interview, Review, Feature. It renders as a chip. Keep it to those three — a fourth category makes the wall stop scanning.",
-
-  "quotes": [],
-  "clippings": []
+  "clippings": [
+    {
+      "outlet": "Parco archeologico di Ostia Antica",
+      "kind": "Feature",
+      "title": "\"Strati\": una serie audio crime del Parco è on air su Spotify",
+      "work": "Strati",
+      "url": "https://ostiaantica.cultura.gov.it/strati-una-serie-audio-crime-del-parco-e-on-air-su-spotify/",
+      "date": "2026"
+    },
+    {
+      "outlet": "Generazione di Archeologi",
+      "kind": "Feature",
+      "title": "Strati: quando il crime incontra l'archeologia nasce un podcast",
+      "work": "Strati",
+      "url": "https://generazionediarcheologi.com/2026/02/20/strati-quando-il-crime-incontra-larcheologia-nasce-un-podcast/",
+      "date": "February 2026"
+    },
+    {
+      "outlet": "Mysterious Goings On",
+      "kind": "Interview",
+      "title": "Dario Cannizzaro's Road Trip with Death — with Alex Greenwood",
+      "work": "Dead Men Naked",
+      "url": "https://mgopod.com/f/dario-cannizzaros-road-trip-with-death",
+      "date": "October 2021"
+    },
+    {
+      "outlet": "Fantasy Book Review",
+      "kind": "Review",
+      "title": "Dead Men Naked — 9/10, reviewed by Sean Barrs",
+      "work": "Dead Men Naked",
+      "url": "https://www.fantasybookreview.co.uk/Dario-Cannizzaro/Dead-Men-Naked.html",
+      "date": ""
+    },
+    {
+      "outlet": "The Audio Drama Directory",
+      "kind": "Feature",
+      "title": "Strati (English) — full-cast historical crime",
+      "work": "Strati",
+      "url": "https://audiodrama.directory/strati-english/",
+      "date": "2025"
+    },
+    {
+      "outlet": "The Audio Drama Directory",
+      "kind": "Feature",
+      "title": "The Secret Seas of Puglia",
+      "work": "The Secret Seas of Puglia",
+      "url": "https://audiodrama.directory/secret-seas-of-puglia/",
+      "date": "2023"
+    }
+  ]
 }

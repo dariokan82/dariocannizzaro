@@ -14,6 +14,7 @@
 <meta property="og:url" content="{{ site.url }}{{ page.url }}">
 <meta property="og:image" content="{{ site.url }}/assets/img/share.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d100e">
 
 <link rel="icon" href="{{ "/assets/img/favicon.png" | url }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,16 +27,18 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="masthead">
-  <a class="wordmark" href="{{ "/" | url }}">Dario&nbsp;Cannizzaro</a>
-  <nav aria-label="Primary">
-    <a href="{{ "/work/" | url }}"{% if page.url == '/work/' %} aria-current="page"{% endif %}>Work</a>
-    <a href="{{ "/writing/" | url }}"{% if '/writing/' in page.url %} aria-current="page"{% endif %}>Writing</a>
-    {%- if press.quotes.length or press.clippings.length %}
-    <a href="{{ "/press/" | url }}"{% if page.url == '/press/' %} aria-current="page"{% endif %}>Press</a>
-    {%- endif %}
-    <a href="{{ "/about/" | url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
-    <a href="{{ "/contact/" | url }}"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>Contact</a>
-  </nav>
+  <div class="shell">
+    <a class="wordmark" href="{{ "/" | url }}">Dario&nbsp;Cannizzaro</a>
+    <nav aria-label="Primary">
+      <a href="{{ "/work/" | url }}"{% if page.url == '/work/' %} aria-current="page"{% endif %}>Work</a>
+      <a href="{{ "/writing/" | url }}"{% if '/writing/' in page.url %} aria-current="page"{% endif %}>Writing</a>
+      {%- if press.quotes.length or press.clippings.length %}
+      <a href="{{ "/press/" | url }}"{% if page.url == '/press/' %} aria-current="page"{% endif %}>Press</a>
+      {%- endif %}
+      <a href="{{ "/about/" | url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
+      <a href="{{ "/contact/" | url }}"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>Contact</a>
+    </nav>
+  </div>
 </header>
 
 <main id="main">
@@ -43,13 +46,18 @@
 </main>
 
 <footer class="colophon">
-  <ul class="social">
-    {%- for s in site.social %}
-    <li><a href="{{ s.url }}" rel="me noopener">{{ s.name }}</a></li>
-    {%- endfor %}
-  </ul>
-  <p class="fine">{{ site.location }} · <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
-  <p class="fine">© {{ site.title }}. All rights reserved.</p>
+  <div class="shell colophon-grid">
+    <ul class="social">
+      {%- for s in site.social %}
+      <li><a href="{{ s.url }}" rel="me noopener">{{ s.name }}</a></li>
+      {%- endfor %}
+    </ul>
+    <div>
+      <p class="fine">{{ site.location }}</p>
+      <p class="fine"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+      <p class="fine">© {{ site.title }}</p>
+    </div>
+  </div>
 </footer>
 
 </body>

@@ -1,13 +1,15 @@
 ---
 layout: layouts/base.njk
 ---
-<article class="sheet prose">
-  <header class="sheet-head">
-    <p class="eyebrow"><a href="{{ "/writing/" | url }}">Writing</a></p>
-    <h1>{{ title }}</h1>
-    {% if standfirst %}<p class="standfirst">{{ standfirst }}</p>{% endif %}
-    <p class="byline"><time datetime="{{ page.date | isoDate }}">{{ page.date | longDate }}</time></p>
-  </header>
-  {{ content | safe }}
+<header class="shell page-head">
+  <p class="eyebrow"><a href="{{ "/writing/" | url }}">Writing</a> &nbsp;·&nbsp; <time datetime="{{ page.date | isoDate }}">{{ page.date | longDate }}</time></p>
+  <h1>{{ title }}</h1>
+  {% if standfirst %}<p class="standfirst">{{ standfirst }}</p>{% endif %}
+</header>
+
+<article class="shell section">
+  <div class="prose">
+    {{ content | safe }}
+  </div>
   <p class="back"><a href="{{ "/writing/" | url }}">← All writing</a></p>
 </article>

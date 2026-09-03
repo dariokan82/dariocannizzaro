@@ -4,37 +4,49 @@ permalink: /writing/
 title: Writing
 description: Essays, stories and fragments by Dario Cannizzaro.
 ---
-<article class="sheet">
-  <header class="sheet-head">
-    <h1>Writing</h1>
-    <p class="standfirst">Essays, fragments, and the odd piece of fiction.</p>
-  </header>
+<header class="shell page-head">
+  <h1>Writing</h1>
+  <p class="standfirst">Essays, fragments, and the odd piece of fiction.</p>
+</header>
 
-  {%- if collections.writingFeatured | length %}
-  <h2 class="shelf-title slug">Start here</h2>
-  <ul class="index">
+{%- if collections.writingFeatured | length %}
+<section class="shell section">
+  <div class="section-head">
+    <h2 class="section-title">Start here</h2>
+  </div>
+  <ul class="ledger">
     {%- for post in collections.writingFeatured %}
-    <li class="entry">
-      <h3 class="entry-title"><span class="star">★</span> <a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>
-      <p class="entry-meta"><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></p>
-      {% if post.data.standfirst %}<p class="entry-standfirst">{{ post.data.standfirst }}</p>{% endif %}
+    <li class="row reveal">
+      <span class="row-index">★</span>
+      <div>
+        <h3 class="row-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>
+        {% if post.data.standfirst %}<p class="row-note">{{ post.data.standfirst }}</p>{% endif %}
+      </div>
+      <p class="row-meta"><span class="row-date"><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></span></p>
     </li>
     {%- endfor %}
   </ul>
-  {%- endif %}
+</section>
+{%- endif %}
 
-  {% if collections.writing | length %}
-  {%- if collections.writingFeatured | length %}<h2 class="shelf-title slug">Everything</h2>{% endif %}
-  <ul class="index">
+<section class="shell section">
+  {%- if collections.writing | length %}
+  {%- if collections.writingFeatured | length %}
+  <div class="section-head"><h2 class="section-title">Everything</h2></div>
+  {%- endif %}
+  <ul class="ledger">
     {%- for post in collections.writing %}
-    <li class="entry">
-      <h2 class="entry-title">{% if post.data.featured %}<span class="star">★</span> {% endif %}<a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
-      <p class="entry-meta"><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></p>
-      {% if post.data.standfirst %}<p class="entry-standfirst">{{ post.data.standfirst }}</p>{% endif %}
+    <li class="row reveal">
+      <span class="row-index">{% if post.data.featured %}<span class="star">★</span>{% else %}{% if loop.index < 10 %}0{% endif %}{{ loop.index }}{% endif %}</span>
+      <div>
+        <h2 class="row-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
+        {% if post.data.standfirst %}<p class="row-note">{{ post.data.standfirst }}</p>{% endif %}
+      </div>
+      <p class="row-meta"><span class="row-date"><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></span></p>
     </li>
     {%- endfor %}
   </ul>
-  {% else %}
+  {%- else %}
   <p class="aside">Nothing published here yet.</p>
-  {% endif %}
-</article>
+  {%- endif %}
+</section>

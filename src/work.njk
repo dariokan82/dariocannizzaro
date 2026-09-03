@@ -5,49 +5,70 @@ title: Work
 description: Available scripts and produced work by Dario Cannizzaro — features, TV, audio drama, fiction.
 ---
 {%- set slate = work.available | rejectattr("hidden") -%}
-<article class="sheet">
-  <header class="sheet-head">
-    <h1>Work</h1>
-    <p class="standfirst">Scripts available to read on request. Everything below the line is finished and out in the world.</p>
-  </header>
 
-  <h2 class="shelf-title slug">Available</h2>
-  <ul class="shelf">
+<header class="shell page-head">
+  <h1>Work</h1>
+  <p class="standfirst">Scripts available to read on request. Everything below the second line is finished and out in the world.</p>
+</header>
+
+<section class="shell section">
+  <div class="section-head">
+    <h2 class="section-title">Available</h2>
+    <p class="section-aside"><a href="{{ "/contact/" | url }}">Ask for any of these →</a></p>
+  </div>
+
+  <ul class="ledger">
     {%- for w in slate %}
-    <li class="item">
-      <h3 class="item-slug">{{ w.title }}{% if w.genre %} <span class="sub">— {{ w.genre }}</span>{% endif %}</h3>
-      <p class="item-rail"><span class="chip">{{ w.format }}</span></p>
-      {%- if w.logline %}
-      <p class="item-logline">{{ w.logline }}</p>
-      {%- elif isDev %}
-      <p class="item-pending">[logline pending — dev only, never ships]</p>
-      {%- endif %}
-      {%- if w.note %}
-      <p class="item-note">{{ w.note }}</p>
-      {%- endif %}
-    </li>
-    {%- endfor %}
-  </ul>
-  <p class="shelf-cta"><a href="{{ "/contact/" | url }}">Ask me for any of these →</a></p>
-
-  <h2 class="shelf-title slug">Produced &amp; published</h2>
-  <ul class="shelf">
-    {%- for w in work.produced %}
-    <li class="item">
-      <h3 class="item-slug">{{ w.title }}{% if w.genre %} <span class="sub">— {{ w.genre }}</span>{% endif %}</h3>
-      <p class="item-rail"><span class="chip">{{ w.format }}</span> <span>{{ w.year }}</span></p>
-      <p class="item-credit">{{ w.credit }}</p>
-      {%- if w.note %}
-      <p class="item-note">{{ w.note }}</p>
-      {%- endif %}
-      {%- if w.links.length %}
-      <p class="item-links">
-        {%- for l in w.links %}
-        <a href="{{ l.url }}" rel="noopener">{{ l.label }} →</a>
-        {%- endfor %}
+    <li class="row reveal">
+      <span class="row-index">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
+      <div>
+        <h3 class="row-title">{{ w.title }}</h3>
+        {%- if w.logline %}
+        <p class="row-line">{{ w.logline }}</p>
+        {%- elif isDev %}
+        <p class="row-line-pending">[logline pending — dev only, never ships]</p>
+        {%- endif %}
+        {%- if w.note %}
+        <p class="row-note">{{ w.note }}</p>
+        {%- endif %}
+      </div>
+      <p class="row-meta">
+        <span class="strongline">{{ w.format }}</span>
+        {%- if w.genre %}<span>{{ w.genre }}</span>{% endif %}
       </p>
-      {%- endif %}
     </li>
     {%- endfor %}
   </ul>
-</article>
+</section>
+
+<section class="shell section">
+  <div class="section-head">
+    <h2 class="section-title">Produced &amp; published</h2>
+  </div>
+
+  <ul class="ledger">
+    {%- for w in work.produced %}
+    <li class="row reveal">
+      <span class="row-index">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
+      <div>
+        <h3 class="row-title">{{ w.title }}</h3>
+        {%- if w.note %}
+        <p class="row-note">{{ w.note }}</p>
+        {%- endif %}
+        {%- if w.links.length %}
+        <p class="row-links">
+          {%- for l in w.links %}
+          <a href="{{ l.url }}" rel="noopener">{{ l.label }}</a>
+          {%- endfor %}
+        </p>
+        {%- endif %}
+      </div>
+      <p class="row-meta">
+        <span class="strongline">{{ w.year }}</span>
+        <span>{{ w.format }}</span>
+        <span>{{ w.credit }}</span>
+      </p>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>

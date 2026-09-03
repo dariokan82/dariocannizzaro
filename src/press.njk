@@ -4,52 +4,60 @@ permalink: /press/
 title: Press
 description: Interviews, reviews and features on the work of Dario Cannizzaro.
 ---
-<article class="sheet">
-  <header class="sheet-head">
-    <h1>Press</h1>
-    <p class="standfirst">Interviews, reviews, and the occasional argument with a stranger in print.</p>
-  </header>
+<header class="shell page-head">
+  <h1>Press</h1>
+  <p class="standfirst">Interviews, reviews, and the occasional argument with a stranger in print.</p>
+</header>
 
-  {%- if press.quotes.length %}
-  <div class="pullquotes">
-    {%- for q in press.quotes %}
-    <figure class="pullquote">
-      <blockquote>{{ q.text }}</blockquote>
-      <figcaption>
-        {%- if q.url %}<a href="{{ q.url }}" rel="noopener">{{ q.outlet }}</a>{% else %}{{ q.outlet }}{% endif %}
-        {%- if q.work %} · on {{ q.work }}{% endif %}
-        {%- if q.date %} · {{ q.date }}{% endif %}
-      </figcaption>
-    </figure>
-    {%- endfor %}
+{%- if press.quotes.length %}
+<section class="shell section">
+  {%- for q in press.quotes %}
+  <figure class="quote-block reveal">
+    <blockquote>{{ q.text }}</blockquote>
+    <figcaption>
+      {%- if q.url %}<a href="{{ q.url }}" rel="noopener">{{ q.outlet }}</a>{% else %}{{ q.outlet }}{% endif %}
+      {%- if q.byline %} &nbsp;·&nbsp; {{ q.byline }}{% endif %}
+      {%- if q.work %} &nbsp;·&nbsp; on {{ q.work }}{% endif %}
+      {%- if q.date %} &nbsp;·&nbsp; {{ q.date }}{% endif %}
+    </figcaption>
+  </figure>
+  {%- endfor %}
+</section>
+{%- endif %}
+
+{%- if press.clippings.length %}
+<section class="shell section">
+  <div class="section-head">
+    <h2 class="section-title">Everything else</h2>
   </div>
-  {%- endif %}
 
-  {%- if press.clippings.length %}
-  <h2 class="shelf-title slug">Everything else</h2>
-  <ul class="clippings">
+  <ul class="ledger">
     {%- for c in press.clippings %}
-    <li class="clipping">
-      <h3 class="clipping-outlet">
-        {%- if c.url %}<a href="{{ c.url }}" rel="noopener">{{ c.outlet }}</a>{% else %}{{ c.outlet }}{% endif %}
-      </h3>
-      <p class="clipping-meta">
-        {%- if c.kind %}<span class="chip">{{ c.kind }}</span>{% endif %}
+    <li class="row reveal">
+      <span class="row-index">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
+      <div>
+        <h3 class="row-title">{% if c.url %}<a href="{{ c.url }}" rel="noopener">{{ c.outlet }}</a>{% else %}{{ c.outlet }}{% endif %}</h3>
+        {%- if c.title %}
+        <p class="row-note">{{ c.title }}</p>
+        {%- endif %}
+      </div>
+      <p class="row-meta">
+        {%- if c.kind %}<span class="strongline">{{ c.kind }}</span>{% endif %}
         {%- if c.work %}<span>{{ c.work }}</span>{% endif %}
         {%- if c.date %}<span>{{ c.date }}</span>{% endif %}
       </p>
-      {%- if c.title %}
-      <p class="clipping-title">{{ c.title }}</p>
-      {%- endif %}
     </li>
     {%- endfor %}
   </ul>
-  {%- endif %}
+</section>
+{%- endif %}
 
-  {%- if not press.quotes.length and not press.clippings.length %}
-  <p class="aside">Nothing gathered here yet. This page is built and waiting; it stays
-  off the menu until there is something on it worth reading.</p>
-  {%- endif %}
+{%- if not press.quotes.length and not press.clippings.length %}
+<section class="shell section">
+  <p class="aside">Nothing gathered here yet.</p>
+</section>
+{%- endif %}
 
+<div class="shell">
   <p class="back"><a href="{{ "/work/" | url }}">The work itself →</a></p>
-</article>
+</div>

@@ -58,29 +58,59 @@ src/
 WRITING-TEMPLATE.md       Copy into src/writing/ to start a piece
 ```
 
-## Design system
+## Design system — "the ledger"
 
-Dark, wooded, editorial. Defined as CSS custom properties at the top of `style.css`.
+**A screenwriter's site should look like something catalogued** — a slate, an index, a set of
+spines. Elegance here is made of three things and nothing else. If a change doesn't serve one of
+them, it doesn't go in:
+
+1. **Violent scale contrast.** Two sizes, far apart: enormous titles against 0.66rem metadata.
+   Everything in the middle is deleted, because the middle is what "boring" is made of.
+2. **Air.** Sections breathe in `--beat` (`clamp(4.5rem, 11vh, 9rem)`), not in units.
+3. **Asymmetry. Nothing is centred, ever.** A left rail carries the index numbers, the body sits
+   off it, the metadata sits far right. The eye has somewhere to go besides down.
+
+### Tokens
 
 | Token | Value | Role |
 |---|---|---|
-| `--ink` | `#0d100e` | Ground. Deep green-black. |
-| `--bone` | `#e9e5da` | Body text. Paper that has been somewhere. |
-| `--bone-dim` | `#a8a294` | Meta, captions, secondary nav. |
-| `--moss` | `#7fa67f` | The single accent. Link underlines, section eyebrows, quote rules. |
-| `--measure` | `61ch` | A screenplay action line is 61 characters. Mono text never exceeds it. |
-| `--measure-prose` | `36rem` | The same job for the proportional essay body. |
+| `--ink` | `#0d100e` | Ground, under a barely-there radial lift from `--ink-lift` at the top. |
+| `--bone` | `#ece8dd` | Body text. Paper that has been somewhere. |
+| `--bone-dim` | `#98937f` | Meta, captions, secondary nav. |
+| `--moss` | `#7fa67f` | The single accent: section titles, nav underline, hover index numbers. |
+| `--ghost` | 17% bone | The index numbers at rest. |
+| `--shell` | `84rem` | Page width. Wide on purpose — a 64rem centred column reads as a blog. |
+| `--measure` | `min(56ch, 100%)` | Mono text. The `min()` is load-bearing on narrow screens. |
+| `--beat` | `clamp(4.5rem, 11vh, 9rem)` | The vertical unit. `.section + .section` gets 0.55 of one. |
+
+### The one repeating object
+
+`.row` inside `.ledger` — a three-column grid, `4.5rem | 1fr | 11rem`: index number, body,
+far-right metadata. Work entries, press clippings and essays are all the same object. It collapses
+to two columns at 62rem and one at 34rem. Hover lifts the background, shifts the title 0.45rem
+right, and turns the index number moss.
+
+**The grain matters.** `body::after` lays an SVG turbulence at 3.5% opacity over everything. It is
+the difference between a flat dark theme and an expensive one; don't delete it.
+
+### Motion
+
+CSS only — the no-JS rule is about crawlability, not about the page being inert. Scroll reveals use
+`animation-timeline: view()` behind `@supports`, so elements are fully visible where it isn't
+supported. Everything is off under `prefers-reduced-motion`.
 
 ### The typographic idiom: screenplay grammar, never screenplay furniture
 
-**In** — fixed-width setting, uppercase letterspaced sluglines, the 61-character action measure,
-marginalia in a right rail where a scene number would sit.
+**In** — fixed-width setting, uppercase letterspaced titles, marginalia in a right rail where a
+scene number would sit, numbered entries.
 **Out** — FADE IN / CUT TO, page numbers, brads, title-page pastiche, `INT.`/`EXT.` prefixes on
 things that aren't places, dialogue blocks used as a joke. If a device needs the reader to be in
 on it, it's out.
 
-Fraunces appears in exactly three places: the homepage promise, page `<h1>`s, and press
-pull-quotes. Everything structural is DM Mono.
+Fraunces appears in exactly three places — the homepage promise, page `<h1>`s, and press
+pull-quotes — and it appears at clamp-to-9.5rem sizes. Three appearances at that scale is why they
+land. Everything structural is DM Mono, and the fix for the first version of this site was making
+that mono *big*, not making it different.
 
 **DM Mono has no bold — 500 is the ceiling.** Nothing in the stylesheet may exceed
 `--weight-strong`; a heavier value gets synthesised into a fake bold and looks wrong. Hierarchy

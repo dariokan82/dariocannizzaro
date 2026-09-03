@@ -4,35 +4,72 @@ permalink: /
 eleventyExcludeFromCollections: true
 ---
 {%- set slate = work.available | rejectattr("hidden") -%}
-<section class="hero">
-  <p class="eyebrow slug">{{ site.role }}</p>
+
+<section class="shell hero">
+  <p class="eyebrow">{{ site.role }} &nbsp;·&nbsp; {{ site.location }}</p>
   <h1 class="promise">{{ site.promise }}</h1>
   <p class="promise-support">{{ site.promiseSupport }}</p>
 
-  <ul class="credentials">
-    {%- for c in site.credentials %}
-    <li><strong>{{ c.lead }}</strong>{% if c.tail %}, {{ c.tail }}{% endif %}</li>
-    {%- endfor %}
-  </ul>
-
-  <p class="doors">
-    <a class="door" href="{{ "/writing/" | url }}">Read something</a>
-    <a class="door door-quiet" href="{{ "/contact/" | url }}">Request a script</a>
-    {%- if press.quotes.length or press.clippings.length %}
-    <a class="door door-quiet" href="{{ "/press/" | url }}">Press</a>
-    {%- endif %}
-  </p>
+  <div class="hero-foot">
+    <a class="scroll-cue" href="#slate">The slate</a>
+    <a class="scroll-cue" href="{{ "/contact/" | url }}">Request a script</a>
+  </div>
 </section>
 
-<section class="strip">
-  <h2 class="strip-title slug">Available now</h2>
-  <ul class="strip-list">
+<section class="band">
+  <div class="shell">
+    <ul class="credentials">
+      {%- for c in site.credentials %}
+      <li>
+        <span class="lead">{{ c.lead }}</span>
+        {%- if c.tail %}<span class="tail">{{ c.tail }}</span>{% endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="shell section" id="slate">
+  <div class="section-head">
+    <h2 class="section-title">Available now</h2>
+    <p class="section-aside"><a href="{{ "/work/" | url }}">The full slate →</a></p>
+  </div>
+
+  <ul class="ledger">
     {%- for w in slate %}{% if loop.index0 < 3 %}
-    <li>
-      <span class="strip-name">{{ w.title }}</span>
-      <span class="chip">{{ w.genre or w.format }}</span>
+    <li class="row reveal">
+      <span class="row-index">0{{ loop.index }}</span>
+      <div>
+        <h3 class="row-title"><a href="{{ "/work/" | url }}">{{ w.title }}</a></h3>
+        {%- if w.logline %}
+        <p class="row-line">{{ w.logline }}</p>
+        {%- elif isDev %}
+        <p class="row-line-pending">[logline pending — dev only, never ships]</p>
+        {%- endif %}
+      </div>
+      <p class="row-meta">
+        <span>{{ w.format }}</span>
+        {%- if w.genre %}<span>{{ w.genre }}</span>{% endif %}
+      </p>
     </li>
     {%- endif %}{% endfor %}
   </ul>
-  <p class="strip-more"><a href="{{ "/work/" | url }}">The full slate →</a></p>
 </section>
+
+{%- if press.quotes.length %}
+<section class="shell section">
+  <div class="section-head">
+    <h2 class="section-title">Said elsewhere</h2>
+    <p class="section-aside"><a href="{{ "/press/" | url }}">All press →</a></p>
+  </div>
+  {%- for q in press.quotes %}{% if loop.index0 < 1 %}
+  <figure class="quote-block reveal">
+    <blockquote>{{ q.text }}</blockquote>
+    <figcaption>
+      {%- if q.url %}<a href="{{ q.url }}" rel="noopener">{{ q.outlet }}</a>{% else %}{{ q.outlet }}{% endif %}
+      {%- if q.work %} &nbsp;·&nbsp; on {{ q.work }}{% endif %}
+    </figcaption>
+  </figure>
+  {%- endif %}{% endfor %}
+</section>
+{%- endif %}

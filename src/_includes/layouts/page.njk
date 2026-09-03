@@ -1,10 +1,13 @@
 ---
 layout: layouts/base.njk
 ---
-<article class="sheet">
-  <header class="sheet-head">
-    <h1>{{ title }}</h1>
-    {% if standfirst %}<p class="standfirst">{{ standfirst }}</p>{% endif %}
-  </header>
-  {{ content | safe }}
+<header class="shell page-head">
+  <h1>{{ title }}</h1>
+  {% if standfirst %}<p class="standfirst">{{ standfirst }}</p>{% endif %}
+</header>
+
+<article class="shell section">
+  <div class="prose">
+    {{ content | safe }}
+  </div>
 </article>

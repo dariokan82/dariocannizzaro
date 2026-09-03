@@ -1,102 +1,161 @@
 /* ---------------------------------------------------------------
    dariocannizzaro.com
 
-   Conventional structure, dangerous prose. The layout should never
-   be the thing anyone notices; the sentences should be.
+   THE IDEA: a ledger. A screenwriter's site should look like
+   something catalogued — a slate, an index, a set of spines.
 
-   The grammar here is the screenplay page — fixed-width setting,
-   uppercase letterspaced sluglines, the 61-character action
-   measure, marginalia where a scene number would sit. The
-   furniture of a screenplay is deliberately absent: no FADE IN,
-   no brads, no title-page pastiche. Borrow the grammar, never
-   the furniture.
+   Elegance here is made of three things and nothing else:
+     1. VIOLENT SCALE CONTRAST. Two sizes, far apart. Enormous
+        titles against 0.68rem metadata. Everything in the middle
+        is deleted, because the middle is what "boring" is made of.
+     2. AIR. Sections breathe in tens of rems, not units.
+     3. ASYMMETRY. Nothing is centred. A left rail carries the
+        index numbers, the body sits off it, metadata sits far
+        right. The eye has somewhere to go besides down.
+
+   DM Mono carries structure — but BIG, which is the part that was
+   missing. Fraunces appears three times: the promise, the page
+   titles, the press pull-quotes. Three appearances is why they land.
+
+   Screenplay GRAMMAR, never screenplay FURNITURE. No FADE IN.
    --------------------------------------------------------------- */
 
 :root {
-  --ink:        #0d100e;   /* deep green-black, the woods at 3am */
+  --ink:        #0d100e;
+  --ink-lift:   #171e1a;
   --ink-soft:   #141917;
-  --bone:       #e9e5da;   /* paper that has been somewhere */
-  --bone-dim:   #a8a294;
-  --moss:       #7fa67f;   /* the grass in the crack */
-  --rule:       rgba(233, 229, 218, 0.14);
+  --bone:       #ece8dd;
+  --bone-dim:   #98937f;
+  --moss:       #7fa67f;
+  --rule:       rgba(236, 232, 221, 0.13);
+  --rule-soft:  rgba(236, 232, 221, 0.055);
+  --ghost:      rgba(236, 232, 221, 0.17);
 
-  /* Two families. Fraunces only where it earns its keep. */
   --display:  "Fraunces", Georgia, "Times New Roman", serif;
   --mono:     "DM Mono", ui-monospace, SFMono-Regular, "Courier New", monospace;
-  --longform: var(--display);   /* essay body. Flip to var(--mono) for all-mono. */
+  --longform: var(--display);
 
-  /* A screenplay action line is 61 characters. Rhyme it. */
-  --measure:       61ch;
-  --measure-prose: 36rem;
-  --shell:         64rem;
+  --shell:         84rem;
+  --measure:       min(56ch, 100%);
+  --measure-prose: min(34rem, 100%);
 
-  /* DM Mono tops out at 500. Hierarchy comes from case, tracking
-     and colour — never weight. Nothing may exceed --weight-strong;
-     anything heavier gets synthesised into a fake bold. */
-  --weight-body:   400;
-  --weight-strong: 500;
-  --weight-dim:    300;
+  --pad:  clamp(1.25rem, 4vw, 3.25rem);
+  --beat: clamp(4.5rem, 11vh, 9rem);
+
+  /* DM Mono tops out at 500. Hierarchy is case, tracking, colour
+     and scale — never weight. Anything heavier fakes a bold. */
+  --w-body:   400;
+  --w-strong: 500;
+  --w-dim:    300;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
   margin: 0;
-  background: var(--ink);
+  min-height: 100%;
   color: var(--bone);
+  background-color: var(--ink);
+  background-image: radial-gradient(ellipse 120% 70% at 50% -15%, var(--ink-lift) 0%, var(--ink) 62%);
+  background-attachment: fixed;
   font-family: var(--mono);
-  font-weight: var(--weight-body);
-  font-size: 1rem;
-  line-height: 1.7;
+  font-weight: var(--w-body);
+  font-size: 0.95rem;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-a { color: inherit; text-decoration-color: var(--moss); text-underline-offset: 0.22em; }
-a:hover { color: var(--moss); }
+/* The grain. Two per cent of an SVG turbulence is the whole
+   difference between a flat dark theme and an expensive one. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
-strong, b { font-weight: var(--weight-strong); color: var(--bone); }
+a { color: inherit; text-decoration-color: var(--moss); text-underline-offset: 0.24em; }
+a:hover { color: var(--moss); }
+strong, b { font-weight: var(--w-strong); color: var(--bone); }
+::selection { background: var(--moss); color: var(--ink); }
 
 .skip { position: absolute; left: -9999px; }
 .skip:focus {
-  left: 1rem; top: 1rem; z-index: 10;
+  left: 1rem; top: 1rem; z-index: 10000;
   background: var(--bone); color: var(--ink);
   padding: 0.5rem 0.9rem; border-radius: 2px;
 }
 
-/* --- the slugline, the one structural idiom --------------------
-   Uppercase, tracked, medium. Section headers, work titles,
-   eyebrows — anything that behaves like a scene heading. */
+:focus-visible { outline: 2px solid var(--moss); outline-offset: 3px; }
 
-.slug {
-  font-family: var(--mono);
-  font-weight: var(--weight-strong);
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  line-height: 1.5;
+/* ===============================================================
+   THE GRID
+   Rail | body | far-right metadata. Nothing centred, ever.
+   =============================================================== */
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--pad);
 }
 
-/* --- masthead ------------------------------------------------- */
+.row {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr) 11rem;
+  gap: 0 clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+@media (max-width: 62rem) {
+  .row { grid-template-columns: 3.25rem minmax(0, 1fr); }
+  .row > .row-meta { grid-column: 2; margin-top: 1.1rem; }
+}
+@media (max-width: 34rem) {
+  .row { grid-template-columns: 1fr; }
+  .row > .row-index { margin-bottom: 0.6rem; }
+  .row > .row-meta { grid-column: 1; }
+}
+
+/* ===============================================================
+   MASTHEAD — thin, wide, sticky, nearly not there
+   =============================================================== */
 
 .masthead {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(14px);
+  background: color-mix(in srgb, var(--ink) 82%, transparent);
+  border-bottom: 1px solid var(--rule-soft);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .masthead { background: var(--ink); }
+}
+
+.masthead > .shell {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 2rem;
+  gap: 0.6rem 2rem;
   align-items: baseline;
   justify-content: space-between;
-  max-width: var(--shell);
-  margin: 0 auto;
-  padding: 2rem 1.5rem 1.25rem;
-  border-bottom: 1px solid var(--rule);
+  padding-block: 1.15rem;
 }
 
 .wordmark {
-  font-family: var(--mono);
-  font-weight: var(--weight-strong);
-  font-size: 0.85rem;
-  letter-spacing: 0.16em;
+  font-weight: var(--w-strong);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -104,425 +163,526 @@ strong, b { font-weight: var(--weight-strong); color: var(--bone); }
 .masthead nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.4rem;
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
+  gap: clamp(1rem, 3vw, 2.25rem);
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
-.masthead nav a { text-decoration: none; color: var(--bone-dim); }
-.masthead nav a:hover,
+.masthead nav a {
+  position: relative;
+  text-decoration: none;
+  color: var(--bone-dim);
+  padding-bottom: 0.2rem;
+  transition: color 0.3s ease;
+}
+.masthead nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: var(--moss);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.masthead nav a:hover { color: var(--bone); }
+.masthead nav a:hover::after,
+.masthead nav a[aria-current="page"]::after { transform: scaleX(1); }
 .masthead nav a[aria-current="page"] { color: var(--bone); }
 
-/* --- hero ----------------------------------------------------- */
+/* ===============================================================
+   HERO — one screen, one sentence, and a great deal of nothing
+   =============================================================== */
 
 .hero {
-  max-width: var(--shell);
-  margin: 0 auto;
-  padding: 5rem 1.5rem 3rem;
+  min-height: calc(100svh - 4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(4rem, 12vh, 9rem) 2rem;
 }
 
 .eyebrow {
-  margin: 0 0 1.75rem;
+  margin: 0 0 clamp(2rem, 6vh, 4rem);
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   color: var(--bone-dim);
 }
-.eyebrow a { text-decoration: none; }
 
 .promise {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(2.6rem, 8vw, 5rem);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  margin: 0 0 1.5rem;
-  max-width: 16ch;
+  font-size: clamp(3rem, 11.5vw, 9.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  margin: 0;
+  max-width: min(13ch, 100%);
+  text-wrap: balance;
 }
+.promise em { font-style: italic; }
 
 .promise-support {
   max-width: var(--measure);
-  margin: 0 0 2.5rem;
-  font-size: 1rem;
-  line-height: 1.7;
+  margin: clamp(2rem, 5vh, 3.25rem) 0 0;
+  margin-left: auto;          /* the asymmetry: support sits right */
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: var(--bone-dim);
+}
+@media (max-width: 62rem) { .promise-support { margin-left: 0; } }
+
+.hero-foot {
+  margin-top: auto;
+  padding-top: clamp(2.5rem, 8vh, 5rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem 2rem;
 }
 
-/* --- credentials band ------------------------------------------
-   Proof as a band, not buried in a sentence. */
+.scroll-cue {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.scroll-cue::after {
+  content: "";
+  width: 3rem; height: 1px;
+  background: var(--ghost);
+  transform-origin: left;
+  animation: draw 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes draw {
+  0%, 100% { transform: scaleX(0.25); opacity: 0.4; }
+  50%      { transform: scaleX(1);    opacity: 1; }
+}
+
+/* ===============================================================
+   CREDENTIALS — a full-bleed band. Proof, not a paragraph.
+   =============================================================== */
+
+.band {
+  border-block: 1px solid var(--rule);
+  padding-block: clamp(2rem, 5vh, 3.25rem);
+}
 
 .credentials {
   list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 2rem clamp(1.5rem, 4vw, 3.5rem);
+}
+.credentials li { display: flex; flex-direction: column; gap: 0.35rem; }
+.credentials .lead {
+  font-size: 0.92rem;
+  font-weight: var(--w-strong);
+  letter-spacing: 0.02em;
+  color: var(--bone);
+}
+.credentials .tail {
+  font-size: 0.64rem;
+  font-weight: var(--w-dim);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
+/* ===============================================================
+   SECTIONS
+   =============================================================== */
+
+figure { margin: 0; }
+
+.section { padding-block: var(--beat); }
+
+/* Adjacent beats double up into a canyon. Related sections get
+   a little over half a beat between them, not two. */
+.section + .section { padding-top: calc(var(--beat) * 0.55); }
+.page-head + .section { padding-top: clamp(0.5rem, 2vh, 1.5rem); }
+
+.section-head {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 1rem;
-  margin: 0 0 2.5rem;
-  padding: 1.5rem 0 0;
-  border-top: 1px solid var(--rule);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--bone-dim);
-}
-.credentials li + li::before {
-  content: "\00b7";
-  margin-right: 1rem;
-  color: var(--rule);
-}
-.credentials strong { font-weight: var(--weight-strong); color: var(--bone); }
-
-.doors { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0; }
-
-.door {
-  display: inline-block;
-  padding: 0.65rem 1.3rem;
-  border: 1px solid var(--bone);
-  border-radius: 999px;
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background 0.18s ease, color 0.18s ease;
-}
-.door:hover { background: var(--bone); color: var(--ink); }
-.door-quiet { border-color: var(--rule); color: var(--bone-dim); }
-.door-quiet:hover { background: transparent; border-color: var(--bone); color: var(--bone); }
-
-/* --- format chip ----------------------------------------------
-   Audio drama / Novel / Feature. The tag that says what medium
-   you are about to be in. */
-
-.chip {
-  display: inline-block;
-  padding: 0.15rem 0.55rem;
-  border: 1px solid var(--rule);
-  border-radius: 2px;
-  font-size: 0.66rem;
-  font-weight: var(--weight-body);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--bone-dim);
-  white-space: nowrap;
-}
-
-/* --- home strip ----------------------------------------------- */
-
-.strip {
-  max-width: var(--shell);
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
-  border-top: 1px solid var(--rule);
-}
-.strip-title { margin: 0 0 0.5rem; color: var(--bone-dim); }
-.strip-list { list-style: none; margin: 0 0 1.5rem; padding: 0; }
-.strip-list li {
-  display: flex; flex-wrap: wrap; gap: 0.4rem 1rem;
-  align-items: baseline; justify-content: space-between;
-  padding: 0.8rem 0; border-bottom: 1px solid var(--rule);
-}
-.strip-name {
-  font-size: 0.9rem;
-  font-weight: var(--weight-strong);
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-}
-.strip-more { margin: 0; font-size: 0.85rem; }
-
-/* --- sheets (inner pages) ------------------------------------- */
-
-.sheet { max-width: var(--shell); margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
-.sheet-head { margin-bottom: 3rem; }
-.sheet h1 {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(2.1rem, 5.5vw, 3.1rem);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  margin: 0 0 1rem;
-}
-.standfirst {
-  max-width: var(--measure);
-  margin: 0;
-  color: var(--bone-dim);
-}
-.byline { margin: 1.25rem 0 0; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bone-dim); }
-
-/* --- work shelves ----------------------------------------------
-   Each entry is a scene block: slugline, action line, marginalia.
-   The left column carries the words; the right rail carries the
-   metadata, where a scene number would sit. */
-
-.shelf-title { margin: 3.5rem 0 0.5rem; color: var(--moss); }
-.sheet .shelf-title:first-of-type { margin-top: 0; }
-
-.shelf { list-style: none; margin: 0; padding: 0; }
-
-.item {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  column-gap: 2rem;
   align-items: baseline;
-  padding: 1.6rem 0;
-  border-top: 1px solid var(--rule);
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: clamp(2rem, 5vh, 3.5rem);
 }
 
-.item-slug {
-  grid-column: 1;
+.section-title {
+  margin: 0;
+  font-size: 0.66rem;
+  font-weight: var(--w-strong);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.section-aside {
+  margin: 0;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.section-aside a { text-decoration: none; }
+
+/* ===============================================================
+   THE LEDGER — the site's one repeating object
+   =============================================================== */
+
+.ledger { list-style: none; margin: 0; padding: 0; }
+
+.ledger > li {
+  border-top: 1px solid var(--rule);
+  padding-block: clamp(2rem, 4.5vh, 3.5rem);
+  transition: background-color 0.45s ease;
+}
+.ledger > li:last-child { border-bottom: 1px solid var(--rule); }
+.ledger > li:hover { background-color: rgba(236, 232, 221, 0.018); }
+
+.row-index {
+  font-size: 0.72rem;
+  font-weight: var(--w-dim);
+  letter-spacing: 0.18em;
+  color: var(--ghost);
+  padding-top: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.45s ease;
+}
+.ledger > li:hover .row-index { color: var(--moss); }
+
+.row-title {
   margin: 0;
   font-family: var(--mono);
-  font-weight: var(--weight-strong);
-  font-size: 0.95rem;
-  letter-spacing: 0.11em;
+  font-weight: var(--w-strong);
+  font-size: clamp(1.5rem, 4.2vw, 2.9rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
   text-transform: uppercase;
-  line-height: 1.4;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.item-slug a { text-decoration: none; }
-.item-slug .sub { color: var(--bone-dim); font-weight: var(--weight-dim); }
+.ledger > li:hover .row-title { transform: translateX(0.45rem); }
+.row-title a { text-decoration: none; }
 
-.item-rail {
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: end;
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: var(--bone-dim);
-}
-
-.item-logline {
-  grid-column: 1;
+.row-line {
   max-width: var(--measure);
-  margin: 0.7rem 0 0;
+  margin: 1.1rem 0 0;
+  color: var(--bone);
 }
-.item-pending {
-  grid-column: 1;
+.row-line-pending {
   max-width: var(--measure);
-  margin: 0.7rem 0 0;
-  color: var(--bone-dim);
-  font-weight: var(--weight-dim);
+  margin: 1.1rem 0 0;
+  font-weight: var(--w-dim);
   font-style: italic;
+  color: var(--bone-dim);
   opacity: 0.5;
 }
-.item-credit {
-  grid-column: 1;
-  margin: 0.6rem 0 0;
-  font-size: 0.85rem;
-  color: var(--bone-dim);
-}
-.item-note {
-  grid-column: 1;
+
+.row-note {
   max-width: var(--measure);
-  margin: 0.5rem 0 0;
-  font-size: 0.85rem;
-  font-weight: var(--weight-dim);
+  margin: 0.9rem 0 0;
+  font-size: 0.8rem;
+  font-weight: var(--w-dim);
+  line-height: 1.75;
   color: var(--bone-dim);
 }
-.item-links {
-  grid-column: 1;
-  margin: 0.75rem 0 0;
+
+.row-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  gap: 1.5rem;
+  margin: 1.4rem 0 0;
+  font-size: 0.64rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
-.item-links a {
+.row-links a {
+  position: relative;
   color: var(--bone-dim);
   text-decoration: none;
-  border-bottom: 1px solid var(--rule);
-  padding-bottom: 0.15rem;
+  padding-bottom: 0.25rem;
 }
-.item-links a:hover { color: var(--moss); border-bottom-color: var(--moss); }
-
-.shelf-cta { margin: 1.75rem 0 0; font-size: 0.85rem; }
-
-@media (max-width: 34rem) {
-  .item { grid-template-columns: 1fr; }
-  .item-rail { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 0.6rem; }
+.row-links a::after {
+  content: "";
+  position: absolute; left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: currentColor; opacity: 0.35;
+  transform: scaleX(1); transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s;
 }
+.row-links a:hover { color: var(--moss); }
+.row-links a:hover::after { transform: scaleX(0); }
 
-/* --- press: the clippings wall ---------------------------------
-   Quotes first, large. Then the wall — a band of names at a
-   glance, a bibliography up close. */
-
-.pullquotes { margin: 0 0 4rem; padding: 0; list-style: none; }
-.pullquote { margin: 0 0 2.75rem; }
-.pullquote blockquote {
-  margin: 0 0 0.6rem;
-  padding-left: 1.25rem;
-  border-left: 2px solid var(--moss);
-  font-family: var(--display);
-  font-style: italic;
-  font-size: clamp(1.15rem, 3vw, 1.6rem);
-  line-height: 1.4;
-  max-width: var(--measure-prose);
-}
-.pullquote figcaption {
-  padding-left: 1.35rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+/* far-right column: format, year, status */
+.row-meta {
+  margin: 0;
+  padding-top: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--bone-dim);
+  text-align: left;
 }
-.pullquote figcaption a { text-decoration: none; border-bottom: 1px solid var(--rule); }
+.row-meta .strongline { color: var(--bone); }
 
-.clippings { list-style: none; margin: 0; padding: 0; }
-.clipping {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  column-gap: 2rem;
-  align-items: baseline;
-  padding: 0.95rem 0;
+/* ===============================================================
+   PAGE HEADS — one enormous Fraunces line, then air
+   =============================================================== */
+
+.masthead-space { height: 0; }
+
+.page-head {
+  padding-block: clamp(3.5rem, 11vh, 7.5rem) clamp(2rem, 5vh, 3.5rem);
+}
+.page-head h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(3rem, 10vw, 7.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.page-head .standfirst {
+  max-width: var(--measure);
+  margin: clamp(1.5rem, 4vh, 2.75rem) 0 0;
+  margin-left: auto;
+  color: var(--bone-dim);
+  font-size: 0.92rem;
+  line-height: 1.85;
+}
+@media (max-width: 62rem) { .page-head .standfirst { margin-left: 0; } }
+
+/* ===============================================================
+   PRESS — the quotes are enormous, and there are few of them
+   =============================================================== */
+
+.quote-block {
+  padding-block: clamp(3rem, 9vh, 7rem);
   border-top: 1px solid var(--rule);
 }
-.clipping-outlet {
-  grid-column: 1;
+.quote-block:last-of-type { border-bottom: 1px solid var(--rule); }
+
+.quote-block blockquote {
   margin: 0;
-  font-weight: var(--weight-strong);
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  line-height: 1.5;
+  max-width: min(22ch, 100%);
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.75rem, 5.5vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
-.clipping-outlet a { text-decoration: none; }
-.clipping-title {
-  grid-column: 1;
-  margin: 0.25rem 0 0;
-  max-width: var(--measure);
-  font-size: 0.85rem;
-  font-weight: var(--weight-dim);
+.quote-block figcaption {
+  margin-top: clamp(1.5rem, 4vh, 2.5rem);
+  font-size: 0.64rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
   color: var(--bone-dim);
 }
-.clipping-meta {
-  grid-column: 2; grid-row: 1; justify-self: end;
-  display: flex; gap: 0.75rem; align-items: baseline;
-  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--bone-dim);
-}
+.quote-block figcaption a { text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 0.15rem; }
 
-@media (max-width: 34rem) {
-  .clipping { grid-template-columns: 1fr; }
-  .clipping-meta { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 0.35rem; }
-}
-
-/* --- writing index -------------------------------------------- */
-
-.index { list-style: none; margin: 0; padding: 0; }
-.entry { padding: 1.6rem 0; border-top: 1px solid var(--rule); }
-.entry-title {
-  margin: 0 0 0.4rem;
-  font-family: var(--mono);
-  font-weight: var(--weight-strong);
-  font-size: 0.95rem;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  line-height: 1.4;
-}
-.entry-title a { text-decoration: none; }
-.entry-meta { margin: 0; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bone-dim); }
-.entry-standfirst { max-width: var(--measure); margin: 0.6rem 0 0; font-size: 0.9rem; color: var(--bone-dim); }
+/* ===============================================================
+   WRITING
+   =============================================================== */
 
 .star { color: var(--moss); font-style: normal; }
 
-/* --- long-form reading -----------------------------------------
-   The one place a proportional face wins: monospace past ~800
-   words is measurably slower to read, and the essays are where
-   someone is meant to sink in. One token to flip. */
-
-.prose { max-width: 44rem; }
-.prose p, .prose ul, .prose ol, .prose blockquote { max-width: var(--measure-prose); }
-.prose p, .prose ul, .prose ol {
-  font-family: var(--longform);
-  font-size: 1.1rem;
-  line-height: 1.7;
-  margin: 0 0 1.4rem;
-}
-.prose .lede { font-size: 1.3rem; line-height: 1.5; }
-.prose h2 {
-  font-family: var(--mono); font-weight: var(--weight-strong);
-  font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase;
-  line-height: 1.5; color: var(--moss);
-  margin: 3rem 0 1rem;
-}
-.prose h3 {
-  font-family: var(--mono); font-weight: var(--weight-strong);
-  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-  margin: 2.25rem 0 0.75rem;
-}
-.prose blockquote {
-  margin: 2rem 0; padding-left: 1.25rem;
-  border-left: 2px solid var(--moss);
-  font-family: var(--display); font-style: italic; color: var(--bone-dim);
-}
-.prose hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
-.prose img { max-width: 100%; height: auto; }
-
-/* --- the job list ----------------------------------------------
-   The best sentence on the site, given its own beat. */
-
-.joblist { list-style: none; margin: 0 0 2rem; padding: 0; max-width: var(--measure); }
-.joblist li {
-  padding: 0.28rem 0;
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
+.row-date {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--bone-dim);
 }
-.joblist li:last-child { color: var(--bone); }
-.joblist li::before { content: "\2014\00a0"; color: var(--rule); }
+
+/* ===============================================================
+   LONG-FORM — the one place a proportional face wins
+   =============================================================== */
+
+.prose { max-width: 46rem; }
+.prose p, .prose ul, .prose ol, .prose blockquote { max-width: var(--measure-prose); }
+.prose p, .prose ul, .prose ol {
+  font-family: var(--longform);
+  font-size: 1.2rem;
+  line-height: 1.72;
+  margin: 0 0 1.5rem;
+}
+.prose .lede { font-size: 1.55rem; line-height: 1.42; letter-spacing: -0.012em; }
+.prose h2 {
+  font-family: var(--mono); font-weight: var(--w-strong);
+  font-size: 0.66rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--moss); margin: clamp(3rem, 7vh, 5rem) 0 1.25rem;
+}
+.prose h3 {
+  font-family: var(--mono); font-weight: var(--w-strong);
+  font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+  margin: 2.5rem 0 0.85rem;
+}
+.prose blockquote {
+  margin: 2.5rem 0; padding-left: 1.5rem;
+  border-left: 1px solid var(--moss);
+  font-family: var(--display); font-style: italic; font-size: 1.35rem;
+  line-height: 1.45; color: var(--bone-dim);
+}
+.prose hr { border: 0; border-top: 1px solid var(--rule); margin: clamp(3rem, 7vh, 5rem) 0; }
+.prose img { max-width: 100%; height: auto; }
+
+/* ===============================================================
+   ABOUT — the job list, numbered, because it is a ledger too
+   =============================================================== */
+
+.jobs { list-style: none; margin: 0; padding: 0; counter-reset: job; }
+.jobs li {
+  counter-increment: job;
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0 clamp(1.5rem, 4vw, 3.5rem);
+  align-items: baseline;
+  padding-block: 0.85rem;
+  border-top: 1px solid var(--rule-soft);
+  font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  transition: color 0.4s ease;
+}
+.jobs li::before {
+  content: "0" counter(job);
+  font-size: 0.72rem;
+  font-weight: var(--w-dim);
+  letter-spacing: 0.18em;
+  color: var(--ghost);
+  font-variant-numeric: tabular-nums;
+}
+.jobs li:hover { color: var(--bone); }
+.jobs li:last-child { color: var(--bone); border-bottom: 1px solid var(--rule-soft); }
+
+@media (max-width: 34rem) {
+  .jobs li { grid-template-columns: 3rem 1fr; }
+}
+
+.portrait { margin: 0 0 clamp(2.5rem, 6vh, 4rem); max-width: 22rem; }
+.portrait img { width: 100%; height: auto; filter: grayscale(1) contrast(1.06); }
+
+/* ===============================================================
+   CONTACT
+   =============================================================== */
+
+.bigmail {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 6.5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  word-break: break-word;
+}
+.bigmail a { text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 0.1em; transition: border-color 0.4s ease; }
+.bigmail a:hover { border-color: var(--moss); }
+
 .aside {
   max-width: var(--measure);
-  margin: 0 0 3rem;
-  font-size: 0.9rem;
+  margin: clamp(1.75rem, 4vh, 2.75rem) 0 0;
+  font-size: 0.82rem;
+  font-weight: var(--w-dim);
   color: var(--bone-dim);
 }
 
-.portrait { margin: 0 0 2.75rem; max-width: 20rem; }
-.portrait img { width: 100%; height: auto; border-radius: 2px; }
-.portrait figcaption {
-  margin-top: 0.6rem;
-  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--bone-dim);
+.back {
+  margin: clamp(3rem, 8vh, 5rem) 0 0;
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
 }
+.back a { text-decoration: none; color: var(--bone-dim); }
+.back a:hover { color: var(--moss); }
 
-.bigmail { font-family: var(--display); font-size: clamp(1.4rem, 4vw, 2.1rem); margin: 0 0 0.75rem; }
-.back { margin-top: 3rem; font-size: 0.85rem; }
+/* ===============================================================
+   FORM
+   =============================================================== */
 
-/* --- form ----------------------------------------------------- */
-
-.form { display: grid; gap: 1.1rem; max-width: var(--measure); margin-top: 2.5rem; }
-.form label { display: grid; gap: 0.4rem; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bone-dim); }
+.form { display: grid; gap: 1.25rem; max-width: 34rem; margin-top: clamp(2.5rem, 6vh, 4rem); }
+.form label { display: grid; gap: 0.5rem; font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--bone-dim); }
 .form input, .form textarea {
   font: inherit; color: var(--bone);
-  background: var(--ink-soft);
-  border: 1px solid var(--rule); border-radius: 3px;
-  padding: 0.7rem 0.85rem;
+  background: transparent;
+  border: 0; border-bottom: 1px solid var(--rule);
+  padding: 0.65rem 0;
+  transition: border-color 0.4s ease;
 }
-.form input:focus, .form textarea:focus { outline: 2px solid var(--moss); outline-offset: 1px; }
+.form input:focus, .form textarea:focus { outline: 0; border-bottom-color: var(--moss); }
 .form button {
   justify-self: start;
-  font: inherit; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  font: inherit; font-size: 0.66rem; letter-spacing: 0.24em; text-transform: uppercase;
   cursor: pointer;
-  padding: 0.7rem 1.6rem;
-  background: var(--bone); color: var(--ink);
-  border: 0; border-radius: 999px;
+  margin-top: 1rem;
+  padding: 0.9rem 2.25rem;
+  background: transparent; color: var(--bone);
+  border: 1px solid var(--bone);
+  transition: background 0.35s ease, color 0.35s ease;
 }
+.form button:hover { background: var(--bone); color: var(--ink); }
 
-/* --- colophon ------------------------------------------------- */
+/* ===============================================================
+   COLOPHON
+   =============================================================== */
 
 .colophon {
-  max-width: var(--shell); margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
   border-top: 1px solid var(--rule);
+  padding-block: clamp(3rem, 8vh, 5.5rem) clamp(2.5rem, 6vh, 4rem);
+  margin-top: var(--beat);
+}
+.colophon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 2.5rem clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
 }
 .social {
   list-style: none; display: flex; flex-wrap: wrap;
-  gap: 0.6rem 1.25rem; margin: 0 0 1.5rem; padding: 0;
-  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  gap: 0.75rem 1.5rem; margin: 0; padding: 0;
+  font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
 }
 .social a { text-decoration: none; color: var(--bone-dim); }
 .social a:hover { color: var(--moss); }
-.fine { margin: 0 0 0.4rem; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--bone-dim); }
+.fine { margin: 0 0 0.5rem; font-size: 0.62rem; letter-spacing: 0.16em; color: var(--bone-dim); }
+.fine a { text-decoration: none; }
+
+/* ===============================================================
+   MOTION — scroll-linked, CSS only, additive
+   Elements are fully visible without it; this only enhances.
+   =============================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 42%;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(1.75rem); }
+      to   { opacity: 1; transform: none; }
+    }
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }
