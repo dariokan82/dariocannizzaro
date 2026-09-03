@@ -1,7 +1,15 @@
 /* ---------------------------------------------------------------
    dariocannizzaro.com
+
    Conventional structure, dangerous prose. The layout should never
    be the thing anyone notices; the sentences should be.
+
+   The grammar here is the screenplay page — fixed-width setting,
+   uppercase letterspaced sluglines, the 61-character action
+   measure, marginalia where a scene number would sit. The
+   furniture of a screenplay is deliberately absent: no FADE IN,
+   no brads, no title-page pastiche. Borrow the grammar, never
+   the furniture.
    --------------------------------------------------------------- */
 
 :root {
@@ -11,10 +19,23 @@
   --bone-dim:   #a8a294;
   --moss:       #7fa67f;   /* the grass in the crack */
   --rule:       rgba(233, 229, 218, 0.14);
-  --measure:    34rem;
 
-  --display: "Fraunces", Georgia, "Times New Roman", serif;
-  --body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  /* Two families. Fraunces only where it earns its keep. */
+  --display:  "Fraunces", Georgia, "Times New Roman", serif;
+  --mono:     "DM Mono", ui-monospace, SFMono-Regular, "Courier New", monospace;
+  --longform: var(--display);   /* essay body. Flip to var(--mono) for all-mono. */
+
+  /* A screenplay action line is 61 characters. Rhyme it. */
+  --measure:       61ch;
+  --measure-prose: 36rem;
+  --shell:         64rem;
+
+  /* DM Mono tops out at 500. Hierarchy comes from case, tracking
+     and colour — never weight. Nothing may exceed --weight-strong;
+     anything heavier gets synthesised into a fake bold. */
+  --weight-body:   400;
+  --weight-strong: 500;
+  --weight-dim:    300;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -25,20 +46,36 @@ body {
   margin: 0;
   background: var(--ink);
   color: var(--bone);
-  font-family: var(--body);
-  font-size: 1.0625rem;
-  line-height: 1.65;
+  font-family: var(--mono);
+  font-weight: var(--weight-body);
+  font-size: 1rem;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
 a { color: inherit; text-decoration-color: var(--moss); text-underline-offset: 0.22em; }
 a:hover { color: var(--moss); }
 
+strong, b { font-weight: var(--weight-strong); color: var(--bone); }
+
 .skip { position: absolute; left: -9999px; }
 .skip:focus {
   left: 1rem; top: 1rem; z-index: 10;
   background: var(--bone); color: var(--ink);
   padding: 0.5rem 0.9rem; border-radius: 2px;
+}
+
+/* --- the slugline, the one structural idiom --------------------
+   Uppercase, tracked, medium. Section headers, work titles,
+   eyebrows — anything that behaves like a scene heading. */
+
+.slug {
+  font-family: var(--mono);
+  font-weight: var(--weight-strong);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.5;
 }
 
 /* --- masthead ------------------------------------------------- */
@@ -49,25 +86,28 @@ a:hover { color: var(--moss); }
   gap: 0.75rem 2rem;
   align-items: baseline;
   justify-content: space-between;
-  max-width: 62rem;
+  max-width: var(--shell);
   margin: 0 auto;
   padding: 2rem 1.5rem 1.25rem;
   border-bottom: 1px solid var(--rule);
 }
 
 .wordmark {
-  font-family: var(--display);
-  font-size: 1.15rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-family: var(--mono);
+  font-weight: var(--weight-strong);
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   text-decoration: none;
 }
 
 .masthead nav {
   display: flex;
-  gap: 1.5rem;
-  font-size: 0.9rem;
-  letter-spacing: 0.02em;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 .masthead nav a { text-decoration: none; color: var(--bone-dim); }
 .masthead nav a:hover,
@@ -76,16 +116,13 @@ a:hover { color: var(--moss); }
 /* --- hero ----------------------------------------------------- */
 
 .hero {
-  max-width: 62rem;
+  max-width: var(--shell);
   margin: 0 auto;
-  padding: 5rem 1.5rem 3.5rem;
+  padding: 5rem 1.5rem 3rem;
 }
 
 .eyebrow {
   margin: 0 0 1.75rem;
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
   color: var(--bone-dim);
 }
 .eyebrow a { text-decoration: none; }
@@ -102,29 +139,44 @@ a:hover { color: var(--moss); }
 
 .promise-support {
   max-width: var(--measure);
-  margin: 0 0 2.25rem;
-  font-size: 1.1875rem;
-  line-height: 1.6;
+  margin: 0 0 2.5rem;
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
-.standing {
-  max-width: var(--measure);
+/* --- credentials band ------------------------------------------
+   Proof as a band, not buried in a sentence. */
+
+.credentials {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
   margin: 0 0 2.5rem;
-  padding-top: 1.75rem;
+  padding: 1.5rem 0 0;
   border-top: 1px solid var(--rule);
-  font-size: 0.95rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--bone-dim);
 }
-.standing strong { color: var(--bone); font-weight: 600; }
+.credentials li + li::before {
+  content: "\00b7";
+  margin-right: 1rem;
+  color: var(--rule);
+}
+.credentials strong { font-weight: var(--weight-strong); color: var(--bone); }
 
 .doors { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0; }
 
 .door {
   display: inline-block;
-  padding: 0.7rem 1.35rem;
+  padding: 0.65rem 1.3rem;
   border: 1px solid var(--bone);
   border-radius: 999px;
-  font-size: 0.92rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   text-decoration: none;
   transition: background 0.18s ease, color 0.18s ease;
 }
@@ -132,35 +184,49 @@ a:hover { color: var(--moss); }
 .door-quiet { border-color: var(--rule); color: var(--bone-dim); }
 .door-quiet:hover { background: transparent; border-color: var(--bone); color: var(--bone); }
 
+/* --- format chip ----------------------------------------------
+   Audio drama / Novel / Feature. The tag that says what medium
+   you are about to be in. */
+
+.chip {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  font-size: 0.66rem;
+  font-weight: var(--weight-body);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  white-space: nowrap;
+}
+
 /* --- home strip ----------------------------------------------- */
 
 .strip {
-  max-width: 62rem;
+  max-width: var(--shell);
   margin: 0 auto;
   padding: 2.5rem 1.5rem 4rem;
   border-top: 1px solid var(--rule);
 }
-.strip-title {
-  margin: 0 0 1.25rem;
-  font-family: var(--body);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--bone-dim);
-}
+.strip-title { margin: 0 0 0.5rem; color: var(--bone-dim); }
 .strip-list { list-style: none; margin: 0 0 1.5rem; padding: 0; }
 .strip-list li {
-  display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; align-items: baseline;
-  padding: 0.7rem 0; border-bottom: 1px solid var(--rule);
+  display: flex; flex-wrap: wrap; gap: 0.4rem 1rem;
+  align-items: baseline; justify-content: space-between;
+  padding: 0.8rem 0; border-bottom: 1px solid var(--rule);
 }
-.strip-name { font-family: var(--display); font-size: 1.2rem; }
-.strip-meta { font-size: 0.85rem; color: var(--bone-dim); }
-.strip-more { margin: 0; font-size: 0.92rem; }
+.strip-name {
+  font-size: 0.9rem;
+  font-weight: var(--weight-strong);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.strip-more { margin: 0; font-size: 0.85rem; }
 
 /* --- sheets (inner pages) ------------------------------------- */
 
-.sheet { max-width: 62rem; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+.sheet { max-width: var(--shell); margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
 .sheet-head { margin-bottom: 3rem; }
 .sheet h1 {
   font-family: var(--display);
@@ -173,61 +239,215 @@ a:hover { color: var(--moss); }
 .standfirst {
   max-width: var(--measure);
   margin: 0;
-  font-size: 1.125rem;
   color: var(--bone-dim);
 }
-.byline { margin: 1.25rem 0 0; font-size: 0.85rem; color: var(--bone-dim); }
+.byline { margin: 1.25rem 0 0; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bone-dim); }
 
-/* --- work shelves --------------------------------------------- */
+/* --- work shelves ----------------------------------------------
+   Each entry is a scene block: slugline, action line, marginalia.
+   The left column carries the words; the right rail carries the
+   metadata, where a scene number would sit. */
 
-.shelf-title {
-  margin: 3.5rem 0 1.25rem;
-  font-family: var(--body);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--moss);
-}
+.shelf-title { margin: 3.5rem 0 0.5rem; color: var(--moss); }
 .sheet .shelf-title:first-of-type { margin-top: 0; }
 
 .shelf { list-style: none; margin: 0; padding: 0; }
-.item { padding: 1.5rem 0; border-top: 1px solid var(--rule); }
-.item-title {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: 1.55rem;
-  line-height: 1.2;
-  margin: 0 0 0.35rem;
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 2rem;
+  align-items: baseline;
+  padding: 1.6rem 0;
+  border-top: 1px solid var(--rule);
 }
-.item-title a { text-decoration: none; }
-.item-meta { margin: 0; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone-dim); }
-.item-logline { max-width: var(--measure); margin: 0.75rem 0 0; }
-.item-credit { margin: 0.6rem 0 0; font-size: 0.95rem; }
-.item-note { max-width: var(--measure); margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--bone-dim); }
-.shelf-cta { margin: 1.5rem 0 0; font-size: 0.95rem; }
+
+.item-slug {
+  grid-column: 1;
+  margin: 0;
+  font-family: var(--mono);
+  font-weight: var(--weight-strong);
+  font-size: 0.95rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.item-slug a { text-decoration: none; }
+.item-slug .sub { color: var(--bone-dim); font-weight: var(--weight-dim); }
+
+.item-rail {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--bone-dim);
+}
+
+.item-logline {
+  grid-column: 1;
+  max-width: var(--measure);
+  margin: 0.7rem 0 0;
+}
+.item-pending {
+  grid-column: 1;
+  max-width: var(--measure);
+  margin: 0.7rem 0 0;
+  color: var(--bone-dim);
+  font-weight: var(--weight-dim);
+  font-style: italic;
+  opacity: 0.5;
+}
+.item-credit {
+  grid-column: 1;
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+  color: var(--bone-dim);
+}
+.item-note {
+  grid-column: 1;
+  max-width: var(--measure);
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  font-weight: var(--weight-dim);
+  color: var(--bone-dim);
+}
+.item-links {
+  grid-column: 1;
+  margin: 0.75rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.item-links a {
+  color: var(--bone-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.15rem;
+}
+.item-links a:hover { color: var(--moss); border-bottom-color: var(--moss); }
+
+.shelf-cta { margin: 1.75rem 0 0; font-size: 0.85rem; }
+
+@media (max-width: 34rem) {
+  .item { grid-template-columns: 1fr; }
+  .item-rail { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 0.6rem; }
+}
+
+/* --- press: the clippings wall ---------------------------------
+   Quotes first, large. Then the wall — a band of names at a
+   glance, a bibliography up close. */
+
+.pullquotes { margin: 0 0 4rem; padding: 0; list-style: none; }
+.pullquote { margin: 0 0 2.75rem; }
+.pullquote blockquote {
+  margin: 0 0 0.6rem;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--moss);
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  line-height: 1.4;
+  max-width: var(--measure-prose);
+}
+.pullquote figcaption {
+  padding-left: 1.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.pullquote figcaption a { text-decoration: none; border-bottom: 1px solid var(--rule); }
+
+.clippings { list-style: none; margin: 0; padding: 0; }
+.clipping {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 2rem;
+  align-items: baseline;
+  padding: 0.95rem 0;
+  border-top: 1px solid var(--rule);
+}
+.clipping-outlet {
+  grid-column: 1;
+  margin: 0;
+  font-weight: var(--weight-strong);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.clipping-outlet a { text-decoration: none; }
+.clipping-title {
+  grid-column: 1;
+  margin: 0.25rem 0 0;
+  max-width: var(--measure);
+  font-size: 0.85rem;
+  font-weight: var(--weight-dim);
+  color: var(--bone-dim);
+}
+.clipping-meta {
+  grid-column: 2; grid-row: 1; justify-self: end;
+  display: flex; gap: 0.75rem; align-items: baseline;
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
+@media (max-width: 34rem) {
+  .clipping { grid-template-columns: 1fr; }
+  .clipping-meta { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 0.35rem; }
+}
 
 /* --- writing index -------------------------------------------- */
 
 .index { list-style: none; margin: 0; padding: 0; }
-.entry { padding: 1.75rem 0; border-top: 1px solid var(--rule); }
-.entry-title { font-family: var(--display); font-weight: 400; font-size: 1.7rem; line-height: 1.2; margin: 0 0 0.4rem; }
+.entry { padding: 1.6rem 0; border-top: 1px solid var(--rule); }
+.entry-title {
+  margin: 0 0 0.4rem;
+  font-family: var(--mono);
+  font-weight: var(--weight-strong);
+  font-size: 0.95rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
 .entry-title a { text-decoration: none; }
-.entry-meta { margin: 0; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone-dim); }
-.entry-standfirst { max-width: var(--measure); margin: 0.7rem 0 0; color: var(--bone-dim); }
+.entry-meta { margin: 0; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bone-dim); }
+.entry-standfirst { max-width: var(--measure); margin: 0.6rem 0 0; font-size: 0.9rem; color: var(--bone-dim); }
 
-/* --- long-form reading ---------------------------------------- */
+.star { color: var(--moss); font-style: normal; }
+
+/* --- long-form reading -----------------------------------------
+   The one place a proportional face wins: monospace past ~800
+   words is measurably slower to read, and the essays are where
+   someone is meant to sink in. One token to flip. */
 
 .prose { max-width: 44rem; }
-.prose p, .prose ul, .prose ol, .prose blockquote { max-width: var(--measure); }
-.prose p { margin: 0 0 1.5rem; font-size: 1.125rem; line-height: 1.75; }
-.prose .lede { font-size: 1.3rem; line-height: 1.55; }
+.prose p, .prose ul, .prose ol, .prose blockquote { max-width: var(--measure-prose); }
+.prose p, .prose ul, .prose ol {
+  font-family: var(--longform);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin: 0 0 1.4rem;
+}
+.prose .lede { font-size: 1.3rem; line-height: 1.5; }
 .prose h2 {
-  font-family: var(--display); font-weight: 600;
-  font-size: 1.5rem; line-height: 1.25;
+  font-family: var(--mono); font-weight: var(--weight-strong);
+  font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase;
+  line-height: 1.5; color: var(--moss);
   margin: 3rem 0 1rem;
 }
-.prose h3 { font-family: var(--display); font-weight: 600; font-size: 1.2rem; margin: 2.25rem 0 0.75rem; }
+.prose h3 {
+  font-family: var(--mono); font-weight: var(--weight-strong);
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  margin: 2.25rem 0 0.75rem;
+}
 .prose blockquote {
   margin: 2rem 0; padding-left: 1.25rem;
   border-left: 2px solid var(--moss);
@@ -236,13 +456,41 @@ a:hover { color: var(--moss); }
 .prose hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .prose img { max-width: 100%; height: auto; }
 
+/* --- the job list ----------------------------------------------
+   The best sentence on the site, given its own beat. */
+
+.joblist { list-style: none; margin: 0 0 2rem; padding: 0; max-width: var(--measure); }
+.joblist li {
+  padding: 0.28rem 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.joblist li:last-child { color: var(--bone); }
+.joblist li::before { content: "\2014\00a0"; color: var(--rule); }
+.aside {
+  max-width: var(--measure);
+  margin: 0 0 3rem;
+  font-size: 0.9rem;
+  color: var(--bone-dim);
+}
+
+.portrait { margin: 0 0 2.75rem; max-width: 20rem; }
+.portrait img { width: 100%; height: auto; border-radius: 2px; }
+.portrait figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
 .bigmail { font-family: var(--display); font-size: clamp(1.4rem, 4vw, 2.1rem); margin: 0 0 0.75rem; }
-.back { margin-top: 3rem; font-size: 0.95rem; }
+.back { margin-top: 3rem; font-size: 0.85rem; }
 
 /* --- form ----------------------------------------------------- */
 
 .form { display: grid; gap: 1.1rem; max-width: var(--measure); margin-top: 2.5rem; }
-.form label { display: grid; gap: 0.4rem; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bone-dim); }
+.form label { display: grid; gap: 0.4rem; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bone-dim); }
 .form input, .form textarea {
   font: inherit; color: var(--bone);
   background: var(--ink-soft);
@@ -252,7 +500,8 @@ a:hover { color: var(--moss); }
 .form input:focus, .form textarea:focus { outline: 2px solid var(--moss); outline-offset: 1px; }
 .form button {
   justify-self: start;
-  font: inherit; cursor: pointer;
+  font: inherit; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer;
   padding: 0.7rem 1.6rem;
   background: var(--bone); color: var(--ink);
   border: 0; border-radius: 999px;
@@ -261,14 +510,18 @@ a:hover { color: var(--moss); }
 /* --- colophon ------------------------------------------------- */
 
 .colophon {
-  max-width: 62rem; margin: 0 auto;
+  max-width: var(--shell); margin: 0 auto;
   padding: 2.5rem 1.5rem 4rem;
   border-top: 1px solid var(--rule);
 }
-.social { list-style: none; display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 0 0 1.5rem; padding: 0; font-size: 0.9rem; }
+.social {
+  list-style: none; display: flex; flex-wrap: wrap;
+  gap: 0.6rem 1.25rem; margin: 0 0 1.5rem; padding: 0;
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+}
 .social a { text-decoration: none; color: var(--bone-dim); }
 .social a:hover { color: var(--moss); }
-.fine { margin: 0 0 0.4rem; font-size: 0.82rem; color: var(--bone-dim); }
+.fine { margin: 0 0 0.4rem; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--bone-dim); }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }

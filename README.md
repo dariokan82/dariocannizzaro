@@ -45,20 +45,37 @@ homepage and nowhere else, so you can rewrite them a hundred times without touch
 
 ## Before this goes live — the outstanding list
 
-- [ ] **`site.json` → `email`** is still `TODO@dariocannizzaro.com`. Put the real address in.
 - [ ] **Loglines.** Every entry in `work.json → available` has an empty `logline`. One line
-      each. Claire deliberately did not invent them.
+      each. Claire deliberately did not invent them. While a logline is empty the Work page
+      shows `[logline pending]` **in dev only** — it is gated on the `isDev` global and
+      cannot reach a production build. Verify with `npm run build && grep -r "logline pending" _site/`.
 - [ ] **Images.** `src/assets/img/` is empty. It needs `share.jpg` (the social-preview card,
-      1200×630) and `favicon.png`. A portrait for the About page would earn its place too.
+      1200×630) and `favicon.png`. For a portrait on About, drop the file in and name it in
+      `site.json → portrait`; leave that empty and the slot renders as if it never existed.
 - [ ] **David's credits.** `about.njk` has a TODO where his two best-known titles should go.
-- [ ] **Confirm two links.** The IMDb title links in `work.json` were carried over from the old
-      site and mapped by position: check that Strati is `tt38907629` and Trigger Warning is
-      `tt11953332`.
+- [ ] **Confirm three links.** The two IMDb title links in `work.json` were carried over from
+      the old site and mapped by position: check that Strati is `tt38907629` and Trigger
+      Warning is `tt11953332`. Also confirm the Strati *Listen* link — Apple Podcasts
+      `id1862584688`, verified via audiodrama.directory as the English full-cast series. The
+      Spreaker original is in the `_comment_unconfirmed` note if you'd rather point there.
+- [ ] **Press.** `src/_data/press.json` ships empty, with the two shapes documented as
+      `_example_*` keys. Fill `quotes` (two or three, set large) and `clippings` (the wall).
+      **While both arrays are empty the `/press/` page builds but is not linked from the
+      masthead** — an empty press page is worse than none. Add one real entry and the nav
+      link appears on its own.
 - [ ] **True Story titles.** Six Dimes, Darkness is my Candle and Running the Amazon are not
       listed. Check with David whether they belong on a personal site before adding them.
+- [ ] **The Last Supper** is off the slate at Dario's request (2026-09-03), not deleted. Its
+      entry in `work.json` carries `"hidden": true`. Remove that one line to put it back.
 - [ ] **Contact form (optional).** Set `formspreeId` in `site.json` to a
       [Formspree](https://formspree.io) form ID and the form appears. Leave it empty and the
       page shows the email address alone, which is the better default.
+
+### Promoting an essay
+
+Add `featured: true` to a piece's front matter and it surfaces in the **Start here** cluster
+above the full index, marked with a ★. Resonance before recency — the newest thing you wrote
+is rarely the one a stranger should read first.
 
 ---
 

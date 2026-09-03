@@ -3,28 +3,35 @@ layout: layouts/base.njk
 permalink: /
 eleventyExcludeFromCollections: true
 ---
+{%- set slate = work.available | rejectattr("hidden") -%}
 <section class="hero">
-  <p class="eyebrow">{{ site.role }}</p>
+  <p class="eyebrow slug">{{ site.role }}</p>
   <h1 class="promise">{{ site.promise }}</h1>
   <p class="promise-support">{{ site.promiseSupport }}</p>
 
-  <p class="standing">
-    Head of Story at <strong>True Story Studios</strong>, alongside screenwriter
-    <strong>David Aaron Cohen</strong>. Author of the novel <em>Dead Men Naked</em>.
-    Austin Film Festival Semifinalist.
-  </p>
+  <ul class="credentials">
+    {%- for c in site.credentials %}
+    <li><strong>{{ c.lead }}</strong>{% if c.tail %}, {{ c.tail }}{% endif %}</li>
+    {%- endfor %}
+  </ul>
 
   <p class="doors">
     <a class="door" href="{{ "/writing/" | url }}">Read something</a>
     <a class="door door-quiet" href="{{ "/contact/" | url }}">Request a script</a>
+    {%- if press.quotes.length or press.clippings.length %}
+    <a class="door door-quiet" href="{{ "/press/" | url }}">Press</a>
+    {%- endif %}
   </p>
 </section>
 
 <section class="strip">
-  <h2 class="strip-title">Available now</h2>
+  <h2 class="strip-title slug">Available now</h2>
   <ul class="strip-list">
-    {%- for w in work.available %}{% if loop.index0 < 3 %}
-    <li><span class="strip-name">{{ w.title }}</span> <span class="strip-meta">{{ w.genre or w.format }}</span></li>
+    {%- for w in slate %}{% if loop.index0 < 3 %}
+    <li>
+      <span class="strip-name">{{ w.title }}</span>
+      <span class="chip">{{ w.genre or w.format }}</span>
+    </li>
     {%- endif %}{% endfor %}
   </ul>
   <p class="strip-more"><a href="{{ "/work/" | url }}">The full slate →</a></p>

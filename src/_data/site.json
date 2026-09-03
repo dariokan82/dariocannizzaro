@@ -9,10 +9,22 @@
 
   "metaDescription": "Dario Cannizzaro is an Italian-Irish writer, screenwriter and director. Head of Story at True Story Studios. Author of the novel Dead Men Naked.",
 
-  "email": "TODO@dariocannizzaro.com",
+  "email": "contact@dariocannizzaro.com",
   "formspreeId": "",
 
   "location": "Cork, Ireland",
+
+  "_comment_portrait": "Drop a file into src/assets/img/ and name it here (e.g. \"dario.jpg\") and the About page grows a portrait. Leave it empty and the page renders as if the slot never existed — no broken image, no placeholder box.",
+  "portrait": "",
+  "portraitAlt": "Dario Cannizzaro",
+
+  "_comment_credentials": "The proof band on the homepage. Four items, no more — the fifth one dilutes the other four. `lead` is the part that renders bright; `tail` the part that renders dim. BILLING RULE: Head of Story, never co-founder.",
+  "credentials": [
+    { "lead": "Head of Story", "tail": "True Story Studios" },
+    { "lead": "Dead Men Naked", "tail": "Novel, 2017" },
+    { "lead": "Austin Film Festival", "tail": "Semifinalist" },
+    { "lead": "Cork", "tail": "Ireland" }
+  ],
 
   "social": [
     { "name": "IMDb", "url": "https://www.imdb.com/name/nm10525131/" },

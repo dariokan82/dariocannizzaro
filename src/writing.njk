@@ -10,17 +10,31 @@ description: Essays, stories and fragments by Dario Cannizzaro.
     <p class="standfirst">Essays, fragments, and the odd piece of fiction.</p>
   </header>
 
+  {%- if collections.writingFeatured | length %}
+  <h2 class="shelf-title slug">Start here</h2>
+  <ul class="index">
+    {%- for post in collections.writingFeatured %}
+    <li class="entry">
+      <h3 class="entry-title"><span class="star">★</span> <a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>
+      <p class="entry-meta"><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></p>
+      {% if post.data.standfirst %}<p class="entry-standfirst">{{ post.data.standfirst }}</p>{% endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+
   {% if collections.writing | length %}
+  {%- if collections.writingFeatured | length %}<h2 class="shelf-title slug">Everything</h2>{% endif %}
   <ul class="index">
     {%- for post in collections.writing %}
     <li class="entry">
-      <h2 class="entry-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
+      <h2 class="entry-title">{% if post.data.featured %}<span class="star">★</span> {% endif %}<a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
       <p class="entry-meta"><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></p>
       {% if post.data.standfirst %}<p class="entry-standfirst">{{ post.data.standfirst }}</p>{% endif %}
     </li>
     {%- endfor %}
   </ul>
   {% else %}
-  <p class="item-note">Nothing published here yet.</p>
+  <p class="aside">Nothing published here yet.</p>
   {% endif %}
 </article>

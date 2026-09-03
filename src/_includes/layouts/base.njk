@@ -18,7 +18,7 @@
 <link rel="icon" href="{{ "/assets/img/favicon.png" | url }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:opsz,ital,wght@9..144,0,400..600;9..144,1,400..600&display=swap">
 <link rel="stylesheet" href="{{ "/assets/css/style.css" | url }}">
 </head>
 <body>
@@ -30,6 +30,9 @@
   <nav aria-label="Primary">
     <a href="{{ "/work/" | url }}"{% if page.url == '/work/' %} aria-current="page"{% endif %}>Work</a>
     <a href="{{ "/writing/" | url }}"{% if '/writing/' in page.url %} aria-current="page"{% endif %}>Writing</a>
+    {%- if press.quotes.length or press.clippings.length %}
+    <a href="{{ "/press/" | url }}"{% if page.url == '/press/' %} aria-current="page"{% endif %}>Press</a>
+    {%- endif %}
     <a href="{{ "/about/" | url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
     <a href="{{ "/contact/" | url }}"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>Contact</a>
   </nav>

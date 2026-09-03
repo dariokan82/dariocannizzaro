@@ -1,12 +1,16 @@
 {
-  "_comment": "TWO SHELVES. `available` is what a producer is here for and it goes FIRST. `produced` is the proof. Loglines are deliberately left empty — Claire will not invent them; one line each, from Dario.",
+  "_comment": "TWO SHELVES. `available` is what a producer is here for and it goes FIRST. `produced` is the proof. Loglines are deliberately left empty — Claire will not invent them; one line each, from Dario. Set `hidden: true` to pull an entry off the site without deleting it.",
+  "_comment_links": "`links` is an array of { label, url }. Labels are the ACTION where the action is unambiguous (Listen, Read, Watch) and the PLATFORM where the link is a credit rather than an experience (IMDb). An entry with no links renders no link row — that is correct for finished work that is not yet public.",
+
   "available": [
     {
       "title": "The Last Supper",
       "format": "Feature",
       "genre": "Period comedy",
       "logline": "",
-      "note": "Lead package"
+      "note": "",
+      "hidden": true,
+      "_hidden_why": "Pulled at Dario's request, 2026-09-03. Delete this flag and the two lines above it to put it back — nothing else needs touching."
     },
     {
       "title": "Near Dark",
@@ -58,7 +62,9 @@
       "note": ""
     }
   ],
+
   "_comment_truestory": "HOLD. Six Dimes / Darkness is my Candle / Running the Amazon are True Story Studios projects. Check with David Aaron Cohen before listing them on a personal site, then move them into `available` or drop this block.",
+
   "produced": [
     {
       "title": "Strati",
@@ -66,8 +72,11 @@
       "genre": "Crime",
       "credit": "Writer & Director",
       "year": "2025",
-      "note": "Commissioned by the Italian Cultural Authority. Produced by Machineria.",
-      "link": "https://www.imdb.com/title/tt38907629/"
+      "note": "A project of the Parco archeologico di Ostia Antica, commissioned by the Italian Cultural Authority. Produced by Machineria. Six episodes, full cast, English and Italian.",
+      "links": [
+        { "label": "Listen", "url": "https://podcasts.apple.com/podcast/id1862584688" },
+        { "label": "IMDb", "url": "https://www.imdb.com/title/tt38907629/" }
+      ]
     },
     {
       "title": "The Venetian",
@@ -76,7 +85,7 @@
       "credit": "Writer",
       "year": "2025",
       "note": "Completed.",
-      "link": ""
+      "links": []
     },
     {
       "title": "Party's Over",
@@ -85,7 +94,7 @@
       "credit": "Director & Co-Writer",
       "year": "2024",
       "note": "",
-      "link": ""
+      "links": []
     },
     {
       "title": "The Secret Seas of Puglia",
@@ -94,7 +103,9 @@
       "credit": "Writer & Director",
       "year": "2023",
       "note": "Commissioned by the Puglia Region and the EU CoHeN Programme. Produced by Machineria.",
-      "link": "https://pod.link/1718771067"
+      "links": [
+        { "label": "Listen", "url": "https://pod.link/1718771067" }
+      ]
     },
     {
       "title": "Trigger Warning",
@@ -103,7 +114,9 @@
       "credit": "Writer & Director",
       "year": "2019",
       "note": "Award-winning. Screened internationally, including Rio de Janeiro and Tokyo.",
-      "link": "https://www.imdb.com/title/tt11953332/"
+      "links": [
+        { "label": "IMDb", "url": "https://www.imdb.com/title/tt11953332/" }
+      ]
     },
     {
       "title": "Dead Men Naked",
@@ -112,7 +125,9 @@
       "credit": "Author",
       "year": "2017",
       "note": "Indie bestseller.",
-      "link": "https://www.amazon.com/Dead-Men-Naked-Dario-Cannizzaro-ebook/dp/B071DP6G9T"
+      "links": [
+        { "label": "Read", "url": "https://www.amazon.com/Dead-Men-Naked-Dario-Cannizzaro-ebook/dp/B071DP6G9T" }
+      ]
     },
     {
       "title": "Of Life, Death, Aliens and Zombies",
@@ -121,8 +136,11 @@
       "credit": "Author",
       "year": "2016",
       "note": "Individual stories published in The Galway Review, San Francisco Review of Books, and elsewhere.",
-      "link": "https://www.amazon.com/Life-Death-Aliens-Zombies-ebook/dp/B0791F3VBR"
+      "links": [
+        { "label": "Read", "url": "https://www.amazon.com/Life-Death-Aliens-Zombies-ebook/dp/B0791F3VBR" }
+      ]
     }
   ],
-  "_comment_links": "Outbound links were lifted verbatim from the old site. The two IMDb title links and the pod.link were mapped BY POSITION in the old markup — Dario, confirm Strati=tt38907629 and Trigger Warning=tt11953332 before launch."
+
+  "_comment_unconfirmed": "STILL UNCONFIRMED, DARIO: the two IMDb title links were lifted from the old site and mapped BY POSITION — check that Strati is tt38907629 and Trigger Warning is tt11953332. The Strati Listen link (Apple Podcasts id1862584688) was verified against audiodrama.directory as your English full-cast series; the Spreaker original is https://www.spreaker.com/podcast/strati-a-historical-crime-series--6831898 if you would rather point there. The Venetian and Party's Over have no public links because none exist yet — that is correct, not missing."
 }

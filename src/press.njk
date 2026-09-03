@@ -1,0 +1,55 @@
+---
+layout: layouts/base.njk
+permalink: /press/
+title: Press
+description: Interviews, reviews and features on the work of Dario Cannizzaro.
+---
+<article class="sheet">
+  <header class="sheet-head">
+    <h1>Press</h1>
+    <p class="standfirst">Interviews, reviews, and the occasional argument with a stranger in print.</p>
+  </header>
+
+  {%- if press.quotes.length %}
+  <div class="pullquotes">
+    {%- for q in press.quotes %}
+    <figure class="pullquote">
+      <blockquote>{{ q.text }}</blockquote>
+      <figcaption>
+        {%- if q.url %}<a href="{{ q.url }}" rel="noopener">{{ q.outlet }}</a>{% else %}{{ q.outlet }}{% endif %}
+        {%- if q.work %} · on {{ q.work }}{% endif %}
+        {%- if q.date %} · {{ q.date }}{% endif %}
+      </figcaption>
+    </figure>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  {%- if press.clippings.length %}
+  <h2 class="shelf-title slug">Everything else</h2>
+  <ul class="clippings">
+    {%- for c in press.clippings %}
+    <li class="clipping">
+      <h3 class="clipping-outlet">
+        {%- if c.url %}<a href="{{ c.url }}" rel="noopener">{{ c.outlet }}</a>{% else %}{{ c.outlet }}{% endif %}
+      </h3>
+      <p class="clipping-meta">
+        {%- if c.kind %}<span class="chip">{{ c.kind }}</span>{% endif %}
+        {%- if c.work %}<span>{{ c.work }}</span>{% endif %}
+        {%- if c.date %}<span>{{ c.date }}</span>{% endif %}
+      </p>
+      {%- if c.title %}
+      <p class="clipping-title">{{ c.title }}</p>
+      {%- endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+
+  {%- if not press.quotes.length and not press.clippings.length %}
+  <p class="aside">Nothing gathered here yet. This page is built and waiting; it stays
+  off the menu until there is something on it worth reading.</p>
+  {%- endif %}
+
+  <p class="back"><a href="{{ "/work/" | url }}">The work itself →</a></p>
+</article>
