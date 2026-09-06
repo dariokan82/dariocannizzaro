@@ -1,5 +1,5 @@
 {
-  "_comment": "TWO SHELVES. `available` is what a producer is here for and it goes FIRST. `produced` is the proof. Loglines are deliberately left empty — Claire will not invent them; one line each, from Dario. Set `hidden: true` to pull an entry off the site without deleting it.",
+  "_comment": "THREE SHELVES, in this order. `available` is what a producer is here for and it goes FIRST — finished scripts, unsold, askable today. `produced` is screen and audio that exists in the world, and it is the shelf that carries the directing credits. `published` is the books, on their own shelf because a reader arrives for those and should not have to scan past five audio dramas to find them. Loglines are deliberately left empty — Claire will not invent them; one line each, from Dario. Set `hidden: true` to pull an entry off the site without deleting it.",
   "_comment_links": "`links` is an array of { label, url }. Labels are the ACTION where the action is unambiguous (Listen, Read, Watch) and the PLATFORM where the link is a credit rather than an experience (IMDb). An entry with no links renders no link row — that is correct for finished work that is not yet public.",
 
   "available": [
@@ -68,6 +68,8 @@
   "produced": [
     {
       "title": "Strati",
+      "cover": "strati.jpg",
+      "coverAlt": "Poster for Strati: a cracked Roman marble bust lit by a single hanging lamp, the title in red beneath it.",
       "format": "Audio drama",
       "genre": "Crime",
       "credit": "Writer & Director",
@@ -109,6 +111,8 @@
     },
     {
       "title": "Trigger Warning",
+      "cover": "trigger-warning.jpg",
+      "coverAlt": "Poster for Trigger Warning: two cut-paper hands, one shaped into a gun with red-painted nails, above the tagline \"The hardest trigger to pull is the one on the inside.\"",
       "format": "Short film",
       "genre": "",
       "credit": "Writer & Director",
@@ -117,9 +121,16 @@
       "links": [
         { "label": "IMDb", "url": "https://www.imdb.com/title/tt11953332/" }
       ]
-    },
+    }
+  ],
+
+  "_comment_cover": "COVERS FOLLOW THE LINKS. An entry earns art when there is somewhere public to send someone — that is why The Venetian and Party's Over have none and are correct without it, and why The Secret Seas of Puglia is the one real gap: it has a Listen link and no artwork on this machine. Posters, not square podcast art: the square Apple cards carry a full credit block that turns to mush at 110px, and the posters share the books' portrait ratio so the ledger stays coherent. `cover` is a filename in src/assets/img/, `coverAlt` its alt text. Any entry on any shelf may carry them — the row grows a cover slot when they are set and renders exactly as before when they are not. Extracted from Dario's own EPUBs, not scraped. Give a new cover a 480px-wide JPEG and a slugged filename.",
+  "_comment_published": "The books. Separate from `produced` on purpose: this is the shelf the reader audience came for, and it is the only one where every `links` entry is a place to actually buy and read the thing.",
+  "published": [
     {
       "title": "Dead Men Naked",
+      "cover": "dead-men-naked.jpg",
+      "coverAlt": "Cover of Dead Men Naked: a skeleton carrying a scythe, drawn in line on a red ground.",
       "format": "Novel",
       "genre": "Literary urban fantasy",
       "credit": "Author",
@@ -131,6 +142,8 @@
     },
     {
       "title": "Of Life, Death, Aliens and Zombies",
+      "cover": "of-life-death-aliens-and-zombies.jpg",
+      "coverAlt": "Cover of Of Life, Death, Aliens and Zombies: a crowd of coral line drawings — a grave, a planet, a figure — on black.",
       "format": "Short story collection",
       "genre": "",
       "credit": "Author",

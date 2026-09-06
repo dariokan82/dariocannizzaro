@@ -31,7 +31,9 @@
     <a class="wordmark" href="{{ "/" | url }}">Dario&nbsp;Cannizzaro</a>
     <nav aria-label="Primary">
       <a href="{{ "/work/" | url }}"{% if page.url == '/work/' %} aria-current="page"{% endif %}>Work</a>
+      {%- if collections.writing | length %}
       <a href="{{ "/writing/" | url }}"{% if '/writing/' in page.url %} aria-current="page"{% endif %}>Writing</a>
+      {%- endif %}
       {%- if press.quotes.length or press.clippings.length %}
       <a href="{{ "/press/" | url }}"{% if page.url == '/press/' %} aria-current="page"{% endif %}>Press</a>
       {%- endif %}
@@ -53,7 +55,7 @@
       {%- endfor %}
     </ul>
     <div>
-      <p class="fine">{{ site.location }}</p>
+      <p class="fine">{{ site.locationShort }}</p>
       <p class="fine"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
       <p class="fine">© {{ site.title }}</p>
     </div>

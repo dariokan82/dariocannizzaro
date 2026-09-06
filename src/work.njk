@@ -2,13 +2,20 @@
 layout: layouts/base.njk
 permalink: /work/
 title: Work
-description: Available scripts and produced work by Dario Cannizzaro — features, TV, audio drama, fiction.
+description: Scripts available to read, produced screen and audio work, and published books by Dario Cannizzaro.
 ---
 {%- set slate = work.available | rejectattr("hidden") -%}
+{#- Three shelves. The first has its own fields (logline, genre); the other two are
+    the same object over different data, so they share one loop. Adding a fourth
+    shelf means adding a line here, not writing more markup. -#}
+{%- set shelves = [
+  { title: "Produced", items: work.produced },
+  { title: "Published", items: work.published }
+] -%}
 
 <header class="shell page-head">
   <h1>Work</h1>
-  <p class="standfirst">Scripts available to read on request. Everything below the second line is finished and out in the world.</p>
+  <p class="standfirst">The first shelf is available to read on request. The rest is finished and out in the world.</p>
 </header>
 
 <section class="shell section">
@@ -41,27 +48,39 @@ description: Available scripts and produced work by Dario Cannizzaro — feature
   </ul>
 </section>
 
+{%- for shelf in shelves %}{% if shelf.items.length %}
 <section class="shell section">
   <div class="section-head">
-    <h2 class="section-title">Produced &amp; published</h2>
+    <h2 class="section-title">{{ shelf.title }}</h2>
   </div>
 
   <ul class="ledger">
-    {%- for w in work.produced %}
+    {%- for w in shelf.items %}
     <li class="row reveal">
       <span class="row-index">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
-      <div>
-        <h3 class="row-title">{{ w.title }}</h3>
-        {%- if w.note %}
-        <p class="row-note">{{ w.note }}</p>
-        {%- endif %}
-        {%- if w.links.length %}
-        <p class="row-links">
-          {%- for l in w.links %}
-          <a href="{{ l.url }}" rel="noopener">{{ l.label }}</a>
-          {%- endfor %}
+      {#- The cover slot is optional and additive: no `cover` field, no wrapper,
+          and the row renders exactly as every other row on the page. -#}
+      <div{% if w.cover %} class="row-body has-cover"{% endif %}>
+        {%- if w.cover %}
+        <p class="row-cover">
+          {%- if w.links.length %}<a href="{{ w.links[0].url }}" rel="noopener">{% endif %}
+          <img src="{{ ("/assets/img/" + w.cover) | url }}" alt="{{ w.coverAlt }}" width="480" loading="lazy" decoding="async">
+          {%- if w.links.length %}</a>{% endif %}
         </p>
         {%- endif %}
+        <div>
+          <h3 class="row-title">{{ w.title }}</h3>
+          {%- if w.note %}
+          <p class="row-note">{{ w.note }}</p>
+          {%- endif %}
+          {%- if w.links.length %}
+          <p class="row-links">
+            {%- for l in w.links %}
+            <a href="{{ l.url }}" rel="noopener">{{ l.label }}</a>
+            {%- endfor %}
+          </p>
+          {%- endif %}
+        </div>
       </div>
       <p class="row-meta">
         <span class="strongline">{{ w.year }}</span>
@@ -72,3 +91,4 @@ description: Available scripts and produced work by Dario Cannizzaro — feature
     {%- endfor %}
   </ul>
 </section>
+{%- endif %}{% endfor %}

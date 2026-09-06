@@ -6,7 +6,7 @@ eleventyExcludeFromCollections: true
 {%- set slate = work.available | rejectattr("hidden") -%}
 
 <section class="shell hero">
-  <p class="eyebrow">{{ site.role }} &nbsp;·&nbsp; {{ site.location }}</p>
+  <p class="eyebrow">{{ site.role }} &nbsp;—&nbsp; {{ site.locationShort }}</p>
   <h1 class="promise">{{ site.promise }}</h1>
   <p class="promise-support">{{ site.promiseSupport }}</p>
 

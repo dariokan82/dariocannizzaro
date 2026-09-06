@@ -397,6 +397,33 @@ figure { margin: 0; }
   color: var(--bone-dim);
 }
 
+/* Optional cover slot. A row only becomes .has-cover when its data carries a
+   `cover` field, so every row without one is byte-for-byte what it was. The
+   border is load-bearing, not decoration: the OLDAZ cover is near-black and
+   dissolves into --ink without an edge. No hover effect here on purpose — the
+   row already has three, and a fourth is noise. */
+.row-body.has-cover {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+}
+.row-cover {
+  flex: 0 0 auto;
+  width: clamp(6rem, 11vw, 9.5rem);
+  margin: 0.3rem 0 0;
+}
+.row-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+}
+/* Stack where .row itself collapses to a single column. */
+@media (max-width: 34rem) {
+  .row-body.has-cover { display: block; }
+  .row-cover { width: 7.5rem; margin: 0 0 1.25rem; }
+}
+
 .row-links {
   display: flex;
   flex-wrap: wrap;
