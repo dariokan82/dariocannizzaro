@@ -66,9 +66,11 @@ homepage and nowhere else, so you can rewrite them a hundred times without touch
       each. Claire deliberately did not invent them. While a logline is empty the Work page
       shows `[logline pending]` **in dev only** — it is gated on the `isDev` global and
       cannot reach a production build. Verify with `npm run build && grep -r "logline pending" _site/`.
-- [ ] **Images.** `src/assets/img/` holds the two book covers. It still needs `share.jpg`
-      (the social-preview card, 1200×630) and `favicon.png`. For a portrait on About, drop the file in and name it in
-      `site.json → portrait`; leave that empty and the slot renders as if it never existed.
+- [x] **Images.** `share.jpg` (1200×630 social card), `favicon.png` and `apple-touch-icon.png`
+      are in `src/assets/img/` — rendered from the site's own type with headless Chrome, 2026-09-08.
+      If the promise line changes, re-render the card (it carries the line). For a portrait on
+      About, drop the file in and name it in `site.json → portrait`; leave that empty and the
+      slot renders as if it never existed.
 - [ ] **David's credits.** `about.njk` has a TODO where his two best-known titles should go.
 - [ ] **Confirm three links.** The two IMDb title links in `work.json` were carried over from
       the old site and mapped by position: check that Strati is `tt38907629` and Trigger

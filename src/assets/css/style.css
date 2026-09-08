@@ -209,6 +209,13 @@ strong, b { font-weight: var(--w-strong); color: var(--bone); }
   text-transform: uppercase;
   color: var(--bone-dim);
 }
+/* Two halves that wrap as halves, never mid-phrase. On a phone the
+   dash goes and the location drops to its own line. */
+.eyebrow > span { white-space: nowrap; }
+@media (max-width: 40rem) {
+  .eyebrow { display: flex; flex-direction: column; gap: 0.5rem; }
+  .eyebrow-sep { display: none; }
+}
 
 .promise {
   font-family: var(--display);
