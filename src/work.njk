@@ -70,6 +70,9 @@ description: Scripts available to read, produced screen and audio work, and publ
         {%- endif %}
         <div>
           <h3 class="row-title">{{ w.title }}</h3>
+          {%- if w.logline %}
+          <p class="row-line">{{ w.logline }}</p>
+          {%- endif %}
           {%- if w.note %}
           <p class="row-note">{{ w.note }}</p>
           {%- endif %}

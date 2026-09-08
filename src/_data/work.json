@@ -1,7 +1,6 @@
 {
-  "_comment": "THREE SHELVES, in this order. `available` is what a producer is here for and it goes FIRST — finished scripts, unsold, askable today. `produced` is screen and audio that exists in the world, and it is the shelf that carries the directing credits. `published` is the books, on their own shelf because a reader arrives for those and should not have to scan past five audio dramas to find them. Loglines are deliberately left empty — Claire will not invent them; one line each, from Dario. Set `hidden: true` to pull an entry off the site without deleting it.",
+  "_comment": "THREE SHELVES, in this order. `available` is what a producer is here for and it goes FIRST — finished scripts, unsold, askable today. `produced` is screen and audio that exists in the world, and it is the shelf that carries the directing credits. `published` is the books, on their own shelf because a reader arrives for those and should not have to scan past five audio dramas to find them. Loglines were drafted by Claire at Dario's request on 2026-09-08 from the scripts and books she has read; Dario edits freely. Wild Fires, The Venetian, Party's Over and The Secret Seas of Puglia have none because Claire hasn't read them — that is a gap, not a choice. Set `hidden: true` to pull an entry off the site without deleting it.",
   "_comment_links": "`links` is an array of { label, url }. Labels are the ACTION where the action is unambiguous (Listen, Read, Watch) and the PLATFORM where the link is a credit rather than an experience (IMDb). An entry with no links renders no link row — that is correct for finished work that is not yet public.",
-
   "available": [
     {
       "title": "The Last Supper",
@@ -15,36 +14,37 @@
     {
       "title": "Near Dark",
       "format": "TV series",
-      "genre": "",
-      "logline": "",
+      "genre": "Sci-fi mystery",
+      "logline": "Earth's rotation is slowing, and the dark has started showing people what they are. A grieving EMT follows an internet prophet across a collapsing America, because he is the only one claiming to know why.",
       "note": "With Tomasz Perczynski · lead package"
     },
     {
-      "title": "The Quiet Mile",
+      "title": "American Cosmic",
       "format": "Feature",
       "genre": "UAP",
-      "logline": "",
-      "note": ""
+      "logline": "A waitress with no birth certificate robs the wrong man on a stretch of California road where phones die and people vanish in threes. Every man she has ever met wanted something from her. The lights in the mountains only want to take her home.",
+      "note": "",
+      "_title_why": "Retitled 2026-09-08: Dario now calls the script AMERICAN COSMIC (reverted from The Quiet Mile). Vault/CLAIRE folders are still slugged the-quiet-mile."
     },
     {
       "title": "Saint Johnny",
       "format": "Feature",
       "genre": "Horror comedy",
-      "logline": "",
+      "logline": "A burned-out priest who has been lacing the communion wine with LSD is exiled to a small town with a habit of killing its priests. To survive it he will have to perform three miracles. He doesn't believe in one.",
       "note": "Austin Film Festival Semifinalist"
     },
     {
       "title": "Wait for Me",
       "format": "Feature",
       "genre": "Crime comedy",
-      "logline": "",
+      "logline": "The children of two feuding Irish crime families fake a kidnapping to force a showdown and vanish in the smoke. The two hitmen hired to deliver the girl have other plans, a bag they shouldn't have opened, and a bet riding on a riddle. Romeo and Juliet, if nobody in Verona could shoot straight.",
       "note": "Austin Film Festival Quarter-Finalist"
     },
     {
       "title": "Maddalena",
       "format": "Feature",
-      "genre": "",
-      "logline": "",
+      "genre": "Drama",
+      "logline": "New York, 1983. A letter from a Sicilian priest sends a cellist back to the island she was taken from as a baby, where her mother has spent thirty years in an asylum and her father is the madman the town still crosses the street to avoid. She has half a melody. They have the rest.",
       "note": "Adapted from the book by Salvatore Colletta Drago"
     },
     {
@@ -58,13 +58,11 @@
       "title": "Karma Police",
       "format": "Novel / series",
       "genre": "Noir sci-fi",
-      "logline": "",
+      "logline": "The soul has been proven, patented and put on a subscription. A licensed reincarnation detective takes a case from a boy who believes he was murdered in his last life, and the trail runs from the old cities of Europe to a colony on the Moon.",
       "note": ""
     }
   ],
-
   "_comment_truestory": "HOLD. Six Dimes / Darkness is my Candle / Running the Amazon are True Story Studios projects. Check with David Aaron Cohen before listing them on a personal site, then move them into `available` or drop this block.",
-
   "produced": [
     {
       "title": "Strati",
@@ -76,9 +74,16 @@
       "year": "2025",
       "note": "A project of the Parco archeologico di Ostia Antica, commissioned by the Italian Cultural Authority. Produced by Machineria. Six episodes, full cast, English and Italian.",
       "links": [
-        { "label": "Listen", "url": "https://podcasts.apple.com/podcast/id1862584688" },
-        { "label": "IMDb", "url": "https://www.imdb.com/title/tt38907629/" }
-      ]
+        {
+          "label": "Listen",
+          "url": "https://podcasts.apple.com/podcast/id1862584688"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt38907629/"
+        }
+      ],
+      "logline": "A body dressed as a Vestal Virgin surfaces in the waters of Trajan's ancient harbour. An Interpol detective in Rome on a favour, a fast-talking taxi driver and an archaeologist dig through two thousand years of the same city to find out who she was, and who looked away."
     },
     {
       "title": "The Venetian",
@@ -106,7 +111,10 @@
       "year": "2023",
       "note": "Commissioned by the Puglia Region and the EU CoHeN Programme. Produced by Machineria.",
       "links": [
-        { "label": "Listen", "url": "https://pod.link/1718771067" }
+        {
+          "label": "Listen",
+          "url": "https://pod.link/1718771067"
+        }
       ]
     },
     {
@@ -119,11 +127,14 @@
       "year": "2019",
       "note": "Award-winning. Screened internationally, including Rio de Janeiro and Tokyo.",
       "links": [
-        { "label": "IMDb", "url": "https://www.imdb.com/title/tt11953332/" }
-      ]
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt11953332/"
+        }
+      ],
+      "logline": "A small-time thug brings a gun home to his girlfriend and explains, over talk of the groceries, that fear and respect are the same thing. She is listening more carefully than he thinks. Six minutes, one room, one trigger."
     }
   ],
-
   "_comment_cover": "COVERS FOLLOW THE LINKS. An entry earns art when there is somewhere public to send someone — that is why The Venetian and Party's Over have none and are correct without it, and why The Secret Seas of Puglia is the one real gap: it has a Listen link and no artwork on this machine. Posters, not square podcast art: the square Apple cards carry a full credit block that turns to mush at 110px, and the posters share the books' portrait ratio so the ledger stays coherent. `cover` is a filename in src/assets/img/, `coverAlt` its alt text. Any entry on any shelf may carry them — the row grows a cover slot when they are set and renders exactly as before when they are not. Extracted from Dario's own EPUBs, not scraped. Give a new cover a 480px-wide JPEG and a slugged filename.",
   "_comment_published": "The books. Separate from `produced` on purpose: this is the shelf the reader audience came for, and it is the only one where every `links` entry is a place to actually buy and read the thing.",
   "published": [
@@ -137,8 +148,12 @@
       "year": "2017",
       "note": "Indie bestseller.",
       "links": [
-        { "label": "Read", "url": "https://www.amazon.com/Dead-Men-Naked-Dario-Cannizzaro-ebook/dp/B071DP6G9T" }
-      ]
+        {
+          "label": "Read",
+          "url": "https://www.amazon.com/Dead-Men-Naked-Dario-Cannizzaro-ebook/dp/B071DP6G9T"
+        }
+      ],
+      "logline": "When his best friend dies in the flat of a neighbour who turns out to be Death, an unemployed poet ends up on a road trip with the ghost, a girl who stabs him, and Death himself, who drives, eats pancakes, and has lost at chess exactly once."
     },
     {
       "title": "Of Life, Death, Aliens and Zombies",
@@ -150,10 +165,13 @@
       "year": "2016",
       "note": "Individual stories published in The Galway Review, San Francisco Review of Books, and elsewhere.",
       "links": [
-        { "label": "Read", "url": "https://www.amazon.com/Life-Death-Aliens-Zombies-ebook/dp/B0791F3VBR" }
-      ]
+        {
+          "label": "Read",
+          "url": "https://www.amazon.com/Life-Death-Aliens-Zombies-ebook/dp/B0791F3VBR"
+        }
+      ],
+      "logline": "A Pope who admits the Church has been worshipping aliens all along. A writer who survives the zombie apocalypse without ever seeing a zombie. A clinic that rewires your mouth so you can only say nice things. Horror, science fiction and the merely strange, told plainly."
     }
   ],
-
   "_comment_unconfirmed": "STILL UNCONFIRMED, DARIO: the two IMDb title links were lifted from the old site and mapped BY POSITION — check that Strati is tt38907629 and Trigger Warning is tt11953332. The Strati Listen link (Apple Podcasts id1862584688) was verified against audiodrama.directory as your English full-cast series; the Spreaker original is https://www.spreaker.com/podcast/strati-a-historical-crime-series--6831898 if you would rather point there. The Venetian and Party's Over have no public links because none exist yet — that is correct, not missing."
 }

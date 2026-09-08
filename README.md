@@ -62,10 +62,11 @@ homepage and nowhere else, so you can rewrite them a hundred times without touch
 
 ## Before this goes live — the outstanding list
 
-- [ ] **Loglines.** Every entry in `work.json → available` has an empty `logline`. One line
-      each. Claire deliberately did not invent them. While a logline is empty the Work page
-      shows `[logline pending]` **in dev only** — it is gated on the `isDev` global and
-      cannot reach a production build. Verify with `npm run build && grep -r "logline pending" _site/`.
+- [ ] **Loglines.** Drafted by Claire 2026-09-08 at Dario's request for everything she has
+      read; Dario to approve or rewrite. Still empty: Wild Fires, The Venetian, Party's Over,
+      The Secret Seas of Puglia. While a logline is empty the Work page shows
+      `[logline pending]` **in dev only** — gated on the `isDev` global, cannot reach a
+      production build. Verify with `npm run build && grep -r "logline pending" _site/`.
 - [x] **Images.** `share.jpg` (1200×630 social card), `favicon.png` and `apple-touch-icon.png`
       are in `src/assets/img/` — rendered from the site's own type with headless Chrome, 2026-09-08.
       If the promise line changes, re-render the card (it carries the line). For a portrait on

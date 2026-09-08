@@ -132,8 +132,9 @@ deliberately a single value, not a redesign.
 - **Content lives in data or Markdown, never in markup.** Adding a script means editing
   `work.json`; adding an essay means dropping a file in `src/writing/`. If a change to the
   slate requires touching a `.njk` file, something has gone wrong.
-- **Loglines are Dario's to write.** Empty `logline` fields render as nothing, on purpose.
-  Do not fill them in on his behalf.
+- **Loglines: drafted by Claire on 2026-09-08 at Dario's explicit request**, from scripts and
+  books she has read in full. Dario edits them freely. Empty `logline` fields still render as
+  nothing; the four entries still empty are ones Claire hasn't read, not ones she declined.
 - **Three shelves, and the names are load-bearing.** *Available* is the only word on the site
   that tells an agent the script can be in their inbox today — never trade it for a format
   label like "Screenplays" (two entries aren't screenplays), and never for "In progress",
