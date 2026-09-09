@@ -12,10 +12,10 @@ I would inscribe my memories:
 the goosebumps on my neck after our first time
 or that time I was about to kill myself
 the one where I smiled at your message
-or the one when my kid was taken from me
+or the one where my kid was taken from me
 or --
 
-Yet all I have is a bic pen
+Yet all I have is a Bic pen
 running low on blue ink
 
 that'll have to do anyway.

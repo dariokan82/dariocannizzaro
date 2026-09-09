@@ -11,7 +11,7 @@ I used to write my name in the sand
 or on my father's car
 cleaning it out of the windshield dust;
 
-In the bathroom of our high school,
+in the bathroom of our high school,
 (where me and my friends would go for a smoke)
 
 on the ancient stones
@@ -24,7 +24,7 @@ my scripts, my books.
 I'd smirk at how others would pronounce it when I'm dead
 a thousand years from now--
 
-When my clothes will be dust
+When my clothes are dust
 and I myself
 ashes
 
