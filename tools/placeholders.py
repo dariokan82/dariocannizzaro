@@ -5,6 +5,8 @@ Run once (`python3 tools/placeholders.py`) and the slots fill with dithered
 grey stand-ins that name themselves and their size. Dario overwrites each
 file with his own picture, same filename, and nothing else changes.
 
+Exception: the strips under src/assets/img/strip/ are the real thing — see strips().
+
 Pillow only. Fonts fall back to Pillow's bitmap font if Helvetica isn't found.
 """
 from pathlib import Path
@@ -102,22 +104,27 @@ def portrait():
 
 
 def strips():
+    """NOT placeholders any more. Dario saw the dithered static and kept it
+    (2026-09-09): "eerie and weird, like some weird static." Six bands of light
+    in a black field, one shown at random per visit. No captions."""
     w, h = 640, 40
-    for i in (1, 2, 3):
+    shapes = {
+        1: lambda d: d.rectangle((0, 22, w, 26), fill=200),                       # horizon
+        2: lambda d: d.rectangle((280, 0, 360, h), fill=170),                     # doorway
+        3: lambda d: d.polygon([(0, h), (w, h), (330, 0), (310, 0)], fill=160),  # road
+        4: lambda d: (d.ellipse((150, 14, 162, 26), fill=230),                    # two lights, far apart
+                      d.ellipse((470, 14, 482, 26), fill=230)),
+        5: lambda d: d.line([(0, 30), (120, 22), (260, 34), (330, 8), (420, 28), (640, 12)],
+                            fill=255, width=5),                                   # the crack
+        6: lambda d: d.rectangle((40, 6, 600, 34), outline=220, width=6),         # a window
+    }
+    for i, draw in shapes.items():
         im = Image.new("L", (w, h), 0)
-        d = ImageDraw.Draw(im)
-        # A different band of light in each: a horizon, a doorway, a road.
-        if i == 1:
-            d.rectangle((0, 22, w, 26), fill=200)
-        elif i == 2:
-            d.rectangle((280, 0, 360, h), fill=170)
-        else:
-            d.polygon([(0, h), (w, h), (330, 0), (310, 0)], fill=160)
-        im = im.filter(ImageFilter.GaussianBlur(6))
+        draw(ImageDraw.Draw(im))
+        im = im.filter(ImageFilter.GaussianBlur(6 if i < 5 else 2))
         im = im.point(lambda v: v if v > 40 else 0)
         im = grain(im, 14)
         im = dither(im)
-        caption(im, [f"PLACEHOLDER  —  strip/0{i}.jpg  640 × 40"], size=9, pad=6)
         im.save(STRIP / f"0{i}.jpg", quality=88)
 
 

@@ -68,7 +68,7 @@ file with your picture, **same filename**, and nothing else changes:
 |---|---|---|
 | `src/assets/img/home-hero.jpg` | 640 × 340 | Black and white. Subject on the LEFT; the right half must fade to black — the greeting sits on it. |
 | `src/assets/img/portrait.jpg` | 200 × 260 | About page. |
-| `src/assets/img/strip/01.jpg`, `02.jpg`, `03.jpg` | 640 × 40 | One is shown at random on every visit. Add more files and list them in `site.json → strips`. |
+| `src/assets/img/strip/01.jpg` … `06.jpg` | 640 × 40 | Kept as they are — the dithered static is the design. One shows at random per visit; add files and list them in `site.json → strips`. |
 | `src/assets/img/signature.png` | 240 × 60 | Transparent PNG, white ink. Delete the `signature` field in `site.json` to drop it. |
 
 `python3 tools/placeholders.py` regenerates the placeholders if you ever want them back.

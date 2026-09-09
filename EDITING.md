@@ -39,7 +39,7 @@ picture over it, **same filename**, and you're done:
 |---|---|---|
 | `src/assets/img/home-hero.jpg` | 640 × 340 | Black and white. You on the LEFT. Right half fades to black — the greeting sits on it. |
 | `src/assets/img/portrait.jpg` | 200 × 260 | About page. |
-| `src/assets/img/strip/01.jpg` … | 640 × 40 | One shows at random per visit. Add `04.jpg`, list it under `strips` in `site.json`. |
+| `src/assets/img/strip/01.jpg` … `06.jpg` | 640 × 40 | Not placeholders — the dithered static stays. One shows at random per visit. To add one, drop a 640×40 file in and list it under `strips` in `site.json`. |
 | `src/assets/img/signature.png` | 240 × 60 | Transparent PNG, white ink. Delete the `signature` line in `site.json` to drop it. |
 
 Book covers: `cover` field on an entry in `work.json`, file in `src/assets/img/`.
