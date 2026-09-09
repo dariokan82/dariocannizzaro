@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% if title %}{{ title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.role }}{% endif %}</title>
+<title>{% if title %}{{ title | upper }} — {{ site.title | upper }}{% else %}{{ site.title | upper }}{% endif %}</title>
 <meta name="description" content="{{ description or site.metaDescription }}">
 <link rel="canonical" href="{{ site.url }}{{ page.url }}">
 
@@ -17,54 +17,53 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="{{ site.title }} — {{ site.promise }}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0d100e">
+<meta name="theme-color" content="#000000">
 
 <link rel="icon" href="{{ "/assets/img/favicon.png" | url }}" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="{{ "/assets/img/apple-touch-icon.png" | url }}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:opsz,ital,wght@9..144,0,400..600;9..144,1,400..600&display=swap">
 <link rel="stylesheet" href="{{ "/assets/css/style.css" | url }}">
 </head>
+{%- set isHome = page.url == '/' %}
 <body>
 
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="masthead">
-  <div class="shell">
-    <a class="wordmark" href="{{ "/" | url }}">Dario&nbsp;Cannizzaro</a>
-    <nav aria-label="Primary">
-      <a href="{{ "/work/" | url }}"{% if page.url == '/work/' %} aria-current="page"{% endif %}>Work</a>
-      {%- if collections.writing | length %}
-      <a href="{{ "/writing/" | url }}"{% if '/writing/' in page.url %} aria-current="page"{% endif %}>Writing</a>
-      {%- endif %}
-      {%- if press.quotes.length or press.clippings.length %}
-      <a href="{{ "/press/" | url }}"{% if page.url == '/press/' %} aria-current="page"{% endif %}>Press</a>
-      {%- endif %}
-      <a href="{{ "/about/" | url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
-      <a href="{{ "/contact/" | url }}"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>Contact</a>
-    </nav>
+<div class="box">
+  {%- if not isHome %}
+  <header class="band head">
+    <a class="wordmark" href="{{ "/" | url }}">{{ site.title }} <span class="mono">D</span></a>
+    <span class="section-name">{{ navTitle or title }}</span>
+  </header>
+  {%- endif %}
+
+  <main id="main" class="band">
+  {{ content | safe }}
+  </main>
+
+  {#- The four doors. `aria-current` lights the circle red for the section you are in;
+      Press is About's child, so About stays lit there. -#}
+  <nav class="band grid2" aria-label="Primary">
+    <a class="btn" href="{{ "/work/" | url }}"{% if page.url == '/work/' %} aria-current="page"{% endif %}>The work</a>
+    <a class="btn" href="{{ "/read/" | url }}"{% if '/read/' in page.url %} aria-current="page"{% endif %}>Read something</a>
+    <a class="btn" href="{{ "/about/" | url }}"{% if page.url == '/about/' or page.url == '/press/' %} aria-current="page"{% endif %}>About</a>
+    <a class="btn" href="{{ "/contact/" | url }}"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>Contacts</a>
+  </nav>
+
+  {%- if isHome %}
+  <div class="band derelict">
+    <span>You are visitor
+      {#- No-JS state is six dashes; derelict.js fills the real count from Abacus. -#}
+      <span class="odo" data-counter="{{ site.counter.namespace }}/{{ site.counter.key }}" aria-live="polite"><span>-</span><span>-</span><span>-</span><span>-</span><span>-</span><span>-</span></span>
+    </span>
+    <span>Last updated {{ buildDate }}</span>
   </div>
-</header>
+  {%- endif %}
+</div>
 
-<main id="main">
-{{ content | safe }}
-</main>
+<p class="copyright">Copyright {{ buildYear }} dariocannizzaro.com</p>
 
-<footer class="colophon">
-  <div class="shell colophon-grid">
-    <ul class="social">
-      {%- for s in site.social %}
-      <li><a href="{{ s.url }}" rel="me noopener">{{ s.name }}</a></li>
-      {%- endfor %}
-    </ul>
-    <div>
-      <p class="fine">{{ site.locationShort }}</p>
-      <p class="fine"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
-      <p class="fine">© {{ site.title }}</p>
-    </div>
-  </div>
-</footer>
-
+{%- if isHome %}
+<script src="{{ "/assets/js/derelict.js" | url }}" defer></script>
+{%- endif %}
 </body>
 </html>

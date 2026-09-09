@@ -1,14 +1,12 @@
 ---
 layout: layouts/base.njk
 permalink: /404.html
-title: Not found
+title: Notice
 eleventyExcludeFromCollections: true
 ---
-<header class="shell page-head">
-  <h1>Nothing here</h1>
-  <p class="standfirst">The door was real. This one isn't.</p>
-</header>
-
-<section class="shell section">
-  <p class="back"><a href="{{ "/" | url }}">← Back to the start</a></p>
-</section>
+{#- The 2004 NOTICE! gate, kept for the one place it belongs. -#}
+<div class="notice">
+  <h1>Notice!</h1>
+  <p>To continue viewing this website you will need a page that exists. This one does not.</p>
+  <a class="btn" href="{{ "/" | url }}">Continue</a>
+</div>

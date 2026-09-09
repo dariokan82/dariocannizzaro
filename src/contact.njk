@@ -1,16 +1,12 @@
 ---
 layout: layouts/base.njk
 permalink: /contact/
-title: Contact
+title: Contacts
 description: Contact Dario Cannizzaro to request a script, or about representation and development.
 ---
-<header class="shell page-head">
-  <h1>Contact</h1>
-  <p class="standfirst">To request a script, talk about a project, or just to chat.</p>
-</header>
-
-<section class="shell section">
-  <p class="bigmail"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+<div class="page">
+  <p class="eyebrow">To request a script, talk about a project, or just to chat.</p>
+  <a class="btn bigmail" href="mailto:{{ site.email }}">{{ site.email }}</a>
   <p class="aside">Based in {{ site.location }}. Comfortable working across European and US hours.</p>
 
   {% if site.formspreeId %}
@@ -18,7 +14,17 @@ description: Contact Dario Cannizzaro to request a script, or about representati
     <label>Name <input type="text" name="name" required></label>
     <label>Email <input type="email" name="email" required></label>
     <label>Message <textarea name="message" rows="6" required></textarea></label>
-    <button type="submit">Send</button>
+    <button type="submit" class="btn">Send</button>
   </form>
   {% endif %}
-</section>
+</div>
+
+{#- The social links borrow the nav's two-column grid; the spacer keeps them from
+    reading as a fifth and sixth row of the nav itself. -#}
+<h2 class="shelf-title" style="margin:0;padding:6px 12px;border-bottom:0;border-top:1px solid #fff">Elsewhere</h2>
+<div class="grid2" style="border-top:1px solid #fff;border-bottom:1px solid #fff">
+  {%- for s in site.social %}
+  <a class="btn" href="{{ s.url }}" rel="me noopener">{{ s.name }}</a>
+  {%- endfor %}
+</div>
+<div style="height:18px"></div>

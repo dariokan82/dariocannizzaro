@@ -4,33 +4,20 @@ permalink: /about/
 title: About
 description: Dario Cannizzaro — Italian-Irish writer, screenwriter and director based in Cork. Head of Story at True Story Studios.
 ---
-<header class="shell page-head">
-  <h1>About</h1>
-  <p class="standfirst">Before he wrote full time, Dario worked as a —</p>
-</header>
+<div class="page">
+  <p class="eyebrow">Before he wrote full time, Dario worked as a —</p>
+  <p class="jobs">
+    <span>Longshoreman</span><span>Dishwasher in a pizzeria</span><span>Socks salesman</span><span>Book delivery guy</span><span>Grocery store clerk</span><span>Electrician</span><span>Travelling salesman</span><span>Apple engineer</span>
+  </p>
 
-<section class="shell section">
-  <ul class="jobs reveal">
-    <li>Longshoreman</li>
-    <li>Dishwasher in a pizzeria</li>
-    <li>Socks salesman</li>
-    <li>Book delivery guy</li>
-    <li>Grocery store clerk</li>
-    <li>Electrician</li>
-    <li>Travelling salesman</li>
-    <li>Apple engineer</li>
-  </ul>
-</section>
-
-<section class="shell section">
   {%- if site.portrait %}
-  <figure class="portrait reveal">
-    <img src="{{ ("/assets/img/" + site.portrait) | url }}" alt="{{ site.portraitAlt }}" loading="lazy">
+  <figure class="portrait">
+    <img src="{{ ("/assets/img/" + site.portrait) | url }}" alt="{{ site.portraitAlt }}" width="200" height="260" loading="lazy">
   </figure>
   {%- endif %}
 
   <div class="prose">
-    <p class="lede">He is an Italian-Irish writer, screenwriter and director based in Cork,
+    <p>He is an Italian-Irish writer, screenwriter and director based in Cork,
     working across film, TV and audio.</p>
 
     <p>He is <strong>Head of Story at True Story Studios</strong>, the boutique development
@@ -50,5 +37,10 @@ description: Dario Cannizzaro — Italian-Irish writer, screenwriter and directo
     that turn round in the third act and quietly rewrite everything you thought you had understood.</p>
   </div>
 
-  <p class="back"><a href="{{ "/contact/" | url }}">Get in touch →</a></p>
-</section>
+  <div class="sub">
+    {%- if press.quotes.length or press.clippings.length %}
+    <a class="btn" href="{{ "/press/" | url }}">What others say</a>
+    {%- endif %}
+    <a class="btn" href="{{ "/contact/" | url }}">Get in touch</a>
+  </div>
+</div>

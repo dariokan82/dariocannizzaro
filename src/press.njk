@@ -1,63 +1,49 @@
 ---
 layout: layouts/base.njk
 permalink: /press/
-title: Press
+title: What others say
 description: Interviews, reviews and features on the work of Dario Cannizzaro.
 ---
-<header class="shell page-head">
-  <h1>Press</h1>
-  <p class="standfirst">Interviews, reviews, and the occasional argument with a stranger in print.</p>
-</header>
+<div class="page">
+  <p class="eyebrow">Interviews, reviews, and the occasional argument with a stranger in print.</p>
 
-{%- if press.quotes.length %}
-<section class="shell section">
+  {%- if press.quotes.length %}
   {%- for q in press.quotes %}
-  <figure class="quote-block reveal">
-    <blockquote>{{ q.text }}</blockquote>
-    <figcaption>
-      {%- if q.url %}<a href="{{ q.url }}" rel="noopener">{{ q.outlet }}</a>{% else %}{{ q.outlet }}{% endif %}
-      {%- if q.byline %} &nbsp;·&nbsp; {{ q.byline }}{% endif %}
-      {%- if q.work %} &nbsp;·&nbsp; on {{ q.work }}{% endif %}
-      {%- if q.date %} &nbsp;·&nbsp; {{ q.date }}{% endif %}
+  <figure class="quote">
+    <p>“{{ q.text }}”</p>
+    <figcaption class="cite">
+      {%- if q.url %}<a class="btn" href="{{ q.url }}" rel="noopener">{{ q.outlet }}</a>{% else %}<span>{{ q.outlet }}</span>{% endif %}
+      {%- if q.byline %}<span>{{ q.byline }}</span>{% endif %}
+      {%- if q.work %}<span>on {{ q.work }}</span>{% endif %}
+      {%- if q.date %}<span>{{ q.date }}</span>{% endif %}
     </figcaption>
   </figure>
   {%- endfor %}
-</section>
-{%- endif %}
+  {%- endif %}
 
-{%- if press.clippings.length %}
-<section class="shell section">
-  <div class="section-head">
-    <h2 class="section-title">Everything else</h2>
+  {%- if press.clippings.length %}
+  <h2 class="shelf-title">Everything else</h2>
+  {%- for c in press.clippings %}
+  <div class="entry">
+    <div>
+      {%- if c.url %}<a class="btn" href="{{ c.url }}" rel="noopener">{{ c.outlet }}</a>{% else %}<span class="btn">{{ c.outlet }}</span>{% endif %}
+      {%- if c.title %}<p class="entry-note">{{ c.title }}</p>{% endif %}
+    </div>
+    <p class="entry-meta">
+      {%- if c.kind %}<span>{{ c.kind }}</span>{% endif %}
+      {%- if c.work %}<span>{{ c.work }}</span>{% endif %}
+      {%- if c.date %}<span>{{ c.date }}</span>{% endif %}
+    </p>
   </div>
+  {%- endfor %}
+  {%- endif %}
 
-  <ul class="ledger">
-    {%- for c in press.clippings %}
-    <li class="row reveal">
-      <span class="row-index">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
-      <div>
-        <h3 class="row-title">{% if c.url %}<a href="{{ c.url }}" rel="noopener">{{ c.outlet }}</a>{% else %}{{ c.outlet }}{% endif %}</h3>
-        {%- if c.title %}
-        <p class="row-note">{{ c.title }}</p>
-        {%- endif %}
-      </div>
-      <p class="row-meta">
-        {%- if c.kind %}<span class="strongline">{{ c.kind }}</span>{% endif %}
-        {%- if c.work %}<span>{{ c.work }}</span>{% endif %}
-        {%- if c.date %}<span>{{ c.date }}</span>{% endif %}
-      </p>
-    </li>
-    {%- endfor %}
-  </ul>
-</section>
-{%- endif %}
-
-{%- if not press.quotes.length and not press.clippings.length %}
-<section class="shell section">
+  {%- if not press.quotes.length and not press.clippings.length %}
   <p class="aside">Nothing gathered here yet.</p>
-</section>
-{%- endif %}
+  {%- endif %}
 
-<div class="shell">
-  <p class="back"><a href="{{ "/work/" | url }}">The work itself →</a></p>
+  <div class="sub">
+    <a class="btn" href="{{ "/about/" | url }}">Back to about</a>
+    <a class="btn" href="{{ "/work/" | url }}">The work itself</a>
+  </div>
 </div>

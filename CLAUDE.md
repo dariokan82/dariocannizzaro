@@ -24,11 +24,12 @@ Never write "co-founder" anywhere a third party reads. Applies site-wide.
 
 - **Eleventy 3** (ESM config, `eleventy.config.js`), Nunjucks templates, Markdown for essays.
 - **No CSS framework.** One hand-written stylesheet, `src/assets/css/style.css`.
-- **No client-side JS.** Deliberate — this site's job is to be readable and indexable.
+- **No client-side JS the page depends on.** One 40-line progressive script on the front
+  page for the visitor counter and the rotating strip; everything else is HTML and CSS.
   Deviates from the True Story site (React + in-browser Babel), because here the prose has to
-  be crawlable and fast, and there is no interactive slate to drive.
-- **Fonts:** Fraunces (display + long-form reading) and DM Mono (everything else), from Google
-  Fonts. Inter is gone.
+  be crawlable and fast.
+- **Fonts:** none loaded. Helvetica Neue / Helvetica / Arial from the system. Fraunces and
+  DM Mono are gone (2026-09-09).
 - Deployed by `.github/workflows/deploy.yml` to GitHub Pages on push to `main`.
 
 ## File map
@@ -45,87 +46,94 @@ src/
     base.njk              Shell: head/meta/OG, masthead, colophon
     page.njk              Generic inner page
     essay.njk             A single piece of writing
-  index.njk               Home: promise, standing credits, two doors, top-3 strip
-  work.njk                Three shelves, each entry a `.row`. Available has its own loop
-                          (logline, genre); Produced and Published share one, driven by the
-                          `shelves` list at the top of the file
-  press.njk               Pull-quotes, then the clippings wall. Self-hiding from the nav
-                          while press.json is empty — see base.njk
-  writing.njk             Index of essays and stories. Self-hides the same way while the
-                          `writing` collection is empty
-  about.njk               Job-list lede first, then the credits
-  contact.njk             Email large; Formspree form only if `formspreeId` is set
-  writing/writing.json    Directory data: applies the essay layout + `writing` tag
-  404.njk, robots.txt, sitemap.njk
+  index.njk               The welcome page: hero + greeting + signature, the strip, the
+                          four doors, the derelict band
+  work.njk                THE WORK. Three shelves, each entry an `.entry`. Available has its
+                          own loop (logline, genre); Produced and Published share one
+  writing.njk             READ SOMETHING, published at /read/. Essays, then the books —
+                          always present, so the door is never locked
+  about.njk               ABOUT. Job list, portrait, bio, then ○ WHAT OTHERS SAY (→ /press/,
+                          hidden while press.json is empty) and ○ GET IN TOUCH
+  press.njk               WHAT OTHERS SAY. About's child — never in the main nav.
+                          Pull-quotes, then the clippings
+  contact.njk             CONTACTS. Email as the one loud button; social in the grid;
+                          Formspree form only if `formspreeId` is set
+  404.njk                 The NOTICE! gate
+  writing/writing.json    Directory data: essay layout, `writing` tag, /read/{slug}/ permalink
+  robots.txt, sitemap.njk
   assets/css/style.css    All styling
-  assets/img/             Book covers (480px JPEGs, slugged filenames). Still missing
-                          share.jpg and favicon.png
+  assets/js/derelict.js   The one script (front page only)
+  assets/img/             Covers, the placeholder slots (see Images), share.jpg, favicons
+tools/placeholders.py     Regenerates the placeholder images
 WRITING-TEMPLATE.md       Copy into src/writing/ to start a piece
 ```
 
-## Design system — "the ledger"
+## Design system — "the box" (2026-09-09, replaces "the ledger")
 
-**A screenwriter's site should look like something catalogued** — a slate, an index, a set of
-spines. Elegance here is made of three things and nothing else. If a change doesn't serve one of
-them, it doesn't go in:
+Modelled on davidlynch.com as it stood in June 2004 (Wayback `20040622084358`, studied from
+the actual HTML and GIFs, not from memory). One idea, and everything obeys it:
 
-1. **Violent scale contrast.** Two sizes, far apart: enormous titles against 0.66rem metadata.
-   Everything in the middle is deleted, because the middle is what "boring" is made of.
-2. **Air.** Sections breathe in `--beat` (`clamp(4.5rem, 11vh, 9rem)`), not in units.
-3. **Asymmetry. Nothing is centred, ever.** A left rail carries the index numbers, the body sits
-   off it, the metadata sits far right. The eye has somewhere to go besides down.
+1. **The box.** `#000` page. A 640px box (`min(640px, 100%)`), 1px `#fff` border, centred,
+   near the top. Every page lives inside it. Inner pages grow downward; the front page is
+   ~440px tall like the original.
+2. **One typeface, uppercase for structure.** Helvetica Neue / Helvetica / Arial, system
+   stack, no webfonts. Wordmark, nav, headings, greeting, metadata: UPPERCASE, 10–13px,
+   `letter-spacing: .04em`. Long prose (bio, essays, loglines): sentence case, 13px/1.5,
+   `#ddd`, measure 58ch. The site drops its voice to sentence case only where someone is
+   meant to *read*.
+3. **The button: `○ LABEL`.** A 9px hollow circle and an uppercase label. Hover: the circle
+   fills red (`#d10000`) inside its white ring — the 2004 swap-image "on" state.
+   `aria-current="page"` lights it permanently. It is the only link style on the site: nav,
+   Listen/Read/IMDb, back-links, social, press outlets. Prose links get an underline instead.
+4. **Hairlines and the grid.** 1px white rules divide *bands* (`.band + .band`); 1px `#333`
+   rules divide *entries* inside a band. The nav is Lynch's two-column grid (`.grid2`,
+   `215px | 1fr`), the rules drawn by cell borders; the contact page's social links borrow it.
+5. **Nothing eases, ever.** No `transition`, no `animation`, no smooth scroll, no grain, no
+   radial lift. Rollovers swap instantly. Of everything from 2004 this is the one that reads
+   as taste today, because every other site has a transition on it.
+6. **Weird arrives sideways.** Three derelict touches, all on the front page's bottom band:
+   a real odometer visitor counter, a LAST UPDATED stamp (the build time, so every deploy is
+   honest), and a strip image picked at random per visit. Nothing else winks. The NOTICE! gate
+   from the original lives on the 404 page and nowhere else.
 
 ### Tokens
 
 | Token | Value | Role |
 |---|---|---|
-| `--ink` | `#0d100e` | Ground, under a barely-there radial lift from `--ink-lift` at the top. |
-| `--bone` | `#ece8dd` | Body text. Paper that has been somewhere. |
-| `--bone-dim` | `#98937f` | Meta, captions, secondary nav. |
-| `--moss` | `#7fa67f` | The single accent: section titles, nav underline, hover index numbers. |
-| `--ghost` | 17% bone | The index numbers at rest. |
-| `--shell` | `84rem` | Page width. Wide on purpose — a 64rem centred column reads as a blog. |
-| `--measure` | `min(56ch, 100%)` | Mono text. The `min()` is load-bearing on narrow screens. |
-| `--beat` | `clamp(4.5rem, 11vh, 9rem)` | The vertical unit. `.section + .section` gets 0.55 of one. |
+| `--black` / `--white` | `#000` / `#fff` | Ground and structure. True black, not near-black. |
+| `--soft` | `#ddd` | Prose. |
+| `--grey` | `#999` | Metadata, eyebrows, copyright. |
+| `--rule-soft` | `#333` | Hairline between entries. White rules are for bands only. |
+| `--red` | `#d10000` | The lit circle. Appears nowhere else. |
+| `--box` | `640px` | The box. Not a variable to tune — it *is* the design. |
 
 ### The one repeating object
 
-`.row` inside `.ledger` — a three-column grid, `4.5rem | 1fr | 11rem`: index number, body,
-far-right metadata. Work entries, press clippings and essays are all the same object. It collapses
-to two columns at 62rem and one at 34rem. Hover lifts the background, shifts the title 0.45rem
-right, and turns the index number moss.
+`.entry` — a two-column grid, body left and uppercase metadata right (`1fr | auto`), a
+`#333` rule beneath. Work entries, press clippings, essays and books are all the same object.
+`.has-cover` adds a 72px thumbnail column with a 1px white border. Collapses to one column
+under 600px, where metadata joins into a single ` · `-separated line.
 
-**The grain matters.** `body::after` lays an SVG turbulence at 3.5% opacity over everything. It is
-the difference between a flat dark theme and an expensive one; don't delete it.
+### The front page
 
-### Motion
+`index.njk`. A 640×340 hero image (`site.hero`), the greeting (`site.greeting`, an array of
+paragraphs, rendered uppercase) absolutely positioned over its right half, a signature beneath
+it. Then the strip, the four doors, the derelict band. Under 600px the text drops below the
+image. **The hero's right half must be dark** — that is where the words sit.
 
-CSS only — the no-JS rule is about crawlability, not about the page being inert. Scroll reveals use
-`animation-timeline: view()` behind `@supports`, so elements are fully visible where it isn't
-supported. Everything is off under `prefers-reduced-motion`.
+### Images: placeholders you overwrite
 
-### The typographic idiom: screenplay grammar, never screenplay furniture
+`tools/placeholders.py` generates dithered stand-ins that name their own slot and size.
+Dario overwrites each with his own picture, **same filename**, and nothing else changes:
+`home-hero.jpg` 640×340 · `portrait.jpg` 200×260 · `strip/01.jpg…` 640×40 (list them in
+`site.json → strips`) · `signature.png` 240×60 transparent, white ink.
 
-**In** — fixed-width setting, uppercase letterspaced titles, marginalia in a right rail where a
-scene number would sit, numbered entries.
-**Out** — FADE IN / CUT TO, page numbers, brads, title-page pastiche, `INT.`/`EXT.` prefixes on
-things that aren't places, dialogue blocks used as a joke. If a device needs the reader to be in
-on it, it's out.
+### The one script
 
-Fraunces appears in exactly three places — the homepage promise, page `<h1>`s, and press
-pull-quotes — and it appears at clamp-to-9.5rem sizes. Three appearances at that scale is why they
-land. Everything structural is DM Mono, and the fix for the first version of this site was making
-that mono *big*, not making it different.
-
-**DM Mono has no bold — 500 is the ceiling.** Nothing in the stylesheet may exceed
-`--weight-strong`; a heavier value gets synthesised into a fake bold and looks wrong. Hierarchy
-comes from **case, letter-spacing and colour**, never weight. Body sits at 400 — 300 is for
-already-dim metadata only, because light weights smear on a dark ground.
-
-**The essays are the one exception.** Monospace past ~800 words is measurably slower to read, and
-`/writing/` is where someone is meant to sink in, so `.prose p` uses `--longform` (Fraunces at its
-text optical size). Flipping that one token to `var(--mono)` makes the site all-mono; it is
-deliberately a single value, not a redesign.
+`src/assets/js/derelict.js`, front page only, `defer`, progressive. Picks the strip and fills
+the counter from Abacus (`abacus.jasoncameron.dev/hit/{namespace}/{key}`, keyless, CORS).
+Without it the page is complete: strip 01 shows and the counter reads `------`. This is the
+whole exception to the no-JS rule; nothing the page *needs* runs in JS.
 
 ## Conventions
 
@@ -148,9 +156,10 @@ deliberately a single value, not a redesign.
   Dario's own EPUBs (`WRITING/published/<title>/*.epub` → `images/`), never from a retailer's
   CDN. The 1px `--rule` border on `.row-cover img` is load-bearing: the *Of Life, Death,
   Aliens and Zombies* cover is near-black and dissolves into `--ink` without it.
-- **A section that self-hides from the nav also leaves the sitemap.** Otherwise the one page
-  nobody can click is the one Google is invited to index. The conditions live in two places —
-  `base.njk` (nav) and `sitemap.njk` — and must move together.
+- **/press/ self-hides while press.json is empty** — from the About page's button and from
+  the sitemap. Otherwise the one page nobody can click is the one Google is invited to index.
+  The two conditions live in `about.njk` and `sitemap.njk` and must move together. The four
+  doors in the nav never hide: /read/ with no essays still shows the books.
 - The outstanding pre-launch list lives in `README.md`, not here.
 
 ## Gotchas
@@ -161,3 +170,7 @@ deliberately a single value, not a redesign.
   reproduce the real thing locally:
   `MSYS_NO_PATHCONV=1 PATH_PREFIX=//dariocannizzaro// npx @11ty/eleventy --output=_site_pp`
 - **`git push` has hung twice from Dario's Windows machine.** Use `timeout 100 git push origin main`.
+- **Screenshots must be served over http**, not opened as files: the `| url` filter emits
+  root-relative paths, so `file://` loses every stylesheet and image. `python3 -m http.server`
+  in `_site/` is enough. Headless Chrome writes the PNG and then may hang on exit — wrap it in
+  a timeout and don't trust the exit code.

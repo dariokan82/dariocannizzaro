@@ -2,17 +2,14 @@
 permalink: /sitemap.xml
 eleventyExcludeFromCollections: true
 ---
-{#- A page that self-hides from the masthead must also stay out of the sitemap —
-    otherwise the one page nobody can click is the one Google is invited to index.
-    These two conditions mirror the nav guards in _includes/layouts/base.njk;
-    change one, change the other. -#}
+{#- /press/ is About's child and self-hides from the sitemap while press.json is empty;
+    the same guard lives on the About page's WHAT OTHERS SAY button. Change one, change the other. -#}
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {# The homepage carries eleventyExcludeFromCollections, so it is listed by hand. #}
   <url><loc>{{ site.url }}/</loc></url>
 {%- for p in collections.all %}
-{%- if p.url == '/writing/' and not collections.writing.length %}
-{%- elif p.url == '/press/' and not (press.quotes.length or press.clippings.length) %}
+{%- if p.url == '/press/' and not (press.quotes.length or press.clippings.length) %}
 {%- else %}
   <url><loc>{{ site.url }}{{ p.url }}</loc></url>
 {%- endif %}

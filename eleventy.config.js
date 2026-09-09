@@ -11,6 +11,16 @@ export default function (eleventyConfig) {
   // and friends — is gated on this so it can never reach a producer.
   eleventyConfig.addGlobalData("isDev", process.env.ELEVENTY_RUN_MODE !== "build");
 
+  // The front page's LAST UPDATED stamp is the build time — every deploy is a
+  // real update, so the stamp is honest by construction. DD.MM.YYYY, 2004-style.
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  eleventyConfig.addGlobalData(
+    "buildDate",
+    `${pad(now.getUTCDate())}.${pad(now.getUTCMonth() + 1)}.${now.getUTCFullYear()}`
+  );
+  eleventyConfig.addGlobalData("buildYear", String(now.getUTCFullYear()));
+
   // Essays, newest first.
   eleventyConfig.addCollection("writing", (api) =>
     api.getFilteredByTag("writing").sort((a, b) => b.date - a.date)

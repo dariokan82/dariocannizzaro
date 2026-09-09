@@ -3,73 +3,26 @@ layout: layouts/base.njk
 permalink: /
 eleventyExcludeFromCollections: true
 ---
-{%- set slate = work.available | rejectattr("hidden") -%}
-
-<section class="shell hero">
-  <p class="eyebrow"><span>{{ site.role }}</span><span class="eyebrow-sep">&nbsp;—&nbsp;</span><span>{{ site.locationShort }}</span></p>
-  <h1 class="promise">{{ site.promise }}</h1>
-  <p class="promise-support">{{ site.promiseSupport }}</p>
-
-  <div class="hero-foot">
-    <a class="scroll-cue" href="#slate">The slate</a>
-    <a class="scroll-cue" href="{{ "/contact/" | url }}">Request a script</a>
-  </div>
-</section>
-
-<section class="band">
-  <div class="shell">
-    <ul class="credentials">
-      {%- for c in site.credentials %}
-      <li>
-        <span class="lead">{{ c.lead }}</span>
-        {%- if c.tail %}<span class="tail">{{ c.tail }}</span>{% endif %}
-      </li>
+<div class="hero">
+  <img src="{{ ("/assets/img/" + site.hero) | url }}" alt="{{ site.heroAlt }}" width="640" height="340" decoding="async">
+  <div class="hero-text">
+    <h1 class="wordmark-big">{{ site.title }} <span class="mono">D</span></h1>
+    <div class="greeting">
+      {%- for line in site.greeting %}
+      <p>{{ line }}</p>
       {%- endfor %}
-    </ul>
+    </div>
+    {%- if site.signature %}
+    <img class="signature" src="{{ ("/assets/img/" + site.signature) | url }}" alt="" width="240" height="60">
+    {%- endif %}
   </div>
-</section>
+</div>
 
-<section class="shell section" id="slate">
-  <div class="section-head">
-    <h2 class="section-title">Available now</h2>
-    <p class="section-aside"><a href="{{ "/work/" | url }}">The full slate →</a></p>
-  </div>
-
-  <ul class="ledger">
-    {%- for w in slate %}{% if loop.index0 < 3 %}
-    <li class="row reveal">
-      <span class="row-index">0{{ loop.index }}</span>
-      <div>
-        <h3 class="row-title"><a href="{{ "/work/" | url }}">{{ w.title }}</a></h3>
-        {%- if w.logline %}
-        <p class="row-line">{{ w.logline }}</p>
-        {%- elif isDev %}
-        <p class="row-line-pending">[logline pending — dev only, never ships]</p>
-        {%- endif %}
-      </div>
-      <p class="row-meta">
-        <span>{{ w.format }}</span>
-        {%- if w.genre %}<span>{{ w.genre }}</span>{% endif %}
-      </p>
-    </li>
-    {%- endif %}{% endfor %}
-  </ul>
-</section>
-
-{%- if press.quotes.length %}
-<section class="shell section">
-  <div class="section-head">
-    <h2 class="section-title">Said elsewhere</h2>
-    <p class="section-aside"><a href="{{ "/press/" | url }}">All press →</a></p>
-  </div>
-  {%- for q in press.quotes %}{% if loop.index0 < 1 %}
-  <figure class="quote-block reveal">
-    <blockquote>{{ q.text }}</blockquote>
-    <figcaption>
-      {%- if q.url %}<a href="{{ q.url }}" rel="noopener">{{ q.outlet }}</a>{% else %}{{ q.outlet }}{% endif %}
-      {%- if q.work %} &nbsp;·&nbsp; on {{ q.work }}{% endif %}
-    </figcaption>
-  </figure>
-  {%- endif %}{% endfor %}
-</section>
+{%- if site.strips.length %}
+<div class="strip" style="border-top:1px solid #fff">
+  {#- The strip that changes on every visit. The first file is the no-JS state;
+      derelict.js picks one at random from data-strips. -#}
+  <img src="{{ ("/assets/img/strip/" + site.strips[0]) | url }}" alt="" width="640" height="40"
+       data-strips='[{% for s in site.strips %}"{{ ("/assets/img/strip/" + s) | url }}"{% if not loop.last %},{% endif %}{% endfor %}]'>
+</div>
 {%- endif %}

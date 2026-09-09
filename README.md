@@ -23,17 +23,17 @@ Node 20 or newer.
 
 1. Copy `WRITING-TEMPLATE.md` into `src/writing/`.
 2. Rename it. **The filename becomes the URL** — `the-door-in-the-tree.md` publishes to
-   `/writing/the-door-in-the-tree/`.
+   `/read/the-door-in-the-tree/`.
 3. Fill in `title`, `date`, `description`, write the piece in Markdown, delete `draft: true`.
 4. Commit and push. The Action builds and deploys; it takes about a minute.
 
-The index at `/writing/` builds itself from whatever is in that folder, newest first.
-There is nothing else to update.
+The index at `/read/` (READ SOMETHING) builds itself from whatever is in that folder, newest
+first. There is nothing else to update.
 
-**While that folder is empty, `/writing/` builds but is not linked from the masthead and is
-left out of `sitemap.xml`** — same treatment as `/press/`. An empty section in the nav is the
-only visibly unfinished thing a stranger can find. Drop in one piece and the link appears on
-its own.
+**While that folder is empty, `/read/` still opens** — it shows the two books under READ
+SOMETHING LONGER and a one-line "nothing short here yet". READ SOMETHING is one of the four
+doors on the front page and never hides. `/press/` (WHAT OTHERS SAY) is the one that
+self-hides: it is About's child and its button disappears while `press.json` is empty.
 
 It does not have to be a blog. The short fiction is the better use of the section: it is
 finished, it is already vetted, and it is the only page where someone can read the prose
@@ -53,10 +53,31 @@ instead of reading about it.
 Add or reorder entries and both pages follow. A fourth shelf is one line in the `shelves`
 list at the top of `src/work.njk` — no new markup.
 
-## Changing the promise line
+## Changing the greeting
 
-`src/_data/site.json`, the `promise` and `promiseSupport` fields. They render on the
-homepage and nowhere else, so you can rewrite them a hundred times without touching markup.
+`src/_data/site.json → greeting`: one array entry per paragraph, rendered in uppercase over
+the right half of the hero. The current text is Claire's placeholder — rewrite it in your
+own words. Keep it short; the hero is 340px tall and the signature sits under it.
+
+## Putting your own pictures in
+
+Every image slot already holds a placeholder that names itself and its size. Overwrite the
+file with your picture, **same filename**, and nothing else changes:
+
+| File | Size | Notes |
+|---|---|---|
+| `src/assets/img/home-hero.jpg` | 640 × 340 | Black and white. Subject on the LEFT; the right half must fade to black — the greeting sits on it. |
+| `src/assets/img/portrait.jpg` | 200 × 260 | About page. |
+| `src/assets/img/strip/01.jpg`, `02.jpg`, `03.jpg` | 640 × 40 | One is shown at random on every visit. Add more files and list them in `site.json → strips`. |
+| `src/assets/img/signature.png` | 240 × 60 | Transparent PNG, white ink. Delete the `signature` field in `site.json` to drop it. |
+
+`python3 tools/placeholders.py` regenerates the placeholders if you ever want them back.
+
+## The visitor counter
+
+Real, via [Abacus](https://abacus.jasoncameron.dev) — keyless, no account. The key is
+`site.json → counter`; change `key` to start again from zero. If the service ever goes away
+the counter shows `------` and nothing else on the page is affected.
 
 ---
 
@@ -67,11 +88,11 @@ homepage and nowhere else, so you can rewrite them a hundred times without touch
       The Secret Seas of Puglia. While a logline is empty the Work page shows
       `[logline pending]` **in dev only** — gated on the `isDev` global, cannot reach a
       production build. Verify with `npm run build && grep -r "logline pending" _site/`.
-- [x] **Images.** `share.jpg` (1200×630 social card), `favicon.png` and `apple-touch-icon.png`
-      are in `src/assets/img/` — rendered from the site's own type with headless Chrome, 2026-09-08.
-      If the promise line changes, re-render the card (it carries the line). For a portrait on
-      About, drop the file in and name it in `site.json → portrait`; leave that empty and the
-      slot renders as if it never existed.
+- [ ] **Pictures.** Every slot is a placeholder until Dario drops his own in — see "Putting
+      your own pictures in" above. The hero is the one that matters.
+- [ ] **The greeting.** Placeholder copy; Dario's words go in `site.json → greeting`.
+- [ ] **Social card.** `share.jpg` still carries the old design (Fraunces on ink). Re-render
+      it in the box style once the hero image is real.
 - [ ] **David's credits.** `about.njk` has a TODO where his two best-known titles should go.
 - [ ] **Confirm three links.** The two IMDb title links in `work.json` were carried over from
       the old site and mapped by position: check that Strati is `tt38907629` and Trigger

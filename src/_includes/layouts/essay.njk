@@ -1,15 +1,15 @@
 ---
 layout: layouts/base.njk
+navTitle: Read something
 ---
-<header class="shell page-head">
-  <p class="eyebrow"><a href="{{ "/writing/" | url }}">Writing</a> &nbsp;·&nbsp; <time datetime="{{ page.date | isoDate }}">{{ page.date | longDate }}</time></p>
-  <h1>{{ title }}</h1>
-  {% if standfirst %}<p class="standfirst">{{ standfirst }}</p>{% endif %}
-</header>
-
-<article class="shell section">
+<div class="page">
+  <p class="eyebrow"><a href="{{ "/read/" | url }}">Read something</a> &nbsp;·&nbsp; <time datetime="{{ page.date | isoDate }}">{{ page.date | longDate }}</time></p>
+  <h1 class="page-title">{{ title }}</h1>
+  {% if standfirst %}<p class="entry-line" style="margin-bottom:14px">{{ standfirst }}</p>{% endif %}
   <div class="prose">
     {{ content | safe }}
   </div>
-  <p class="back"><a href="{{ "/writing/" | url }}">← All writing</a></p>
-</article>
+  <div class="sub">
+    <a class="btn" href="{{ "/read/" | url }}">Back</a>
+  </div>
+</div>

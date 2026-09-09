@@ -1,52 +1,66 @@
 ---
 layout: layouts/base.njk
-permalink: /writing/
-title: Writing
-description: Essays, stories and fragments by Dario Cannizzaro.
+permalink: /read/
+title: Read something
+description: Essays, stories and fragments by Dario Cannizzaro, and the books.
 ---
-<header class="shell page-head">
-  <h1>Writing</h1>
-  <p class="standfirst">Essays, fragments, and the odd piece of fiction.</p>
-</header>
+<div class="page">
+  <p class="eyebrow">Essays, fragments, and the odd piece of fiction.</p>
 
-{%- if collections.writingFeatured | length %}
-<section class="shell section">
-  <div class="section-head">
-    <h2 class="section-title">Start here</h2>
-  </div>
-  <ul class="ledger">
-    {%- for post in collections.writingFeatured %}
-    <li class="row reveal">
-      <span class="row-index">★</span>
-      <div>
-        <h3 class="row-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h3>
-        {% if post.data.standfirst %}<p class="row-note">{{ post.data.standfirst }}</p>{% endif %}
-      </div>
-      <p class="row-meta"><span class="row-date"><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></span></p>
-    </li>
-    {%- endfor %}
-  </ul>
-</section>
-{%- endif %}
-
-<section class="shell section">
-  {%- if collections.writing | length %}
   {%- if collections.writingFeatured | length %}
-  <div class="section-head"><h2 class="section-title">Everything</h2></div>
+  <h2 class="shelf-title">Start here</h2>
+  {%- for post in collections.writingFeatured %}
+  <div class="entry">
+    <div>
+      <a class="btn" href="{{ post.url | url }}">{{ post.data.title }}</a>
+      {% if post.data.standfirst %}<p class="entry-note">{{ post.data.standfirst }}</p>{% endif %}
+    </div>
+    <p class="entry-meta"><span><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></span></p>
+  </div>
+  {%- endfor %}
   {%- endif %}
-  <ul class="ledger">
-    {%- for post in collections.writing %}
-    <li class="row reveal">
-      <span class="row-index">{% if post.data.featured %}<span class="star">★</span>{% else %}{% if loop.index < 10 %}0{% endif %}{{ loop.index }}{% endif %}</span>
-      <div>
-        <h2 class="row-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
-        {% if post.data.standfirst %}<p class="row-note">{{ post.data.standfirst }}</p>{% endif %}
-      </div>
-      <p class="row-meta"><span class="row-date"><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></span></p>
-    </li>
-    {%- endfor %}
-  </ul>
+
+  {%- if collections.writing | length %}
+  <h2 class="shelf-title">{% if collections.writingFeatured | length %}Everything{% else %}Read now{% endif %}</h2>
+  {%- for post in collections.writing %}
+  <div class="entry">
+    <div>
+      <a class="btn" href="{{ post.url | url }}">{{ post.data.title }}</a>
+      {% if post.data.standfirst %}<p class="entry-note">{{ post.data.standfirst }}</p>{% endif %}
+    </div>
+    <p class="entry-meta"><span><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></span></p>
+  </div>
+  {%- endfor %}
   {%- else %}
-  <p class="aside">Nothing published here yet.</p>
+  <p class="aside">Nothing short here yet. Come back.</p>
   {%- endif %}
-</section>
+
+  {#- Always present, so the door is never locked: the books. -#}
+  <h2 class="shelf-title">Read something longer</h2>
+  {%- for w in work.published %}
+  <div class="entry{% if w.cover %} has-cover{% endif %}">
+    {%- if w.cover %}
+    <p class="entry-cover">
+      {%- if w.links.length %}<a href="{{ w.links[0].url }}" rel="noopener">{% endif %}
+      <img src="{{ ("/assets/img/" + w.cover) | url }}" alt="{{ w.coverAlt }}" width="72" loading="lazy" decoding="async">
+      {%- if w.links.length %}</a>{% endif %}
+    </p>
+    {%- endif %}
+    <div>
+      <h3 class="entry-title">{{ w.title }}</h3>
+      {%- if w.logline %}<p class="entry-line">{{ w.logline }}</p>{% endif %}
+      {%- if w.links.length %}
+      <p class="links">
+        {%- for l in w.links %}
+        <a class="btn" href="{{ l.url }}" rel="noopener">{{ l.label }}</a>
+        {%- endfor %}
+      </p>
+      {%- endif %}
+    </div>
+    <p class="entry-meta">
+      <span>{{ w.year }}</span>
+      <span>{{ w.format }}</span>
+    </p>
+  </div>
+  {%- endfor %}
+</div>
