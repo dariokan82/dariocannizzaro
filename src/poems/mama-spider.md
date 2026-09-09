@@ -7,14 +7,14 @@ description: A poem by Dario Cannizzaro.
 I saved two more spiderlings today
 (or maybe condemned them to a quicker death).
 
-I've offered them a square of toilet paper to cling to,
-and so they've done; as they run toward my hand
+I offered them a square of toilet paper to cling to,
+and so they did; as they ran toward my hand,
 I shook them off outside the window.
 
 Two days ago I removed Mama Spider
-without knowing she laid eggs.
+without knowing she'd laid eggs.
 
 Maybe she's outside, waiting for her spiderlings
 to come home
-and eat them
+so she can eat them
 and survive the winter.
