@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+navTitle: Poems
+---
+<div class="page">
+  <p class="eyebrow"><a href="{{ "/poems/" | url }}">Poems</a>{% if year %} &nbsp;·&nbsp; {{ year }}{% endif %}</p>
+  <h1 class="page-title">{{ title }}</h1>
+  <div class="poem"{% if lang %} lang="{{ lang }}"{% endif %}>
+    {{ content | safe }}
+  </div>
+  {% if gloss %}<p class="aside gloss">{{ gloss }}</p>{% endif %}
+  <div class="sub">
+    <a class="btn" href="{{ "/poems/" | url }}">Back</a>
+  </div>
+</div>

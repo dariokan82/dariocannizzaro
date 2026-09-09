@@ -45,13 +45,17 @@ src/
   _includes/layouts/
     base.njk              Shell: head/meta/OG, masthead, colophon
     page.njk              Generic inner page
-    essay.njk             A single piece of writing
+    essay.njk             A single story or essay (eyebrow: section · kind · date; the
+                          optional `first` line at the foot)
+    poem.njk              A single poem: `.poem` keeps every line break
   index.njk               The welcome page: hero + greeting + signature, the strip, the
-                          four doors, the derelict band
+                          five doors, the derelict band
   work.njk                THE WORK. Three shelves, each entry an `.entry`. Available has its
                           own loop (logline, genre); Produced and Published share one
-  writing.njk             READ SOMETHING, published at /read/. Essays, then the books —
+  writing.njk             READ SOMETHING, published at /read/. Three shelves: STORIES and
+                          ESSAYS (from src/writing/, split by `kind`), then the books —
                           always present, so the door is never locked
+  poems.njk               POEMS, published at /poems/. The fifth door. Ordered by `order`
   about.njk               ABOUT. Job list, portrait, bio, then ○ WHAT OTHERS SAY (→ /press/,
                           hidden while press.json is empty) and ○ GET IN TOUCH
   press.njk               WHAT OTHERS SAY. About's child — never in the main nav.
@@ -60,6 +64,9 @@ src/
                           Formspree form only if `formspreeId` is set
   404.njk                 The NOTICE! gate
   writing/writing.json    Directory data: essay layout, `writing` tag, /read/{slug}/ permalink
+  writing/*.md            Two stories from OLDAZ and the four Medium essays (2026-09-09)
+  poems/poems.json        Directory data: poem layout, `poems` tag, /poems/{slug}/ permalink
+  poems/*.md              Four poems chosen by Claire from VAULT/projects/poetry/Collected
   robots.txt, sitemap.njk
   assets/css/style.css    All styling
   assets/js/derelict.js   The one script (front page only)
@@ -118,7 +125,7 @@ under 600px, where metadata joins into a single ` · `-separated line.
 
 `index.njk`. A 640×340 hero image (`site.hero`), the greeting (`site.greeting`, an array of
 paragraphs, rendered uppercase) absolutely positioned over its right half, a signature beneath
-it. Then the strip, the four doors, the derelict band. Under 600px the text drops below the
+it. Then the strip, the five doors, the derelict band. Under 600px the text drops below the
 image. **The hero's right half must be dark** — that is where the words sit.
 
 ### Images: placeholders you overwrite
@@ -156,6 +163,12 @@ whole exception to the no-JS rule; nothing the page *needs* runs in JS.
   Dario's own EPUBs (`WRITING/published/<title>/*.epub` → `images/`), never from a retailer's
   CDN. The 1px `--rule` border on `.row-cover img` is load-bearing: the *Of Life, Death,
   Aliens and Zombies* cover is near-black and dissolves into `--ink` without it.
+- **Stories keep the book's section mark.** In the OLDAZ stories a lone `#` separates
+  passages; on the site it is `<p class="sep">#</p>` between blank lines, rendered grey.
+  Not `---`: the # is Dario's, the rule is the template's.
+- **Poems are pre-wrap, not Markdown line breaks.** `.poem p { white-space: pre-wrap }`
+  keeps the newlines markdown-it leaves inside a paragraph, so a poem is typed as it reads.
+  Leading indentation is still stripped by CommonMark; use `&nbsp;` if a line must indent.
 - **/press/ self-hides while press.json is empty** — from the About page's button and from
   the sitemap. Otherwise the one page nobody can click is the one Google is invited to index.
   The two conditions live in `about.njk` and `sitemap.njk` and must move together. The four

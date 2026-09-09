@@ -24,20 +24,28 @@ Node 20 or newer.
 1. Copy `WRITING-TEMPLATE.md` into `src/writing/`.
 2. Rename it. **The filename becomes the URL** — `the-door-in-the-tree.md` publishes to
    `/read/the-door-in-the-tree/`.
-3. Fill in `title`, `date`, `description`, write the piece in Markdown, delete `draft: true`.
+3. Fill in `title`, `kind` (`story` or `essay`), `date`, `description`; write the piece in
+   Markdown; delete `draft: true`.
 4. Commit and push. The Action builds and deploys; it takes about a minute.
 
-The index at `/read/` (READ SOMETHING) builds itself from whatever is in that folder, newest
-first. There is nothing else to update.
+The index at `/read/` (READ SOMETHING) has three shelves — STORIES, ESSAYS, then the books —
+and builds itself from whatever is in that folder, newest first. Empty shelves don't render.
 
 **While that folder is empty, `/read/` still opens** — it shows the two books under READ
-SOMETHING LONGER and a one-line "nothing short here yet". READ SOMETHING is one of the four
+SOMETHING LONGER and a one-line "nothing short here yet". READ SOMETHING is one of the five
 doors on the front page and never hides. `/press/` (WHAT OTHERS SAY) is the one that
 self-hides: it is About's child and its button disappears while `press.json` is empty.
 
-It does not have to be a blog. The short fiction is the better use of the section: it is
-finished, it is already vetted, and it is the only page where someone can read the prose
-instead of reading about it.
+As of 2026-09-09 the shelves hold two stories from *Of Life, Death, Aliens and Zombies*
+(*The Announcement*, *The Name of the Rose*) and the four Medium essays from February 2023,
+consolidated here with a "first published on Medium" line and a link back.
+
+## Adding a poem
+
+Same shape, in `src/poems/`: one Markdown file per poem, filename is the URL
+(`/poems/the-ocean/`). Front matter: `title`, optional `year`, `order` (position on the
+POEMS page), `lang: it` for Italian, optional `gloss`. Line breaks inside a paragraph are
+preserved; a blank line is a stanza break. POEMS is the fifth door in the nav.
 
 ## Changing the work slate
 

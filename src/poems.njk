@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+permalink: /poems/
+title: Poems
+description: A few poems by Dario Cannizzaro, in English and in Italian.
+---
+<div class="page">
+  <p class="eyebrow">A few poems. Some in Italian, which is where they started.</p>
+
+  {%- for poem in collections.poems %}
+  <div class="entry">
+    <div>
+      <a class="btn" href="{{ poem.url | url }}">{{ poem.data.title }}</a>
+    </div>
+    <p class="entry-meta">
+      {%- if poem.data.lang == 'it' %}<span>Italian</span>{% endif %}
+      {%- if poem.data.year %}<span>{{ poem.data.year }}</span>{% endif %}
+    </p>
+  </div>
+  {%- endfor %}
+</div>

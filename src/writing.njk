@@ -2,36 +2,34 @@
 layout: layouts/base.njk
 permalink: /read/
 title: Read something
-description: Essays, stories and fragments by Dario Cannizzaro, and the books.
+description: Short stories and essays by Dario Cannizzaro, free to read, and the books.
 ---
+{#- Three shelves. Stories and essays come from src/writing/ (the `kind` field in each
+    file's front matter decides the shelf); the books are always present, so the door is
+    never locked. -#}
 <div class="page">
-  <p class="eyebrow">Essays, fragments, and the odd piece of fiction.</p>
+  <p class="eyebrow">Stories you can read now, a few essays, and the books.</p>
 
-  {%- if collections.writingFeatured | length %}
-  <h2 class="shelf-title">Start here</h2>
-  {%- for post in collections.writingFeatured %}
+  {%- set shelves = [
+    { title: "Stories", items: collections.stories },
+    { title: "Essays", items: collections.essays }
+  ] -%}
+  {%- for shelf in shelves %}
+  {%- if shelf.items | length %}
+  <h2 class="shelf-title">{{ shelf.title }}</h2>
+  {%- for post in shelf.items %}
   <div class="entry">
     <div>
       <a class="btn" href="{{ post.url | url }}">{{ post.data.title }}</a>
       {% if post.data.standfirst %}<p class="entry-note">{{ post.data.standfirst }}</p>{% endif %}
     </div>
-    <p class="entry-meta"><span><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></span></p>
+    <p class="entry-meta"><span><time datetime="{{ post.date | isoDate }}">{{ post.date | year }}</time></span></p>
   </div>
   {%- endfor %}
   {%- endif %}
-
-  {%- if collections.writing | length %}
-  <h2 class="shelf-title">{% if collections.writingFeatured | length %}Everything{% else %}Read now{% endif %}</h2>
-  {%- for post in collections.writing %}
-  <div class="entry">
-    <div>
-      <a class="btn" href="{{ post.url | url }}">{{ post.data.title }}</a>
-      {% if post.data.standfirst %}<p class="entry-note">{{ post.data.standfirst }}</p>{% endif %}
-    </div>
-    <p class="entry-meta"><span><time datetime="{{ post.date | isoDate }}">{{ post.date | longDate }}</time></span></p>
-  </div>
   {%- endfor %}
-  {%- else %}
+
+  {%- if not (collections.stories | length) and not (collections.essays | length) %}
   <p class="aside">Nothing short here yet. Come back.</p>
   {%- endif %}
 

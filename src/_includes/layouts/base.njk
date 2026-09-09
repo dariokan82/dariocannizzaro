@@ -10,7 +10,7 @@
 <meta property="og:site_name" content="{{ site.title }}">
 <meta property="og:title" content="{% if title %}{{ title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.role }}{% endif %}">
 <meta property="og:description" content="{{ description or site.metaDescription }}">
-<meta property="og:type" content="{% if layout == 'layouts/essay.njk' %}article{% else %}website{% endif %}">
+<meta property="og:type" content="{% if layout == 'layouts/essay.njk' or layout == 'layouts/poem.njk' %}article{% else %}website{% endif %}">
 <meta property="og:url" content="{{ site.url }}{{ page.url }}">
 <meta property="og:image" content="{{ site.url }}/assets/img/share.jpg">
 <meta property="og:image:width" content="1200">
@@ -40,11 +40,13 @@
   {{ content | safe }}
   </main>
 
-  {#- The four doors. `aria-current` lights the circle red for the section you are in;
-      Press is About's child, so About stays lit there. -#}
+  {#- The five doors. `aria-current` lights the circle red for the section you are in;
+      Press is About's child, so About stays lit there. Five is odd for a two-column
+      grid on purpose: the last cell runs full width and the grid's own rules handle it. -#}
   <nav class="band grid2" aria-label="Primary">
     <a class="btn" href="{{ "/work/" | url }}"{% if page.url == '/work/' %} aria-current="page"{% endif %}>The work</a>
     <a class="btn" href="{{ "/read/" | url }}"{% if '/read/' in page.url %} aria-current="page"{% endif %}>Read something</a>
+    <a class="btn" href="{{ "/poems/" | url }}"{% if '/poems/' in page.url %} aria-current="page"{% endif %}>Poems</a>
     <a class="btn" href="{{ "/about/" | url }}"{% if page.url == '/about/' or page.url == '/press/' %} aria-current="page"{% endif %}>About</a>
     <a class="btn" href="{{ "/contact/" | url }}"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>Contacts</a>
   </nav>

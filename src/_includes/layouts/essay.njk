@@ -3,12 +3,13 @@ layout: layouts/base.njk
 navTitle: Read something
 ---
 <div class="page">
-  <p class="eyebrow"><a href="{{ "/read/" | url }}">Read something</a> &nbsp;·&nbsp; <time datetime="{{ page.date | isoDate }}">{{ page.date | longDate }}</time></p>
+  <p class="eyebrow"><a href="{{ "/read/" | url }}">Read something</a>{% if kind %} &nbsp;·&nbsp; {{ kind }}{% endif %} &nbsp;·&nbsp; <time datetime="{{ page.date | isoDate }}">{{ page.date | longDate }}</time></p>
   <h1 class="page-title">{{ title }}</h1>
   {% if standfirst %}<p class="entry-line" style="margin-bottom:14px">{{ standfirst }}</p>{% endif %}
   <div class="prose">
     {{ content | safe }}
   </div>
+  {% if first %}<p class="aside first">{{ first }}{% if firstUrl %} <a href="{{ firstUrl }}" rel="noopener">Original.</a>{% endif %}</p>{% endif %}
   <div class="sub">
     <a class="btn" href="{{ "/read/" | url }}">Back</a>
   </div>

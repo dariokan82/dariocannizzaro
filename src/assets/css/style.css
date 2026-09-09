@@ -233,6 +233,18 @@ img { display: block; max-width: 100%; height: auto; }
 .prose ul { padding-left: 1.2em; }
 .prose blockquote { border-left: 1px solid var(--white); padding-left: 12px; color: var(--white); }
 .prose hr { border: 0; border-top: 1px solid var(--rule-soft); margin: 18px 0; }
+/* Dario's section mark in the stories: a lone # between passages, as in the book. */
+.prose .sep { color: var(--grey); text-align: left; margin: 14px 0; }
+.first { margin-top: 18px; font-size: 12px; }
+.first a { border-bottom: 1px solid var(--grey); }
+.first a:hover { border-bottom-color: var(--white); }
+
+/* Poems: the line breaks are the poem, so the markup keeps every one of them. */
+.poem { max-width: 58ch; color: var(--soft); line-height: 1.6; }
+.poem p { white-space: pre-wrap; }
+.poem p + p { margin-top: 16px; }
+.poem em { font-style: italic; }
+.gloss { margin-top: 18px; font-size: 12px; }
 
 .eyebrow { font-size: 10px; color: var(--grey); margin-bottom: 10px; }
 .eyebrow a:hover { color: var(--white); }

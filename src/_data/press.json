@@ -1,8 +1,6 @@
 {
   "_comment": "INTERVIEWS & REVIEWS. Two shelves, deliberately unequal. `quotes` is small and loud — set enormous, one per screen. `clippings` is the ledger: everything else, scannable. Both arrays empty = the /press/ page still builds but drops out of the nav on its own.",
-
-  "_comment_provenance": "Everything below was researched and verified by Claire on 2026-09-03 against the live source pages — quotes are VERBATIM and attributed. Dario: cut anything you don't want, and add what I couldn't find. `kind` is Interview / Review / Feature; a fourth category stops the ledger scanning.",
-
+  "_comment_provenance": "Everything below was researched and verified by Claire on 2026-09-03 against the live source pages — quotes are VERBATIM and attributed. Dario: cut anything you don't want, and add what I couldn't find. `kind` is Interview / Review / Feature; a fourth category stops the ledger scanning. Added 2026-09-09 from links Dario sent: La Gazzetta del Mezzogiorno (Secret Seas), Cinque Colonne (review + quote, verbatim Italian), Senigallia Notizie (Impurità in the iTunes list, 2012).",
   "quotes": [
     {
       "text": "I would recommend this book to fans of Terry Pratchett or David Lynch.",
@@ -27,9 +25,16 @@
       "work": "Dead Men Naked",
       "url": "https://billectricking.com/2017/07/08/dead-men-naked-book-review/",
       "date": "2017"
+    },
+    {
+      "text": "Lo stile di Cannizzaro è – fortunatamente! – unico.",
+      "outlet": "Cinque Colonne",
+      "byline": "Alessio Cacciapuoti",
+      "work": "Of Life, Death, Aliens and Zombies",
+      "url": "https://www.cinquecolonne.it/un-nuovo-autore-e-nato.html",
+      "date": "2016"
     }
   ],
-
   "clippings": [
     {
       "outlet": "Parco archeologico di Ostia Antica",
@@ -48,6 +53,14 @@
       "date": "February 2026"
     },
     {
+      "outlet": "La Gazzetta del Mezzogiorno",
+      "kind": "Feature",
+      "title": "Le meraviglie di Egnazia in un'immersione: il racconto in un podcast — with Luca Melchionna of Machineria",
+      "work": "The Secret Seas of Puglia",
+      "url": "https://www.lagazzettadelmezzogiorno.it/news/curiosita/1472341/le-meraviglie-di-egnazia-in-unimmersione-il-racconto-in-un-podcast.html",
+      "date": "February 2024"
+    },
+    {
       "outlet": "Mysterious Goings On",
       "kind": "Interview",
       "title": "Dario Cannizzaro's Road Trip with Death — with Alex Greenwood",
@@ -64,6 +77,14 @@
       "date": ""
     },
     {
+      "outlet": "Cinque Colonne",
+      "kind": "Review",
+      "title": "Un nuovo Autore è nato — Alessio Cacciapuoti on the collection, story by story",
+      "work": "Of Life, Death, Aliens and Zombies",
+      "url": "https://www.cinquecolonne.it/un-nuovo-autore-e-nato.html",
+      "date": "October 2016"
+    },
+    {
       "outlet": "The Audio Drama Directory",
       "kind": "Feature",
       "title": "Strati (English) — full-cast historical crime",
@@ -78,6 +99,14 @@
       "work": "The Secret Seas of Puglia",
       "url": "https://audiodrama.directory/secret-seas-of-puglia/",
       "date": "2023"
+    },
+    {
+      "outlet": "Senigallia Notizie",
+      "kind": "Feature",
+      "title": "Impurità on the iTunes bookstore's new-and-notable shelf, between Kathryn Stockett and Andrea Camilleri",
+      "work": "Impurità",
+      "url": "https://www.senigallianotizie.it/1327308813/i-ragazzi-guardano-le-stelle-di-enzo-pettinelli-ai-primi-posti-nella-libreria-di-itunes",
+      "date": "February 2012"
     }
   ]
 }
