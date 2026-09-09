@@ -131,24 +131,22 @@ is rarely the one a stranger should read first.
 
 ---
 
-## Going live on the real domain
+## The real domain
 
-The site publishes to `dariokan82.github.io/dariocannizzaro/` first, so you can look at it
-without touching the live domain. When you are happy with it:
+Cut over on 2026-09-09. The repo side is done: `src/CNAME` holds `dariocannizzaro.com`,
+Eleventy copies it into the build and, while that file exists, ignores `PATH_PREFIX`, so
+every path is root-relative. The deploy workflow still exports `PATH_PREFIX` — it is now
+dead weight; delete the `env:` block under the build step whenever you edit that file
+(pushing a workflow change needs a token with the `workflow` scope, which the one on
+Claire's Mac keychain lacks). The two settings outside the repo:
 
-1. Create `src/CNAME` containing one line: `dariocannizzaro.com`
-2. Uncomment the `addPassthroughCopy("src/CNAME")` line in `eleventy.config.js`.
-3. Delete the `env:` block (and its `PATH_PREFIX` line) under the build step in
-   `.github/workflows/deploy.yml`. On a project URL the site lives at
-   `/dariocannizzaro/`; on the apex domain it lives at `/`, and that env var is the
-   only thing that knows the difference.
-4. In **Settings → Pages**, set the custom domain to `dariocannizzaro.com` and tick
-   *Enforce HTTPS*.
-5. At the registrar, point the apex `A` records at GitHub's four IPs
-   (`185.199.108.153`, `.109.153`, `.110.153`, `.111.153`) and `www` at a `CNAME` to
-   `dariokan82.github.io`.
+- **Settings → Pages**: custom domain `dariocannizzaro.com`, *Enforce HTTPS* ticked.
+- **Registrar**: apex `A` records at GitHub's four IPs (`185.199.108.153`, `.109.153`,
+  `.110.153`, `.111.153`) and `www` as a `CNAME` to `dariokan82.github.io`.
 
-Until step 5 the old site keeps serving. Nothing breaks while you decide.
+Until DNS flips, `dariokan82.github.io/dariocannizzaro/` will look broken (root-relative
+paths on a sub-path URL) — that is expected, not a bug. Once the domain resolves it
+redirects there anyway.
 
 ---
 

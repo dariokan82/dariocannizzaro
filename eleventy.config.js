@@ -1,10 +1,12 @@
+import { existsSync } from "node:fs";
+
 export default function (eleventyConfig) {
   // Pass static assets straight through.
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   // Custom-domain cutover: create src/CNAME containing `dariocannizzaro.com`,
   // then uncomment the line below. See README "Going live on the real domain".
-  // eleventyConfig.addPassthroughCopy("src/CNAME");
+  eleventyConfig.addPassthroughCopy("src/CNAME");
 
   // True while running `npm start` (serve/watch), false for `npm run build`.
   // Scaffolding that helps Dario see the shape of a page — [logline pending]
@@ -63,7 +65,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("year", (d) => String(d.getUTCFullYear()));
 
   return {
-    pathPrefix: process.env.PATH_PREFIX || "/",
+    // The custom domain decides: while src/CNAME exists the site is served from the
+    // root of dariocannizzaro.com, and any PATH_PREFIX in the environment (the deploy
+    // workflow still exports /dariocannizzaro/ for the project URL) is ignored.
+    pathPrefix: existsSync("src/CNAME") ? "/" : process.env.PATH_PREFIX || "/",
     dir: {
       input: "src",
       output: "_site",
