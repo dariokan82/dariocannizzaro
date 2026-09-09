@@ -86,7 +86,11 @@ img { display: block; max-width: 100%; height: auto; }
   border-bottom: 1px solid var(--white);
 }
 .grid2 > *:nth-child(odd) { border-right: 1px solid var(--white); }
-.grid2 > *:nth-last-child(-n + 2) { border-bottom: 0; }
+/* The last row loses its bottom rule. With an even count that is the last two cells;
+   with an odd count (five doors) only the last one — the second-to-last sits on the
+   right of the row above and keeps its rule. */
+.grid2 > *:last-child { border-bottom: 0; }
+.grid2 > *:nth-child(odd):nth-last-child(2) { border-bottom: 0; }
 .grid2 > *:nth-child(odd):last-child { border-right: 0; }
 
 /* ---------- Front page ---------- */
