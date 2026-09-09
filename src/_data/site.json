@@ -8,10 +8,10 @@
   "_comment_greeting": "THE FRONT PAGE GREETING. One array entry per paragraph; rendered in uppercase Helvetica over the right half of the hero. Placeholder copy by Claire, 2026-09-09 — Dario rewrites in his own words. Keep it short: the hero is 340px tall and the signature sits under it.",
   "greeting": [
     "Hello, and thank you for stopping by.",
-    "This is a small site. There is no sponsor and no advertising. There are scripts you can ask to read, a few things you can read right now, and a door in the woods that should not open, but does.",
-    "Mind the cracks."
+    "Here on my small site you'll find scripts you can ask to read, a few things you can read right now, and a door in the woods that should not open, but does.",
+    "Mind the cracks where wonder lives."
   ],
-  "metaDescription": "Dario Cannizzaro is an Italian-Irish writer, screenwriter and director. Head of Story at True Story Studios. Author of the novel Dead Men Naked.",
+  "metaDescription": "Dario Cannizzaro is an Italian-Irish writer, screenwriter and director. Head of Story at True Story Studios. Author of the best-selling novel Dead Men Naked.",
   "email": "contact@dariocannizzaro.com",
   "formspreeId": "",
   "_comment_location": "Two forms, deliberately. `location` is the full sentence form and is used only where it sits inside prose (the contact page). `locationShort` is the metadata form — the homepage eyebrow and the colophon — where the full one overflows its column and wraps. Keep the `//` in both: it is the site's mark for the two bases.",

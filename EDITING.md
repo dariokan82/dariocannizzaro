@@ -37,7 +37,7 @@ picture over it, **same filename**, and you're done:
 
 | File | Size | Notes |
 |---|---|---|
-| `src/assets/img/home-hero.jpg` | 640 × 340 | Black and white. You on the LEFT. Right half fades to black — the greeting sits on it. |
+| `src/assets/img/home-hero.jpg` | 640 × 340 | Black and white. You on the LEFT. Right half fades to black — the greeting sits on it. Or let the script make it from a photo: `python3 tools/hero.py photo.jpg` (add `--sheet out.jpg` for a contact sheet of variants, `--fit` for a portrait on a dark ground, `--invert` for a subject on white). |
 | `src/assets/img/portrait.jpg` | 200 × 260 | About page. |
 | `src/assets/img/strip/01.jpg` … `06.jpg` | 640 × 40 | Not placeholders — the dithered static stays. One shows at random per visit. To add one, drop a 640×40 file in and list it under `strips` in `site.json`. |
 | `src/assets/img/signature.png` | 240 × 60 | Transparent PNG, white ink. Delete the `signature` line in `site.json` to drop it. |
@@ -52,10 +52,27 @@ again from `start`.
 
 ## Writing
 
-Copy `WRITING-TEMPLATE.md` into `src/writing/`, rename it (the filename is the URL:
-`the-door.md` → `/read/the-door/`), fill in title and date, write in Markdown, delete
-`draft: true`. It appears under READ SOMETHING on its own. `featured: true` puts it in
-START HERE.
+**Stories and essays** live in `src/writing/`, one Markdown file each. Copy
+`WRITING-TEMPLATE.md` in, rename it (the filename is the URL: `the-door.md` → `/read/the-door/`),
+fill in the top, write in Markdown, delete `draft: true`. `kind: story` or `kind: essay`
+picks the shelf on READ SOMETHING; `first` + `firstUrl` are the optional "first published
+in…" line. Delete a file to unpublish it.
+
+**Poems** live in `src/poems/`, same idea: a file per poem, the filename is the URL
+(`/poems/the-ocean/`). The top of the file is
+
+```
+---
+title: The Ocean
+year: 2024          (optional, shows in grey)
+order: 5            (position on the POEMS page — lower is higher)
+lang: it            (only for Italian ones — adds the ITALIAN tag)
+gloss: "…"          (optional grey line under the poem, e.g. a rough English sense)
+---
+```
+
+then the poem, exactly as you'd type it: every line break is kept, a blank line is a
+stanza break. `*asterisks*` for italics.
 
 ## Ship it
 

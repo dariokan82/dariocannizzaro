@@ -6,6 +6,7 @@ grey stand-ins that name themselves and their size. Dario overwrites each
 file with his own picture, same filename, and nothing else changes.
 
 Exception: the strips under src/assets/img/strip/ are the real thing — see strips().
+For the real hero from a photograph, use tools/hero.py (same recipe, real subject).
 
 Pillow only. Fonts fall back to Pillow's bitmap font if Helvetica isn't found.
 """
