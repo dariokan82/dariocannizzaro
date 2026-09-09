@@ -53,7 +53,7 @@
   <div class="band derelict">
     <span>You are visitor
       {#- No-JS state is six dashes; derelict.js fills the real count from Abacus. -#}
-      <span class="odo" data-counter="{{ site.counter.namespace }}/{{ site.counter.key }}" aria-live="polite"><span>-</span><span>-</span><span>-</span><span>-</span><span>-</span><span>-</span></span>
+      <span class="odo" data-counter="{{ site.counter.namespace }}/{{ site.counter.key }}" data-start="{{ site.counter.start or 1 }}" aria-live="polite"><span>-</span><span>-</span><span>-</span><span>-</span><span>-</span><span>-</span></span>
     </span>
     <span>Last updated {{ buildDate }}</span>
   </div>

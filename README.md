@@ -75,8 +75,9 @@ file with your picture, **same filename**, and nothing else changes:
 
 ## The visitor counter
 
-Real, via [Abacus](https://abacus.jasoncameron.dev) — keyless, no account. The key is
-`site.json → counter`; change `key` to start again from zero. If the service ever goes away
+Real, via [Abacus](https://abacus.jasoncameron.dev) — keyless, no account. `site.json →
+counter`: `start` is what the first visitor sees (100723 — 10 July 2023, the day Dario quit
+Apple to write); change `key` to begin again from `start`. If the service ever goes away
 the counter shows `------` and nothing else on the page is affected.
 
 ---

@@ -16,7 +16,9 @@
     fetch("https://abacus.jasoncameron.dev/hit/" + odo.getAttribute("data-counter"))
       .then(function (r) { return r.json(); })
       .then(function (j) {
-        var n = String(j.value || 0);
+        // The first visitor sees `start`; everyone after adds one.
+        var start = parseInt(odo.getAttribute("data-start"), 10) || 1;
+        var n = String(Math.max(0, (j.value || 0) - 1) + start);
         var cells = odo.querySelectorAll("span");
         while (n.length < cells.length) n = "0" + n;
         n = n.slice(-cells.length);

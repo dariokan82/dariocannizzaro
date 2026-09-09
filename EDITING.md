@@ -44,6 +44,12 @@ picture over it, **same filename**, and you're done:
 
 Book covers: `cover` field on an entry in `work.json`, file in `src/assets/img/`.
 
+## The visitor counter
+
+`src/_data/site.json → counter`. `start` is what the first visitor sees (100723, the day you
+quit Apple); every visit after that adds one. Change `key` to any new word and it begins
+again from `start`.
+
 ## Writing
 
 Copy `WRITING-TEMPLATE.md` into `src/writing/`, rename it (the filename is the URL:

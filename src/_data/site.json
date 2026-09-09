@@ -32,10 +32,11 @@
     "05.jpg",
     "06.jpg"
   ],
-  "_comment_counter": "The visitor counter on the front page is real: Abacus (abacus.jasoncameron.dev), keyless, namespace/key below. Change the key to start from zero.",
+  "_comment_counter": "The visitor counter on the front page is real: Abacus (abacus.jasoncameron.dev), keyless, namespace/key below. `start` is the number the FIRST visitor sees — 100723, the day Dario quit Apple to write (10 July 2023); every visit after that adds one. Change the key to begin again from `start`.",
   "counter": {
     "namespace": "dariocannizzaro",
-    "key": "visits"
+    "key": "visits-since-apple",
+    "start": 100723
   },
   "_comment_credentials": "The proof band on the homepage. Four items, no more — the fifth one dilutes the other four. `lead` is the part that renders bright; `tail` the part that renders dim. BILLING RULE: Head of Story, never co-founder.",
   "credentials": [
