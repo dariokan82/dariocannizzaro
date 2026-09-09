@@ -1,12 +1,12 @@
 {
   "name": "dariocannizzaro",
   "version": "1.0.0",
-  "description": "dariocannizzaro.com — writer, screenwriter, director",
+  "description": "dariocannizzaro.com \u2014 writer, screenwriter, director",
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "eleventy --serve --quiet",
-    "build": "eleventy",
+    "start": "node node_modules/@11ty/eleventy/cmd.cjs --serve --quiet",
+    "build": "node node_modules/@11ty/eleventy/cmd.cjs",
     "clean": "rm -rf _site"
   },
   "devDependencies": {
