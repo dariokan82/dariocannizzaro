@@ -133,7 +133,7 @@ image. **The hero's right half must be dark** — that is where the words sit.
 `tools/placeholders.py` generates dithered stand-ins that name their own slot and size.
 Dario overwrites each with his own picture, **same filename**, and nothing else changes:
 `home-hero.jpg` 640×340 · `portrait.jpg` 200×260 · `strip/01.jpg…` 640×40 (list them in
-`site.json → strips`) · `signature.png` 240×60 transparent, white ink.
+`site.json → strips`) · `signature.png` 240×90 transparent, white ink.
 
 ### The one script
 
