@@ -21,7 +21,7 @@
 
 <link rel="icon" href="{{ "/assets/img/favicon.png" | url }}" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="{{ "/assets/img/apple-touch-icon.png" | url }}">
-<link rel="stylesheet" href="{{ "/assets/css/style.css" | url }}">
+<link rel="stylesheet" href="{{ "/assets/css/style.css" | url }}?v={{ buildStamp }}">
 </head>
 {%- set isHome = page.url == '/' %}
 <body>
@@ -65,7 +65,7 @@
 <p class="copyright">Copyright {{ buildYear }} dariocannizzaro.com</p>
 
 {%- if isHome %}
-<script src="{{ "/assets/js/derelict.js" | url }}" defer></script>
+<script src="{{ "/assets/js/derelict.js" | url }}?v={{ buildStamp }}" defer></script>
 {%- endif %}
 </body>
 </html>

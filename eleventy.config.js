@@ -20,6 +20,10 @@ export default function (eleventyConfig) {
     `${pad(now.getUTCDate())}.${pad(now.getUTCMonth() + 1)}.${now.getUTCFullYear()}`
   );
   eleventyConfig.addGlobalData("buildYear", String(now.getUTCFullYear()));
+  // Cache-buster on the stylesheet and the one script. Pages serves them with a
+  // ten-minute max-age and browsers hold on longer; without this a redesign shows
+  // up as new HTML wearing the old CSS until someone hard-reloads.
+  eleventyConfig.addGlobalData("buildStamp", String(Math.floor(now.getTime() / 1000)));
 
   // Everything in src/writing/, newest first.
   const byDate = (a, b) => b.date - a.date;
